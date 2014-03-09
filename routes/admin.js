@@ -24,11 +24,13 @@ exports.updateProject = function(req, res) {
     project.narrative = req.body.project_narratives;
     // Stores the id of the category.
     project.category = req.body.project_category;
-    project.lat = parseFloat(req.body.project_lat),
-    project.lng = parseFloat(req.body.project_lng)
+    project.lat = parseFloat(req.body.project_lat);
+    project.lng = parseFloat(req.body.project_lng);
     project.save(function(err) {
     	if (err) {
     		console.log("There was an error saving your project");
+    		console.log(err);
+    		return;
     	}
     	res.redirect('/admin');
     });
