@@ -1,0 +1,168 @@
+html, body {
+    height: 100%;
+    background-color:#b8e5ee;
+}
+
+#letterbox {
+    background-color: #FFF;
+    height: 600px;
+    width: 80%;
+    box-shadow: 0px 20px 50px 20px #888488;
+
+    position: relative;
+    margin-left:auto;
+    margin-right:auto;
+    margin-top: 30px;
+    margin-bottom: 25px;
+    border: 2px solid gray;
+}
+
+#foreground {
+    position: relative;
+    margin-left:auto;
+    margin-right:auto;
+    width: 90%;
+    height: 600px;
+    margin-top: 35px;
+    margin-bottom: 15px;
+}
+
+#left_column {
+    width:44%;
+    overflow: hidden;
+    position: relative;
+    float:left;
+}
+
+#map {
+    position: relative;
+    width: 48%;
+    height: 450px;
+    bottom: 20px;
+    margin-right:0px;
+    margin-top: 32px;
+    border: 1px solid gray;
+    float:right;
+    overflow: hidden;
+}
+
+#radio {
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+/* TODO: set these as a class. */
+#add_point_panel {
+    overflow: auto;
+    height: 400px;
+}
+
+#edit_category_panel {
+    display:none;
+    overflow: auto;
+    height: 400px;
+}
+
+#database_panel {
+    display:none;
+    height: 400px;
+    overflow: auto;
+}
+
+#img_submit_button {
+    display:none;
+}
+
+.title_span {
+    font-size: 26px;
+}
+
+.logout_span {
+    font-size: 14px;
+    float:right;
+
+}
+
+#add_image,
+#add_entry,
+#submit_button_id,
+#project_category,
+#add_point {
+    width: 208px;
+}
+
+/*JARED STUFF*/
+button {
+    background: #dddddd;
+    border: none;
+    border-radius: 1px;
+    -moz-border-radius: 1px;
+    -webkit-border-radius: 1px;
+    -khtml-border-radius: 1px;
+    color: #000000;
+    display: block;
+    padding: 5px 10px;
+    text-transform: uppercase;
+}
+
+button:hover {
+    background: #1e2506;
+    cursor: pointer;
+    color: #dddddd;
+    background: #555555;
+}
+
+ul, li
+{
+    list-style-type:none;
+    background: #fefefe;
+    list-style: none;
+    width: 350px;
+    padding:0px;
+    margin:0px;
+}
+
+form input:not([type=submit]),
+form textarea,
+form select,
+form input:not([type=submit]),
+form textarea,
+.input
+ {
+    background: #f0f0f0;
+    border-color: #f0f0f0;
+    border-radius: 1px;
+    -moz-border-radius: 1px;
+    -webkit-border-radius: 1px;
+    -khtml-border-radius: 1px;
+    font: 13px Georgia, "Times New Roman", Times, serif;
+    outline: none;
+    border-style: solid;
+    border-width: 1px;
+    padding: 3px;
+    margin: 1px;
+    width: 200px;
+}
+
+
+.leaflet-popup-content-wrapper {
+    border-radius: 1px;
+    -moz-border-radius: 1px;
+    -webkit-border-radius: 1px;
+    -khtml-border-radius: 1px;
+}
+
+
+/* Fix this shit 
+.field_key {
+    float:left;
+    width:-50px;
+
+}
+
+.field_value {
+    float:right;
+    width:45%;
+
+} */
+
