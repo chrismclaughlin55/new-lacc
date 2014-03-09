@@ -17,11 +17,13 @@ document.addEventListener('DOMContentLoaded', function() {
     }).addTo(map);
 
     var categoryMap = {};
-    var socket = io.connect('http://localhost');
+    var socket = io.connect('http://localhost:3000');
     socket.on('projects', function(projects) {
         socket.on('categories', function(categories) {
             projects.forEach(function(project) {
-                var point = L.marker([project.coords.point.lat, project.coords.point.lng]).addTo(map);
+                console.log(project.lat);
+                console.log(project.lng);
+                var point = L.marker([project.lat, project.lng]).addTo(map);
                 // categoryList is a map from category_id to an array of points
                 // project.category is an _id
                 if (categoryMap[project.category]) {

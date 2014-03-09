@@ -4,6 +4,7 @@ var express = require('express'),
 
 var projectService = require('./routes/ProjectService');
 var categoryService = require('./routes/CategoryService');
+var mongoose    = require('mongoose');
 var http = require('http');
 var path = require('path');
 var app = express();
@@ -63,7 +64,7 @@ io.sockets.on('connection', function(socket) {
 	            console.log(err);
 	            return;
 	        }
-        	socket.emit('projects', categories);
+        	socket.emit('categories', categories);
     	});
     });
 });
