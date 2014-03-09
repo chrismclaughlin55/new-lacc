@@ -1,6 +1,17 @@
 var mongoose = require('mongoose');
 var Project = require('../models/Project');
 
+exports.getProjects = function(callback) {
+    var Project = mongoose.model('Project');
+    Project.find(function(err, projects) {
+        if (err) {
+            console.log("Could not return projects");
+            console.log(err);
+            return;
+        }
+        return projects;
+    });
+}
 
 exports.updateProject = function(req, res) {
 	var Project = mongoose.model('Project');
