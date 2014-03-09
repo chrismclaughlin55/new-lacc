@@ -1,10 +1,9 @@
-var express = require('express')
- , routes = require('./routes')
- , http = require('http')
- , path = require('path');
+var express = require('express'),
+	http = require('http'),
+	path = require('path');
 
-var routes = require('./routes');
-var admin = require('./routes/admin');
+var projectService = require('./routes/ProjectService');
+var categoryService = require('./routes/CategoryService');
 var http = require('http');
 var path = require('path');
 
@@ -30,12 +29,12 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
-app.get('/', routes.index);
-app.get('/admin', admin.admin);
-app.post('/admin/update-project', admin.updateProject);
-app.post('/admin/update-category', admin.updateCategory);
-app.get('/admin/download', admin.download);
-app.get('/admin/upload', admin.upload);
+app.get('/admin', categoryService.getCategoriesForAdmin);
+app.post('/admin/update-category', categoryService.updateCategory);
+
+app.post('/admin/update-project', projectService.updateProject);
+app.get('/admin/download', projectService.download);
+app.get('/admin/upload', projectService.upload);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
