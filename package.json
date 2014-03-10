@@ -10,6 +10,8 @@
     "jade": "*",
     "nice-json2csv": "^0.1.2",
     "ya-csv": "^0.9.3",
-    "socket.io": "^0.9.16"
+    "socket.io": "^0.9.16",
+    "passport-local": "^1.0.0",
+    "bcrypt-nodejs": "0.0.3"
   }
 }

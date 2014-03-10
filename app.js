@@ -5,6 +5,9 @@ var projectService = require('./routes/ProjectService');
 var categoryService = require('./routes/CategoryService');
 var userService = require('./routes/UserService');
 var mongoose    = require('mongoose');
+var passport    = require('passport'), 
+    LocalStrategy = require('passport-local').Strategy;
+var bcrypt        = require('bcrypt-nodejs');
 var http = require('http');
 var path = require('path');
 var json2csv = require('nice-json2csv');
@@ -24,7 +27,9 @@ app.configure(function() {
 	app.use(express.urlencoded());
 	app.use(express.methodOverride());
 	app.use(express.cookieParser('your secret here'));
-	app.use(express.session());
+	app.use(express.session({secret:'chacharealsmooth'}));
+  app.use(passport.initialize());
+  app.use(passport.session());
 	app.use(app.router);
 	app.use(express.static(path.join(__dirname, 'public')));
 });
@@ -45,6 +50,21 @@ app.get('/admin/download', projectService.download);
 app.get('/admin/upload', projectService.upload);
 
 app.get('/login', userService.login);
+app.post('/login-user',
+    passport.authenticate('local-login', {
+    successRedirect: '/admin',
+    failureRedirect:'/login'
+    })
+);
+app.post('/signup-user',
+    passport.authenticate('local-signup', {
+        successRedirect:'/admin',
+        failureRedirect:'/login'
+    })
+);
+
+
+
 
 io.sockets.on('connection', function(socket) {
     socket.on('projectsRequest', function() {
