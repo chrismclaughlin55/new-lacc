@@ -1,40 +1,30 @@
 var mongoose = require('mongoose');
 var Category = require('../models/Category');
 
-exports.getCategories = function(callback) {
+var getCategories = function(callback) {
 	var Category = mongoose.model('Category');
 	Category.find(function (err, categories) {
 		if (err) {
 			console.log("Error finding categories");
 			return;
 		}
-		return categories;
+		callback(categories);
 	});
 }
 
 exports.getCategoriesForAdmin = function(req, res) {
-	var Category = mongoose.model('Category');
-	Category.find(function (err, data) {
-		if (err) {
-			console.log("Error finding projects");
-			return;
-		}
+	getCategories(function(data) {
 		res.render('admin.ejs', {
-        	categories: data
-        }); 
+			categories: data
+		});
 	});
 }
 
 exports.getCategoriesForIndex = function(req, res) {
-	var Category = mongoose.model('Category');
-	Category.find(function (err, data) {
-		if (err) {
-			console.log("Error finding projects");
-			return;
-		}
+	getCategories(function(data) {
 		res.render('index.ejs', {
-        	categories: data
-        }); 
+			categories: data
+		});
 	});
 }
 
