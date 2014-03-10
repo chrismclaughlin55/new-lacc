@@ -7,7 +7,14 @@ var ProjectSchema = new mongoose.Schema({
 	narrative: String,
 	category: String,
 	lat: Number,
-	lng: Number
+	lng: Number,
+	customFields: 
+	[
+		{
+			key: String,
+			value: String
+		}
+	]
 });
 
 mongoose.model('Project', ProjectSchema );

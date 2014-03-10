@@ -14,8 +14,10 @@ exports.getProjects = function(callback) {
 }
 
 exports.updateProject = function(req, res) {
+    console.log(req.body);
 	var Project = mongoose.model('Project');
    	var project = new Project();
+    //console.log(project);
     project.name = req.body.project_name;
     project.address = req.body.project_address;
     project.narrative = req.body.project_narratives;
@@ -23,6 +25,17 @@ exports.updateProject = function(req, res) {
     project.category = req.body.project_category;
     project.lat = parseFloat(req.body.project_lat);
     project.lng = parseFloat(req.body.project_lng);
+    for (var i = 0; i < req.body.custom_field_key.length; i++) {
+        var custom_key = req.body.custom_field_key[i];
+        var custom_value = req.body.custom_field_value[i];
+        console.log(custom_key);
+        console.log(custom_value);
+        var customFieldMap = { 
+            key: custom_key,
+            value: custom_value
+        };
+        project.customFields.push(customFieldMap);
+    }
     project.save(function(err) {
     	if (err) {
     		console.log("There was an error saving your project");

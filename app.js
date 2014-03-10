@@ -43,7 +43,6 @@ app.post('/admin/update-project', projectService.updateProject);
 app.get('/admin/download', projectService.download);
 app.get('/admin/upload', projectService.upload);
 
-// Socket IO (Need to incorporate this into routes somehow)
 io.sockets.on('connection', function(socket) {
     socket.on('projectsRequest', function() {
     	projectService.getProjects(function(projects) {
