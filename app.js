@@ -49,7 +49,8 @@ app.post('/admin/update-project', projectService.updateProject);
 app.get('/admin/download', projectService.download);
 app.get('/admin/upload', projectService.upload);
 
-app.get('/login', userService.login);
+app.get('/login',userService.login);
+app.get('/logout', userService.logout);
 app.post('/login-user',
     passport.authenticate('local-login', {
     successRedirect: '/admin',
@@ -58,8 +59,8 @@ app.post('/login-user',
 );
 app.post('/signup-user',
     passport.authenticate('local-signup', {
-        successRedirect:'/admin',
-        failureRedirect:'/login'
+        successRedirect:'/login',
+        failureRedirect:'/'
     })
 );
 

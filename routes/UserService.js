@@ -1,8 +1,9 @@
-var mongoose  = require('mongoose');
-var passport  = require('passport'),
-    LocalStrategy = require('passport-local').Strategy;
-var bcrypt    = require('bcrypt-nodejs');
-var User      = require('../models/User');
+var mongoose        = require('mongoose');
+var passport        = require('passport'),
+    LocalStrategy   = require('passport-local').Strategy;
+var bcrypt          = require('bcrypt-nodejs');
+var User            = require('../models/User');
+var categoryService = require('./CategoryService');
 
 passport.use('local-signup', new LocalStrategy({
     usernameField: 'username',
@@ -48,6 +49,17 @@ passport.deserializeUser(function(id,done){
 exports.isLoggedIn = function(req,res, next){
     if(req.isAuthenticated())
         return next;
+    res.redirect('/');
+}
+
+exports.hasLoggedIn = function(req, req, next){
+    if(!req.isAuthenticated())
+        return next;
+    res.redirect('/admin');
+}
+
+exports.logout = function(req,res){
+    req.logout();
     res.redirect('/login');
 }
 
