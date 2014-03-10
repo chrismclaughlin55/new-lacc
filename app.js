@@ -3,6 +3,7 @@ var express = require('express'),
 	path = require('path');
 var projectService = require('./routes/ProjectService');
 var categoryService = require('./routes/CategoryService');
+var userService = require('./routes/UserService');
 var mongoose    = require('mongoose');
 var http = require('http');
 var path = require('path');
@@ -42,6 +43,8 @@ app.post('/admin/update-category', categoryService.updateCategory);
 app.post('/admin/update-project', projectService.updateProject);
 app.get('/admin/download', projectService.download);
 app.get('/admin/upload', projectService.upload);
+
+app.get('/login', userService.login);
 
 io.sockets.on('connection', function(socket) {
     socket.on('projectsRequest', function() {
