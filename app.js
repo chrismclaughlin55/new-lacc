@@ -1,12 +1,12 @@
 var express = require('express'),
 	http = require('http'),
 	path = require('path');
-
 var projectService = require('./routes/ProjectService');
 var categoryService = require('./routes/CategoryService');
 var mongoose    = require('mongoose');
 var http = require('http');
 var path = require('path');
+var json2csv = require('nice-json2csv');
 var app = express();
 var server = app.listen(3000);
 var io = require('socket.io').listen(server);
@@ -55,7 +55,3 @@ io.sockets.on('connection', function(socket) {
     	});
     });
 });
-
-// http.createServer(app).listen(app.get('port'), function(){
-//   console.log('Express server listening on port ' + app.get('port'));
-// });

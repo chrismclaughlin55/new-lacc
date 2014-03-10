@@ -1,5 +1,9 @@
 var mongoose = require('mongoose');
 var Project = require('../models/Project');
+var projectService = require('../routes/ProjectService');
+var csvConvertor   = require('../custom_modules/record.js');
+var json2csv    = require('nice-json2csv');
+var csv         = require('ya-csv');
 
 exports.getProjects = function(callback) {
     var Project = mongoose.model('Project');
@@ -47,7 +51,7 @@ exports.updateProject = function(req, res) {
 }
 
 exports.download = function(req, res) {
-	getProjects(function(results) {
+	projectService.getProjects(function(records) {
 		var recordData = [];
         records.forEach(function(r){
             var tempRecord = csvConvertor(r);
