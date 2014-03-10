@@ -9,7 +9,7 @@ exports.getProjects = function(callback) {
             console.log(err);
             return;
         }
-        return projects;
+        callback(projects);
     });
 }
 
@@ -34,8 +34,7 @@ exports.updateProject = function(req, res) {
 }
 
 exports.download = function(req, res) {
-	var Project = mongoose.model('Project');
-	Project.find(function(err, records) {
+	getProjects(function(results) {
 		var recordData = [];
         records.forEach(function(r){
             var tempRecord = csvConvertor(r);

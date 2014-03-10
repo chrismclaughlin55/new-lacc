@@ -46,25 +46,13 @@ app.get('/admin/upload', projectService.upload);
 // Socket IO (Need to incorporate this into routes somehow)
 io.sockets.on('connection', function(socket) {
     socket.on('projectsRequest', function() {
-    	var Project = mongoose.model('Project');
-    	Project.find(function(err, projects) {
-	        if (err) {
-	            console.log("Could not return projects");
-	            console.log(err);
-	            return;
-	        }
-        	socket.emit('projects', projects);
+    	projectService.getProjects(function(projects) {
+    		socket.emit('projects', projects);
     	});
     });
     socket.on('categoriesRequest', function() {
-    	var Category = mongoose.model('Category');
-    	Category.find(function(err, categories) {
-	        if (err) {
-	            console.log("Could not return categoreis");
-	            console.log(err);
-	            return;
-	        }
-        	socket.emit('categories', categories);
+    	categoryService.getCategories(function(categories) {
+    		socket.emit('categories', categories);
     	});
     });
 });

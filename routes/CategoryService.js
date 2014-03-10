@@ -1,7 +1,8 @@
 var mongoose = require('mongoose');
 var Category = require('../models/Category');
+var categoryService = require('../routes/CategoryService');
 
-var getCategories = function(callback) {
+exports.getCategories = function(callback) {
 	var Category = mongoose.model('Category');
 	Category.find(function (err, categories) {
 		if (err) {
@@ -13,7 +14,7 @@ var getCategories = function(callback) {
 }
 
 exports.getCategoriesForAdmin = function(req, res) {
-	getCategories(function(data) {
+	categoryService.getCategories(function(data) {
 		res.render('admin.ejs', {
 			categories: data
 		});
@@ -21,7 +22,7 @@ exports.getCategoriesForAdmin = function(req, res) {
 }
 
 exports.getCategoriesForIndex = function(req, res) {
-	getCategories(function(data) {
+	categoryService.getCategories(function(data) {
 		res.render('index.ejs', {
 			categories: data
 		});
