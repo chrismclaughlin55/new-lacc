@@ -21,12 +21,11 @@ document.addEventListener('DOMContentLoaded', function() {
     socket.on('projects', function(projects) {
         socket.on('categories', function(categories) {
             projects.forEach(function(project) {
-                console.log(project.lat);
-                console.log(project.lng);
                 var point = L.marker([project.lat, project.lng]).addTo(map);
                 // categoryList is a map from category_id to an array of points
                 // project.category is an _id
                 if (categoryMap[project.category]) {
+                    // console.log("Inside here");
                     categoryMap[project.category].push(point);    
                 } else {
                     categoryMap[project.category] = [];
@@ -35,8 +34,12 @@ document.addEventListener('DOMContentLoaded', function() {
             });
             var overLayMap = {};
             categories.forEach(function(category) {
+                //console.log(category._id);
+                //console.log(category.name);
+                console.log(categoryMap);
                 overLayMap[category.name] = L.layerGroup(categoryMap[category._id]);
             });
+            //console.log(categoryMap);
             L.control.layers(null, overLayMap).addTo(map);
         });
     });

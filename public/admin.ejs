@@ -125,7 +125,7 @@
 									<select id="project_category" name="project_category" >
 										<option value="" disabled selected>Project Category</option>
 										 <% for (var i = 0; i < categories.length; i++) { %>
-											<option value=' <%= categories[i]['_id'] %>' class="input"><%=categories[i]['name']%> </option>
+											<option value='<%= categories[i]['_id'] %>' class="input"><%=categories[i]['name']%> </option>
 										<% }%>
 									</select>
 								</li>
@@ -182,7 +182,7 @@
 						Current Categories:
 							<form>
 								<% for (var i = 0; i < categories.length; i++) { %>
-									<input class="input" value="<%= categories[i]['name'] %>"> <br>
+									<input class="input" value="<%=categories[i]['name'] %>"> <br>
 								<% }%>
 							</form>
 						
