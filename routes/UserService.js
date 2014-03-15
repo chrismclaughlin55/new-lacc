@@ -48,18 +48,21 @@ passport.deserializeUser(function(id,done){
 
 exports.isLoggedIn = function(req,res, next){
     if(req.isAuthenticated())
-        return next;
-    res.redirect('/');
+        next();
+    else
+      res.redirect('/login');
 }
 
 exports.hasLoggedIn = function(req, req, next){
     if(!req.isAuthenticated())
-        return next;
-    res.redirect('/admin');
+        next();
+    else
+      res.redirect('/admin');
 }
 
 exports.logout = function(req,res){
     req.logout();
+    req.user=null;
     res.redirect('/login');
 }
 
