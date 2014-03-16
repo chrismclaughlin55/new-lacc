@@ -1,9 +1,16 @@
-var mongoose = require('mongoose');
-var Project = require('../models/Project');
-var projectService = require('../routes/ProjectService');
-var csvConvertor   = require('../custom_modules/record.js');
-var json2csv    = require('nice-json2csv');
-var csv         = require('ya-csv');
+GridStore           = require('mongodb').GridStore,
+Grid                = require('mongodb').Grid,
+Code                = require('mongodb').Code,
+BSON                = require('mongodb').pure().BSON,
+assert              = require('assert');
+
+var mongoose        = require('mongoose');
+var Project         = require('../models/Project');
+var projectService  = require('../routes/ProjectService');
+var csvConvertor    = require('../custom_modules/record.js');
+var json2csv        = require('nice-json2csv');
+var csv             = require('ya-csv');
+var fs              = require('fs');
 
 exports.getProjects = function(callback) {
     var Project = mongoose.model('Project');
@@ -18,7 +25,6 @@ exports.getProjects = function(callback) {
 }
 
 exports.updateProject = function(req, res) {
-    console.log(req.body);
 	var Project = mongoose.model('Project');
    	var project = new Project();
     //console.log(project);
@@ -33,8 +39,6 @@ exports.updateProject = function(req, res) {
         for (var i = 0; i < req.body.custom_field_key.length; i++) {
             var custom_key = req.body.custom_field_key[i];
             var custom_value = req.body.custom_field_value[i];
-            console.log(custom_key);
-            console.log(custom_value);
             var customFieldMap = { 
                 key: custom_key,
                 value: custom_value
@@ -42,13 +46,43 @@ exports.updateProject = function(req, res) {
             project.customFields.push(customFieldMap);
         }
     }
-    project.save(function(err) {
-    	if (err) {
-    		console.log("There was an error saving your project");
-    		console.log(err);
-    		return;
-    	}
-    	res.redirect('/admin');
+    projectService.storeImage(req, project, function() {
+        project.save(function(err) {
+            if (err) {
+                console.log("There was an error saving your project");
+                console.log(err);
+                return;
+            }
+            res.redirect('/admin');
+        });
+    });
+}
+
+exports.storeImage = function(req, project, callback) {
+    if (req.files['imgFile']) {
+        if (req.files['imgFile'].length) {
+            req.files['imgFile'].forEach(function(image) {
+                project.images.push(fs.readFileSync(image.path));
+            });
+        } else {
+            var image = req.files['imgFile'];
+            project.images.push(fs.readFileSync(image.path));
+        }
+    }
+    callback();
+}
+
+exports.readImage = function(req, res) {
+    var Project = mongoose.model('Project');
+    var project_id = req.params.project;
+    var image_id = req.params.image;
+    Project.findById(project_id, function(err, project) {
+        if (err) {
+            console.log("There was an error finding image for project: " + project_id + " and id: " + image_id);
+            res.send();
+        }
+        res.contentType('image/png');
+        res.send(project.images[image_id]);
     });
 }
 
