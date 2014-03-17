@@ -68,7 +68,6 @@ exports.download = function(req, res) {
 
 exports.upload = function(req, res) {
 	var reader = csv.createCsvFileReader(req.files.csvFile.path, {columnsFromHeader:true, nestedQuotes:true});
-    var writer = new csv.CsvWriter(process.stdout);
     reader.addListener('data', function(data) {
     	var Project = mongoose.model('Project');
    		var project = new Project();
@@ -78,7 +77,18 @@ exports.upload = function(req, res) {
 	    project.category = data.Category;
 	    project.lat = data.Lat;
    		project.lng = data.Lng;
-	  	project.save(function(err) {
+        for (var index in data){ //Checking for custom fields. 
+            if(!(index=='Name' || index=='Narrative' || index == 'Address' || index == 'Category' || index == 'Lat' || index == 'Lng')){
+                if(data[index]!=''){
+                    var customField = {
+                        key: index.toString(),
+                        value: data[index].toString()
+                    }
+                    project.customFields.push(customField);
+                }
+            }
+        }
+        project.save(function(err) {
 	    	if (err) {
 	    		console.log("There was an error saving your project");
 	    		console.log(err);
@@ -86,4 +96,5 @@ exports.upload = function(req, res) {
 	    	}
     	});
 	});
+    res.redirect('/admin');
 }
