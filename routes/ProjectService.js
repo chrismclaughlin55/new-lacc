@@ -18,10 +18,9 @@ exports.getProjects = function(callback) {
 }
 
 exports.updateProject = function(req, res) {
-    console.log(req.body);
 	var Project = mongoose.model('Project');
-   	var project = new Project();
-    //console.log(project);
+    var project = new Project();
+
     project.name = req.body.project_name;
     project.address = req.body.project_address;
     project.narrative = req.body.project_narratives;
@@ -42,14 +41,26 @@ exports.updateProject = function(req, res) {
             project.customFields.push(customFieldMap);
         }
     }
-    project.save(function(err) {
-    	if (err) {
-    		console.log("There was an error saving your project");
-    		console.log(err);
-    		return;
-    	}
-    	res.redirect('/admin');
-    });
+
+    if (req.body.p_id=='') {
+        project.save(function(err) {
+            if (err) {
+                console.log("There was an error saving your project");
+                console.log(err);
+                return;
+            }
+            res.redirect('/admin');
+        });
+    }
+    else{
+            project.update({_id: req.body.p_id}, project);
+            console.log(project._id);
+            res.redirect('/');
+        };
+
+    /* TODO Found this example online */
+    //models.visits.update({ _id: req.body.id }, upsertData, { multi: false }, function(err) {
+    //if(err) { throw err; }
 }
 
 exports.download = function(req, res) {
@@ -69,19 +80,19 @@ exports.upload = function(req, res) {
     var writer = new csv.CsvWriter(process.stdout);
     reader.addListener('data', function(data) {
     	var Project = mongoose.model('Project');
-   		var project = new Project();
-	    project.name = data.Name;
-	    project.narrative = data.Narrative;
-	    project.address = data.Address;
-	    project.category = data.Category;
-	    project.lat = data.Lat;
-   		project.lng = data.Lng;
-	  	project.save(function(err) {
-	    	if (err) {
-	    		console.log("There was an error saving your project");
-	    		console.log(err);
-	    		return;
-	    	}
-    	});
-	});
+       var project = new Project();
+       project.name = data.Name;
+       project.narrative = data.Narrative;
+       project.address = data.Address;
+       project.category = data.Category;
+       project.lat = data.Lat;
+       project.lng = data.Lng;
+       project.save(function(err) {
+          if (err) {
+             console.log("There was an error saving your project");
+             console.log(err);
+             return;
+         }
+     });
+   });
 }

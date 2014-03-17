@@ -8,7 +8,7 @@ var Esri_WorldTopoMap = 'http://server.arcgisonline.com/ArcGIS/rest/services/Wor
 */        
 // Need to refactor this code to make more elegant. This looks like garbage.              
 var updateData = function (m) {
-    alert("data should be updated for "+m.data.name);
+
     document.getElementById('p_id').value = m.data._id;
     document.getElementById('project_name').value = m.data.name;
     document.getElementById('project_category').value = m.data.category;
@@ -49,9 +49,7 @@ document.addEventListener('DOMContentLoaded', function() {
     L.tileLayer(Esri_WorldTopoMap, {
         attribution: 'Tiles &copy; Esri'
     }).addTo(map);
-  map.on('click', function(e){
-        alert("You clicked the map at "+e.latlng.toString())
-    });
+
     document.getElementById("add_point").onclick = points;
   //  document.getElementById("edit_point").onclick = points;
     function points() {
@@ -90,10 +88,9 @@ document.addEventListener('DOMContentLoaded', function() {
             updateData(newMarker);
         });
 
-        newMarker.on('click', function(e) {
-            updateData(newMarker);
-            console.log("clicked on marker, should update form");
-        });
+        // newMarker.on('click', function(e) {
+        //     updateData(newMarker);
+        // });
         if(document.getElementById("add_point").value == "add_point")
             console.log("add point value = add_point")
         if(document.getElementById("add_point").value == "edit_point")
@@ -120,22 +117,6 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('uv_cnt').value = len + 1;
     };
 
-    // var newMarker =
-    // L.marker(map.getCenter(), {color: 'red', draggable:'true', clickable:'true'});
-
-    // newMarker.data = {
-    //     _id: '',
-    //     name: '',
-    //     category: '',
-    //     narrative: '',
-    //     address: '',
-    //     coords: {
-    //         point: {
-    //             lat: newMarker.getLatLng().lat,
-    //             lng: newMarker.getLatLng().lng
-    //         }
-    //     }
-    // }
     map.setView(mapCenter, 13);
 
     var categoryMap = {};
@@ -143,14 +124,16 @@ document.addEventListener('DOMContentLoaded', function() {
     socket.on('projects', function(projects) {
         socket.on('categories', function(categories) {
             projects.forEach(function(project) {
-                var point = L.marker([project.lat, project.lng]).addTo(map);
+                var point = L.marker([project.lat, project.lng], {draggable:'true', clickable:'true'}).addTo(map);
                     point.data = project;
                  point.on('click', function() {
-                    console.log(point);
-                     updateData(point)
+                     updateData(point);
                  });
                  point.on('dragend', function(){
-                    console.log(point);
+                    updateData(point);
+                 });
+                 point.on('mouseover', function(){
+                    point.bindPopup(point.data._id).openPopup();
                  });
                 // categoryList is a map from category_id to an array of points
                 // project.category is an _id
