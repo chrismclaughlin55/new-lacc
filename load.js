@@ -18,7 +18,7 @@ mongodb.MongoClient.connect("mongodb://localhost:27017/lacc", function(err,db) {
         project.lng = e.lng;
 
         var customFieldMap1 = {
-            key: 'Year Completed',
+            key: 'Year_Completed',
             value: e.year
         };
 

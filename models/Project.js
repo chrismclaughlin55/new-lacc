@@ -20,8 +20,6 @@ var ProjectSchema = new mongoose.Schema(
 	},
 
 	{versionKey: false}
-	
-
 );
 
 mongoose.model('Project', ProjectSchema );

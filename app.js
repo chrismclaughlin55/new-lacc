@@ -12,6 +12,8 @@ var app = express();
 var server = app.listen(3000);
 var io = require('socket.io').listen(server);
 
+
+
 // all environments
 app.configure(function() {
 	app.set('port', process.env.PORT || 3000);
@@ -27,7 +29,11 @@ app.configure(function() {
 	app.use(express.session());
 	app.use(app.router);
 	app.use(express.static(path.join(__dirname, 'public')));
+	 
+
 });
+
+app.use(json2csv.expressDecorator); // Doesnt work when I put it in the configure function
 
 // development only
 if ('development' == app.get('env')) {
