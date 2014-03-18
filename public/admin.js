@@ -8,7 +8,6 @@ var Esri_WorldTopoMap = 'http://server.arcgisonline.com/ArcGIS/rest/services/Wor
 */        
 // Need to refactor this code to make more elegant. This looks like garbage.              
 var updateData = function (m) {
-
     document.getElementById('p_id').value = m.data._id;
     document.getElementById('project_name').value = m.data.name;
     document.getElementById('project_category').value = m.data.category;
@@ -51,7 +50,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }).addTo(map);
 
     document.getElementById("add_point").onclick = points;
-  //  document.getElementById("edit_point").onclick = points;
     function points() {
         var pinIcon = L.icon(
         {   
@@ -88,9 +86,6 @@ document.addEventListener('DOMContentLoaded', function() {
             updateData(newMarker);
         });
 
-        // newMarker.on('click', function(e) {
-        //     updateData(newMarker);
-        // });
         if(document.getElementById("add_point").value == "add_point")
             console.log("add point value = add_point")
         if(document.getElementById("add_point").value == "edit_point")

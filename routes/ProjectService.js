@@ -20,11 +20,7 @@ exports.getProjects = function(callback) {
 exports.updateProject = function(req, res) {
 	var Project = mongoose.model('Project');
     var project = new Project();
-    // if(req.body.p_id !=''){
-    //     console.log(req.body.p_id+"\n\n\n");
-    // Project.find({"_id": mongoose.Types.ObjectId(req.body.p_id)}).remove().exec();
 
-    // };
     project.name = req.body.project_name;
     project.address = req.body.project_address;
     project.narrative = req.body.project_narratives;
@@ -45,7 +41,7 @@ exports.updateProject = function(req, res) {
             project.customFields.push(customFieldMap);
         }
     }
-    if(req.body.p_id ==''){
+    if(req.body.p_id == ''){
         project.save(function(err) {
             if (err) {
                 console.log("There was an error saving your project");
@@ -54,23 +50,20 @@ exports.updateProject = function(req, res) {
             }
             res.redirect('/admin');
         });
-    }
-    else {
+    }else {
         var temp = project.toObject();
         delete temp._id;
-        for (i in temp) console.log(i);
-            Project.update({"_id": mongoose.Types.ObjectId(req.body.p_id)}, temp, {upsert:true}, function (err, numberAffected, raw) {
-                if (err){ console.log("error updating record err= "+ err); return}
+        Project.update({"_id": mongoose.Types.ObjectId(req.body.p_id)}, temp, {upsert:true}, 
+            function (err, numberAffected, raw) {
+                if (err){ 
+                    console.log("error updating record "+ err); 
+                    return;
+                }
                 console.log('The number of updated documents was %d', numberAffected);
-        res.redirect('/admin');
+                res.redirect('/admin');
             });
-
     }
 
-
-    /* TODO Found this example online */
-    //models.visits.update({ _id: req.body.id }, upsertData, { multi: false }, function(err) {
-    //if(err) { throw err; }
 }
 
 exports.download = function(req, res) {
@@ -89,20 +82,20 @@ exports.upload = function(req, res) {
 	var reader = csv.createCsvFileReader(req.files.csvFile.path, {columnsFromHeader:true, nestedQuotes:true});
     var writer = new csv.CsvWriter(process.stdout);
     reader.addListener('data', function(data) {
-    	var Project = mongoose.model('Project');
-     var project = new Project();
-     project.name = data.Name;
-     project.narrative = data.Narrative;
-     project.address = data.Address;
-     project.category = data.Category;
-     project.lat = data.Lat;
-     project.lng = data.Lng;
-     project.save(function(err) {
-      if (err) {
-       console.log("There was an error saving your project");
-       console.log(err);
-       return;
-   }
-});
- });
+        var Project = mongoose.model('Project');
+        var project = new Project();
+        project.name = data.Name;
+        project.narrative = data.Narrative;
+        project.address = data.Address;
+        project.category = data.Category;
+        project.lat = data.Lat;
+        project.lng = data.Lng;
+        project.save(function(err) {
+          if (err) {
+             console.log("There was an error saving your project");
+             console.log(err);
+             return;
+         }
+     });
+    });
 }

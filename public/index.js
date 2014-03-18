@@ -12,9 +12,6 @@ document.addEventListener('DOMContentLoaded', function() {
         maxZoom: 15,
         minZoom: 0
     });
-    map.on('click', function(e){
-        alert("You clicked the map at "+e.latlng.toString())
-    });
     L.tileLayer( Esri_WorldTopoMap, {
     }).addTo(map);
 
