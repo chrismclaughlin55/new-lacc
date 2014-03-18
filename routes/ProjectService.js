@@ -20,11 +20,11 @@ exports.getProjects = function(callback) {
 exports.updateProject = function(req, res) {
 	var Project = mongoose.model('Project');
     var project = new Project();
-    if(req.body.p_id !=''){
-        console.log(req.body.p_id+"\n\n\n");
-    Project.find({"_id": mongoose.Types.ObjectId(req.body.p_id)}).remove().exec();
+    // if(req.body.p_id !=''){
+    //     console.log(req.body.p_id+"\n\n\n");
+    // Project.find({"_id": mongoose.Types.ObjectId(req.body.p_id)}).remove().exec();
 
-    };
+    // };
     project.name = req.body.project_name;
     project.address = req.body.project_address;
     project.narrative = req.body.project_narratives;
@@ -45,6 +45,7 @@ exports.updateProject = function(req, res) {
             project.customFields.push(customFieldMap);
         }
     }
+    if(req.body.p_id ==''){
         project.save(function(err) {
             if (err) {
                 console.log("There was an error saving your project");
@@ -53,6 +54,18 @@ exports.updateProject = function(req, res) {
             }
             res.redirect('/admin');
         });
+    }
+    else {
+        var temp = project.toObject();
+        delete temp._id;
+        for (i in temp) console.log(i);
+            Project.update({"_id": mongoose.Types.ObjectId(req.body.p_id)}, temp, {upsert:true}, function (err, numberAffected, raw) {
+                if (err){ console.log("error updating record err= "+ err); return}
+                console.log('The number of updated documents was %d', numberAffected);
+        res.redirect('/admin');
+            });
+
+    }
 
 
     /* TODO Found this example online */
