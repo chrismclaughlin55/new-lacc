@@ -22,14 +22,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 var marker = L.marker([project.lat, project.lng]).addTo(map);
                 marker.project = project;
                 marker.on('click', function() { //This requires the user to double click a point right now... maybe it should happen regardless of load?
-                    var imageTag = '<a rel="group" href="dummy1.jpg"><img src="dummy1.jpg" alt="" width="80" height="80"></a><img src="dummy2.jpeg" width="80" height="80">'
-                    /* Roy: dummy image code:
+                    // var imageTag = '<a rel="group" href="dummy1.jpg"><img src="dummy1.jpg" alt="" width="80" height="80"></a><img src="dummy2.jpeg" width="80" height="80">'
+                    //Roy: dummy image code:
                     var imageTag = "";
                     for (var i = 0; i < marker.project.images.length; i++) {
                         var url = '/project/' + marker.project._id + '/image/' + i;
                         imageTag += '<img src="' + url + '" width="100" height="100">';
-                    } */
-                    marker.bindPopup(imageTag + "<div>Give me example text and il format it correctly, then we'll put the right collection call here.</div>");
+                    } 
+                    // TODO: We should put narrative / description in here.
+                    var narrativeTag = "<div>Give me example text and il format it correctly, then we'll put the right collection call here.</div>";
+                    marker.bindPopup(imageTag + narrativeTag);
                 });
                 // categoryList is a map from category_id to an array of points
                 // project.category is an _id
