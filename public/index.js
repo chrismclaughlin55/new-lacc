@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
         center: mapCenter,
         zoom: 13,
         maxZoom: 15,
-        minZoom: 0
+        minZoom: 9
     });
 
     L.tileLayer( Esri_WorldTopoMap, {
@@ -21,15 +21,15 @@ document.addEventListener('DOMContentLoaded', function() {
             projects.forEach(function(project) {
                 var marker = L.marker([project.lat, project.lng]).addTo(map);
                 marker.project = project;
-                // TODO: @Roy, not sure how to use jquery with this so I just did it in this messy way
-                // We should clean this up when we get a chance.
-                marker.on('click', function() {
+                marker.on('click', function() { //This requires the user to double click a point right now... maybe it should happen regardless of load?
+                    var imageTag = '<a rel="group" href="dummy1.jpg"><img src="dummy1.jpg" alt="" width="80" height="80"></a><img src="dummy2.jpeg" width="80" height="80">'
+                    /* Roy: dummy image code:
                     var imageTag = "";
                     for (var i = 0; i < marker.project.images.length; i++) {
                         var url = '/project/' + marker.project._id + '/image/' + i;
                         imageTag += '<img src="' + url + '" width="100" height="100">';
-                    }
-                    document.getElementById('photos').innerHTML = imageTag;
+                    } */
+                    marker.bindPopup(imageTag + "<div>Give me example text and il format it correctly, then we'll put the right collection call here.</div>");
                 });
                 // categoryList is a map from category_id to an array of points
                 // project.category is an _id

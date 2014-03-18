@@ -1,0 +1,2082 @@
+[
+  {
+    "name":"California Science Center Fence ",
+    "category":3,
+    "year":"2010",
+    "sponsors":"California Science Center; The State of California",
+    "lat":"34.0151569480627",
+    "lng":"-118.28509569168"
+  },
+  {
+    "name":"South Coast Botanical Garden Security Fence ",
+    "category":3,
+    "year":"2008",
+    "sponsors":"L.A. County Parks & Recreation",
+    "lat":"33.7829818425775",
+    "lng":"-118.345069885253"
+  },
+  {
+    "name":"Arboretum Retaining Wall",
+    "category":3,
+    "year":"2009",
+    "sponsors":"L.A. County Parks & Recreation",
+    "lat":"34.142249600694",
+    "lng":"-118.053932189941"
+  },
+  {
+    "name":"Stanford/Avalon Community Garden Fence",
+    "category":3,
+    "year":"2008",
+    "sponsors":"L.A. Community Garden Council",
+    "lat":"33.923705297709",
+    "lng":"-118.265333175659"
+  },
+  {
+    "name":"Backbone Trail Rehabilitation",
+    "category":7,
+    "year":"2011",
+    "sponsors":"National Parks Service",
+    "lat":"34.09544",
+    "lng":"-118.81274"
+  },
+  {
+    "name":"USDA Forest Service Recovery Act: San Bernardino National Forest",
+    "category":7,
+    "year":"2008",
+    "sponsors":"U.S. Forest Service",
+    "lat":"34.31104",
+    "lng":"-117.47302"
+  },
+  {
+    "name":"USDA Forest Service Recovery Act: San Bernardino National Forest",
+    "category":7,
+    "year":"2008",
+    "sponsors":"U.S. Forest Service",
+    "lat":"34.15157",
+    "lng":"-116.97226"
+  },
+  {
+    "name":"USDA Forest Service Recovery Act: Angeles Forest (San Dimas Canyon and Soldier Creek ) Demolition and Trail Construction",
+    "category":7,
+    "year":"2009",
+    "sponsors":"U.S. Forest Service",
+    "lat":"34.3042369652554",
+    "lng":"-117.837209701538"
+  },
+  {
+    "name":"USDA Forest Service Recovery Act: Angeles Forest Vegetation Clearance & Fuel Reduction",
+    "category":7,
+    "year":"2009",
+    "sponsors":"U.S. Forest Service",
+    "lat":"34.5874321690253",
+    "lng":"-118.574066162109"
+  },
+  {
+    "name":"Silver Lake Reservoir Walking Path Maintenance",
+    "category":3,
+    "year":"2010",
+    "sponsors":"City of Los Angeles",
+    "lat":"34.0946011015368",
+    "lng":"-118.265912532806"
+  },
+  {
+    "name":"WCA Equestrian Trails Improvement",
+    "category":7,
+    "year":"2010",
+    "sponsors":"Watershed Conservation Authority",
+    "lat":"34.02893",
+    "lng":"-118.04139"
+  },
+  {
+    "name":"Sespe Wilderness Project",
+    "category":7,
+    "year":"2009",
+    "sponsors":"National Forest Foundation",
+    "lat":"34.47031",
+    "lng":"-118.90885"
+  },
+  {
+    "name":"EL Encanto Beautification",
+    "category":3,
+    "year":"2009",
+    "sponsors":"State of California",
+    "lat":"34.17288",
+    "lng":"-117.88682"
+  },
+  {
+    "name":"Bonelli Regional Park Trailhead",
+    "category":3,
+    "year":"2009",
+    "sponsors":"L.A. County Parks & Recreation",
+    "lat":"34.08367",
+    "lng":"-117.7994"
+  },
+  {
+    "name":"Tujunga Wash Trail",
+    "category":7,
+    "year":"2008",
+    "sponsors":"Mountains Recreation Conservancy Authority",
+    "lat":"34.26352",
+    "lng":"-118.36711"
+  },
+  {
+    "name":"Kenneth Hahn State Recreation Area Trail(s) & Interpretive Rest Stops ",
+    "category":3,
+    "year":"2008",
+    "sponsors":"County of Los Angeles",
+    "lat":"34.00272",
+    "lng":"-118.36522"
+  },
+  {
+    "name":"Durfee Thompson School Trail Construction",
+    "category":3,
+    "year":"2007",
+    "sponsors":"Amigos De Los Rios",
+    "lat":"34.0817217632529",
+    "lng":"-118.002798557281"
+  },
+  {
+    "name":"EEMP Audubon Nature Trail Project (are multiple San Gabriel  projects here?)NO",
+    "category":5,
+    "year":"2009",
+    "sponsors":"California Department of Transporation",
+    "lat":"34.0982126510995",
+    "lng":"-118.198170661926"
+  },
+  {
+    "name":"View Ridge Trail",
+    "category":7,
+    "year":"2005",
+    "sponsors":"Palos Verdes Peninsula Land Conservancy",
+    "lat":"34.07992",
+    "lng":"-118.91195"
+  },
+  {
+    "name":"Chadwick School Trail & Restoration Work",
+    "category":3,
+    "year":"2005",
+    "sponsors":"The Chadwick School",
+    "lat":"33.7808951763291",
+    "lng":"-118.357236385345"
+  },
+  {
+    "name":"Cherry Canyon Trail",
+    "category":7,
+    "year":"2004",
+    "sponsors":"City of La Canada Flintridge",
+    "lat":"34.1903637869977",
+    "lng":"-118.20641040802"
+  },
+  {
+    "name":"Ocean Trails Project",
+    "category":7,
+    "year":"2005",
+    "sponsors":"Dudyk and Associates",
+    "lat":"33.729",
+    "lng":"-118.34161"
+  },
+  {
+    "name":"Catalina Island Trail Construction",
+    "category":7,
+    "year":"2003",
+    "sponsors":"Catalina Island Conservancy",
+    "lat":"33.44163",
+    "lng":"-118.48075"
+  },
+  {
+    "name":"Ken Malloy Harbor Regional Park Trail",
+    "category":3,
+    "year":"2001",
+    "sponsors":"County of Los Angeles: Regional Park and Open Space District",
+    "lat":"33.78260 -118.29410",
+    "lng":"-118.2941"
+  },
+  {
+    "name":"Coldwater Canyon Trails",
+    "category":3,
+    "year":"2001",
+    "sponsors":"Tree People",
+    "lat":"34.129072",
+    "lng":"-118.406829"
+  },
+  {
+    "name":"Elysian Park Trail Construction",
+    "category":3,
+    "year":"1998",
+    "sponsors":"County of Los Angeles",
+    "lat":"34.08369",
+    "lng":"-118.23368"
+  },
+  {
+    "name":"Griffith Park Projects (trails & Fern Canyon Restoration)",
+    "category":3,
+    "year":"1998",
+    "sponsors":"County of Los Angeles & Simple Green",
+    "lat":"34.13512",
+    "lng":"-118.2978"
+  },
+  {
+    "name":"Anacapa Island Invasive Plant Species Eradication",
+    "category":7,
+    "year":"2010",
+    "sponsors":"National Parks Service",
+    "lat":"34.01381",
+    "lng":"-119.42541"
+  },
+  {
+    "name":"Arcadia Canyon Weed Abatement",
+    "category":7,
+    "year":"2010",
+    "sponsors":"City of Arcadia",
+    "lat":"34.123001",
+    "lng":"-118.21591"
+  },
+  {
+    "name":"Bull Creek Vegetation Clearance",
+    "category":7,
+    "year":"2010",
+    "sponsors":"Metropolitan Water District",
+    "lat":"34.191032",
+    "lng":"-118.294585"
+  },
+  {
+    "name":"Santa Cruz Island Invasive Plant Species Removal",
+    "category":7,
+    "year":"2011",
+    "sponsors":"California Conservation Corps",
+    "lat":"34.01709",
+    "lng":"-119.7733"
+  },
+  {
+    "name":"Jesse Brewer Park Invasive Species Eradication",
+    "category":7,
+    "year":"2011",
+    "sponsors":"???",
+    "lat":"34.0175758152583",
+    "lng":"-118.290835618972"
+  },
+  {
+    "name":"Cleveland National Forest Grow Site Invasive Plant Species Removal",
+    "category":7,
+    "year":"2010",
+    "sponsors":"United States Forest Service",
+    "lat":"33.36853",
+    "lng":"-116.92425"
+  },
+  {
+    "name":"Channel Island Coastal Wetland Restoration",
+    "category":7,
+    "year":"2010",
+    "sponsors":"National Parks Service",
+    "lat":"34.01709",
+    "lng":"-119.7733"
+  },
+  {
+    "name":"Rancho Palos Verdes Brush Clearance",
+    "category":3,
+    "year":"Ongoing",
+    "sponsors":"City of Rancho Palos Verdes",
+    "lat":"33.74172",
+    "lng":"-118.3512"
+  },
+  {
+    "name":"Marshall Creek Restoration",
+    "category":7,
+    "year":"2010",
+    "sponsors":"Metropolitan Water District",
+    "lat":"34.8797",
+    "lng":"-117.454693"
+  },
+  {
+    "name":"San Marino Wash Vegetation Removal ",
+    "category":3,
+    "year":"2009",
+    "sponsors":"City of San Marino",
+    "lat":"34.12023",
+    "lng":"-118.11979"
+  },
+  {
+    "name":"Royal Palms Weed Abatement",
+    "category":3,
+    "year":"2008",
+    "sponsors":"L.A. County Beaches & Harbors",
+    "lat":"33.71857",
+    "lng":"-118.3226"
+  },
+  {
+    "name":"Rolling Hills Trail Rehabilitation",
+    "category":3,
+    "year":"2008",
+    "sponsors":"City of Rolling Hills Estates",
+    "lat":"33.79153",
+    "lng":"-118.3538"
+  },
+  {
+    "name":"Madrona Restoration Project",
+    "category":3,
+    "year":"2009",
+    "sponsors":"City of Torrance",
+    "lat":"33.82667",
+    "lng":"-118.34252"
+  },
+  {
+    "name":"Dockweiler Median Restoration",
+    "category":3,
+    "year":"2008",
+    "sponsors":"L.A. County Beaches & Harbors",
+    "lat":"33.93008",
+    "lng":"-118.43467"
+  },
+  {
+    "name":"Redondo Beach Bluff Restoration",
+    "category":3,
+    "year":"2007",
+    "sponsors":"L.A. County Beaches & Harbors",
+    "lat":"33.82926",
+    "lng":"-118.38916"
+  },
+  {
+    "name":"Strand Revegetation Project",
+    "category":3,
+    "year":"2007",
+    "sponsors":"City of Manhattan Beach",
+    "lat":"33.86387",
+    "lng":"-118.40245"
+  },
+  {
+    "name":"Utility Corridor Beautification",
+    "category":3,
+    "year":"2008",
+    "sponsors":"L.A. Department of Water and Power",
+    "lat":"34.19281",
+    "lng":"-118.38719"
+  },
+  {
+    "name":"Mission Creek Restoration",
+    "category":3,
+    "year":"2008",
+    "sponsors":"State Water Resources Control Board",
+    "lat":"34.0334390297317",
+    "lng":"-118.05240869522"
+  },
+  {
+    "name":"San Gorgonio Wilderness Trail Construction and Habitat Restoration",
+    "category":7,
+    "year":"2007",
+    "sponsors":"United States Forest Service; The San Bernadino National Forest Association;  The California Conservation Corps",
+    "lat":"34.10497",
+    "lng":"-116.83264"
+  },
+  {
+    "name":"Ramirez Canyon Restoration",
+    "category":7,
+    "year":"2006",
+    "sponsors":"Mountain Recreation and Conservation Authority",
+    "lat":"34.0348",
+    "lng":"-118.79307"
+  },
+  {
+    "name":"Ballona Wetlands Landscaping",
+    "category":7,
+    "year":"2009",
+    "sponsors":"California Conservation Corps",
+    "lat":"33.96684",
+    "lng":"-118.44469"
+  },
+  {
+    "name":"San Gabriel Low-Impact Landscaping and Restoration",
+    "category":3,
+    "year":"2005",
+    "sponsors":"Rivers and Mountains Conservancy",
+    "lat":"34.16098",
+    "lng":"-117. 89143"
+  },
+  {
+    "name":"Metropolitan Water District Fuel Abatement",
+    "category":7,
+    "year":"2006",
+    "sponsors":"Metropolitan Water District",
+    "lat":"34.5291",
+    "lng":"-118.62403"
+  },
+  {
+    "name":"City of Industry - Arundo Removal",
+    "category":3,
+    "year":"2005",
+    "sponsors":"City of Industry & San Gabriel Rivers and Mountains Conservancy",
+    "lat":"33.99498",
+    "lng":"-118.15193"
+  },
+  {
+    "name":"Palos Verdes Interpretive Center Non-Native Plant Species Abatement",
+    "category":3,
+    "year":"2004",
+    "sponsors":"Palos Verdes Land Conservancy",
+    "lat":"33.7436298188509",
+    "lng":"-118.409678936004"
+  },
+  {
+    "name":"Alameda Corridor Transportation Authority Pickleweed Mitigation",
+    "category":3,
+    "year":"2004",
+    "sponsors":"Alameda Corridor Transportation Authority",
+    "lat":"33.9285",
+    "lng":"-118.17668"
+  },
+  {
+    "name":"Whittier Narrows Regional Park Arundo Mitigation",
+    "category":3,
+    "year":"2004",
+    "sponsors":"Center for Natural Lands Management",
+    "lat":"34.05133",
+    "lng":"-118.0725"
+  },
+  {
+    "name":"Muholland Overlook Fuel Abatement",
+    "category":3,
+    "year":"2006",
+    "sponsors":"Mountains Recreation and Conservation Authority",
+    "lat":"34.10141",
+    "lng":"-118.65875"
+  },
+  {
+    "name":"Topanga Canyon Arundo Mitigation",
+    "category":7,
+    "year":"2004",
+    "sponsors":"California State Parks",
+    "lat":"34.07641",
+    "lng":"-118.59121"
+  },
+  {
+    "name":"Tujunga Pond Restoration",
+    "category":7,
+    "year":"2001",
+    "sponsors":"???",
+    "lat":"34.29525",
+    "lng":"-118.18461"
+  },
+  {
+    "name":"Cal State L.A. Weed Abatement",
+    "category":3,
+    "year":"2001",
+    "sponsors":"California State University of Los Angeles",
+    "lat":"34.066",
+    "lng":"-118.16786"
+  },
+  {
+    "name":"Ridgecrest Tamarasc Removal",
+    "category":7,
+    "year":"2002",
+    "sponsors":"Bureau of Land Management",
+    "lat":"35.60614",
+    "lng":"-117.53327"
+  },
+  {
+    "name":"Barstow Mojave Restoration Project",
+    "category":7,
+    "year":"2001",
+    "sponsors":"Bureau of Land Management",
+    "lat":"35.02784",
+    "lng":"-116.32831"
+  },
+  {
+    "name":"Palos Verdes Peninsula Restoration",
+    "category":3,
+    "year":"2001",
+    "sponsors":"City of Rancho Palos Verdes & Palos Verdes Land Conservancy",
+    "lat":"33.73982",
+    "lng":"-118.35129"
+  },
+  {
+    "name":"Catalina Island Natural Habitat Restoration",
+    "category":7,
+    "year":"2001",
+    "sponsors":"Catalina Island Conservancy",
+    "lat":"33.40852",
+    "lng":"-118.45764"
+  },
+  {
+    "name":"North Marrano Beach Restoration",
+    "category":3,
+    "year":"2000",
+    "sponsors":"County of Los Angeles",
+    "lat":"34.05166",
+    "lng":"-118.07224"
+  },
+  {
+    "name":"L.A. River Corps",
+    "category":4,
+    "year":"Ongoing",
+    "sponsors":"American Chemistry Council, Annenberg Foundation & _________",
+    "lat":"34.09635",
+    "lng":"-118.24023"
+  },
+  {
+    "name":"Metropolitan Water East Slope Fire Management Project",
+    "category":7,
+    "year":"2009",
+    "sponsors":"Metropolitan Water District",
+    "lat":"34.182986",
+    "lng":"-118.294562"
+  },
+  {
+    "name":"San Gabriel River Restoration",
+    "category":7,
+    "year":"2003",
+    "sponsors":"CH2MHill",
+    "lat":"34.05133",
+    "lng":"-118.0725"
+  },
+  {
+    "name":"Amargosa-Mojave Basin Tamarasc Removal",
+    "category":7,
+    "year":"1999",
+    "sponsors":"Bureau of Land Management",
+    "lat":"35.77964",
+    "lng":"-116.20098"
+  },
+  {
+    "name":"Southern California Post-Wildfire Restoration Work",
+    "category":7,
+    "year":"2009",
+    "sponsors":"U.S. Department of Labor & Los Angeles Community Development Department",
+    "lat":"34.09591",
+    "lng":"-118.24784"
+  },
+  {
+    "name":"Slope Stabilization and Sandbagging",
+    "category":7,
+    "year":"2010",
+    "sponsors":"City of L.A. Bureau of Engineering",
+    "lat":"34.09591",
+    "lng":"-118.24784"
+  },
+  {
+    "name":"City of Los Angeles Wildfire Recovery Work",
+    "category":7,
+    "year":"2009",
+    "sponsors":"U.S. Department of Labor & Los Angeles Community Development Department",
+    "lat":"34.55749",
+    "lng":"-118.45694"
+  },
+  {
+    "name":"Los Angeles Flood Avoidance Projects",
+    "category":3,
+    "year":"2006",
+    "sponsors":"City of Los Angeles Engineering Department",
+    "lat":"34.11717",
+    "lng":"-118.30979"
+  },
+  {
+    "name":"Los Angeles Hill Stabilization and Flood Control",
+    "category":3,
+    "year":"2005",
+    "sponsors":"Los Angeles Department of Parks and Recreation",
+    "lat":"34.12773",
+    "lng":"-118.31054"
+  },
+  {
+    "name":"Forest Recovery Team - Post-fire Restoration (San Bernardino NF)",
+    "category":7,
+    "year":"Ongoing",
+    "sponsors":"United States Department of Agriculture",
+    "lat":"34.845",
+    "lng":"-116.5857"
+  },
+  {
+    "name":"Santa Clarita Firestorms Recovery Work",
+    "category":7,
+    "year":"2008",
+    "sponsors":"Jewish Vocational Services, the U.S. Department of Labor & The Los Angeles Community Development Department",
+    "lat":"34.42741",
+    "lng":"-118.37699"
+  },
+  {
+    "name":"Metropolitan Water District Flood Control & Hillside Stabilization",
+    "category":3,
+    "year":"Ongoing",
+    "sponsors":"Metropolitan Water District",
+    "lat":"34.05483",
+    "lng":"-118.23631"
+  },
+  {
+    "name":"O'melvany Park Erosion Prevention",
+    "category":3,
+    "year":"1999",
+    "sponsors":"City of Los Angeles and County of Los Angeles: Regional Park and Open Space District",
+    "lat":"34.31417",
+    "lng":"-118.52093"
+  },
+  {
+    "name":"Wildwood Canyon Flood Control",
+    "category":3,
+    "year":"1999",
+    "sponsors":"???",
+    "lat":"34.20866",
+    "lng":"-118.29699"
+  },
+  {
+    "name":"Fern Dell Canyon Flood Control",
+    "category":3,
+    "year":"1999",
+    "sponsors":"City of Los Angeles: Department of Parks and Recreation",
+    "lat":"34.13271",
+    "lng":"-118.30071"
+  },
+  {
+    "name":"Rancho Palos Verdes  ",
+    "category":3,
+    "year":"1999",
+    "sponsors":"City of Rancho Palos Verdes",
+    "lat":"33.76686",
+    "lng":"-118.41611"
+  },
+  {
+    "name":"La Cienega  Flood Control",
+    "category":3,
+    "year":"1999",
+    "sponsors":"City of Los Angeles",
+    "lat":"34.00378",
+    "lng":"-118.37283"
+  },
+  {
+    "name":"Porter Ranch Flood Control",
+    "category":3,
+    "year":"1999",
+    "sponsors":"City of Los Angeles",
+    "lat":"34.29995",
+    "lng":"-118.49667"
+  },
+  {
+    "name":"Channel Island Prisoners Cove Historic Stable Relocation ",
+    "category":7,
+    "year":"2011",
+    "sponsors":"National Parks Service",
+    "lat":"34.0167",
+    "lng":"-119.6833"
+  },
+  {
+    "name":"Cleveland National Forest Marijuana Farm Dismantling",
+    "category":7,
+    "year":"2011",
+    "sponsors":"U.S. Forest Service",
+    "lat":"33.35961",
+    "lng":"-116.87939"
+  },
+  {
+    "name":"San Dimas Canyon: Demolition and Capital Improvements ",
+    "category":7,
+    "year":"2010",
+    "sponsors":"U.S. Department of Agriculture",
+    "lat":"34.20279",
+    "lng":"-117.75127"
+  },
+  {
+    "name":"Diamondbar Landscaping Project",
+    "category":3,
+    "year":"2011",
+    "sponsors":"State of California Department of Transporation",
+    "lat":"33.99158",
+    "lng":"-117.84086"
+  },
+  {
+    "name":"Florence Firestone Service Center Landscaping",
+    "category":3,
+    "year":"2010",
+    "sponsors":"Los Angeles County Department of Parks and Recreation",
+    "lat":"33.96524",
+    "lng":"-118.22578"
+  },
+  {
+    "name":"San Gabriel Pressure Control Structure Site Grading",
+    "category":3,
+    "year":"2010",
+    "sponsors":"Metropolitan Water District",
+    "lat":"34.123001",
+    "lng":"-118.21591"
+  },
+  {
+    "name":"City of Whittier Landscaping",
+    "category":3,
+    "year":"2010",
+    "sponsors":"City of Whittier",
+    "lat":"33.98789",
+    "lng":"-118.02007"
+  },
+  {
+    "name":"Marsh St. Park & Elysian Bike Path Construction",
+    "category":3,
+    "year":"2009",
+    "sponsors":"Mountains Recreation & Conservation Authority",
+    "lat":"33.10689",
+    "lng":"-118.24607"
+  },
+  {
+    "name":"Vista Hermosa Park",
+    "category":3,
+    "year":"2009",
+    "sponsors":"Mountains Recreation & Conservation Authority",
+    "lat":"34.06183",
+    "lng":"-118.25784"
+  },
+  {
+    "name":"Community Living Room (at 29th and Maple)",
+    "category":3,
+    "year":"2005",
+    "sponsors":"City of Los Angeles & the Office of Community Beautification",
+    "lat":"34.0211150629008",
+    "lng":"-118.266921043396"
+  },
+  {
+    "name":"Community Living Room (at 5th and Bixel)",
+    "category":3,
+    "year":"2006",
+    "sponsors":"City of Los Angeles & the Office of Community Beautification",
+    "lat":"34.0549527756873",
+    "lng":"-118.261363506317"
+  },
+  {
+    "name":"Boyle Heights Community Living Room",
+    "category":3,
+    "year":"2006",
+    "sponsors":"City of Los Angeles & the Office of Community Beautification",
+    "lat":"34.0467924186933",
+    "lng":"-118.207783699035"
+  },
+  {
+    "name":"Echo Park United Methodist Church Community Living Room",
+    "category":3,
+    "year":"2007",
+    "sponsors":"Echo Park United Methodist Church, City of Los Angeles & the Office of Community Beautification",
+    "lat":"34.0797490389512",
+    "lng":"-118.262500762939"
+  },
+  {
+    "name":"Yo Watts Community Living Room Construction",
+    "category":3,
+    "year":"2008",
+    "sponsors":"Office of Community Beautification, City of Los Angeles",
+    "lat":"33.9431997368037",
+    "lng":"-118.240377902984"
+  },
+  {
+    "name":"WAYS Elementary School Community Living Room Construction",
+    "category":3,
+    "year":"2011",
+    "sponsors":"Office of Community Beautification, City of Los Angeles",
+    "lat":"33.9600379143427",
+    "lng":"-118.26271533966"
+  },
+  {
+    "name":"Pickens Canyon Park Construction",
+    "category":3,
+    "year":"2008",
+    "sponsors":"L.A. County Parks and Recreation",
+    "lat":"34.21765",
+    "lng":"-118.2294"
+  },
+  {
+    "name":"Metropolitan Water District Landscape Maintenance - Via Princessa Work Site: City of Santa Clarita",
+    "category":7,
+    "year":"Ongoing",
+    "sponsors":"Metropolitan Water District",
+    "lat":"34.235361",
+    "lng":"-118.32348"
+  },
+  {
+    "name":"Metropolitan Water District Landscape Maintenance - Benson/18th Street Rialto Feeder",
+    "category":7,
+    "year":"Ongoing",
+    "sponsors":"Metropolitan Water District",
+    "lat":"34.74365",
+    "lng":"-117.405912"
+  },
+  {
+    "name":"Metropolitan Water District Landscape Maintenance - 12th Street Alley Site: City of Santa Clarita",
+    "category":7,
+    "year":"Ongoing",
+    "sponsors":"Metropolitan Water District",
+    "lat":"34.23797",
+    "lng":"-118.313572"
+  },
+  {
+    "name":"Metropolitan Water District Landscape Maintenance - Road Clearance: Garvey-Ascot Towers",
+    "category":7,
+    "year":"Ongoing",
+    "sponsors":"Metropolitan Water District",
+    "lat":"34.42553",
+    "lng":"-118.111869"
+  },
+  {
+    "name":"Metropolitan Water District Landscape Maintenance - Santa Clara High Raise Structure: City of Santa Clarita",
+    "category":7,
+    "year":"Ongoing",
+    "sponsors":"Metropolitan Water District",
+    "lat":"34.27168",
+    "lng":"-118.332476"
+  },
+  {
+    "name":"Metropolitan Water District Landscape Maintenance - 18th Street & Christopher",
+    "category":7,
+    "year":"Ongoing",
+    "sponsors":"Metropolitan Water District",
+    "lat":"34.74558",
+    "lng":"-117.384007"
+  },
+  {
+    "name":"City of Bell Riverfront Project",
+    "category":3,
+    "year":"2008",
+    "sponsors":"L.A. Regional Open Space District",
+    "lat":"33.98135",
+    "lng":"-118.1701"
+  },
+  {
+    "name":"Rio Vista Park Project",
+    "category":3,
+    "year":"2007",
+    "sponsors":"Amigos de los Rios",
+    "lat":"34.00971",
+    "lng":"-118.06799"
+  },
+  {
+    "name":"Compton High Rest Stop",
+    "category":3,
+    "year":"2007",
+    "sponsors":"Mountains Recreation & Conservation Authority",
+    "lat":"33.89108",
+    "lng":"-118.229"
+  },
+  {
+    "name":"Compton Creek Irrigation, Landscaping and Bike Path Construction",
+    "category":3,
+    "year":"2005",
+    "sponsors":"County of Los Angeles",
+    "lat":"33.90777",
+    "lng":"-118.24537"
+  },
+  {
+    "name":"Lashbrook Park Irrigation / Construction",
+    "category":3,
+    "year":"2005",
+    "sponsors":"???",
+    "lat":"34.06474",
+    "lng":"-118.06431"
+  },
+  {
+    "name":"Little Bear Park - Playground Construction",
+    "category":3,
+    "year":"2004",
+    "sponsors":"1st 5 L.A. & County of Los Angeles",
+    "lat":"33.9770507001982",
+    "lng":"-118.198299407958"
+  },
+  {
+    "name":"John Anson Ford Park - Playground Construction",
+    "category":3,
+    "year":"2004",
+    "sponsors":"1st 5 L.A. & County of Los Angeles",
+    "lat":"33.9584183190548",
+    "lng":"-118.153023719787"
+  },
+  {
+    "name":"Darwell Park - Playground Construction",
+    "category":3,
+    "year":"2004",
+    "sponsors":"1st 5 L.A. & County of Los Angeles",
+    "lat":"33.9688472607653",
+    "lng":"-118.154118061065"
+  },
+  {
+    "name":"Bell Gardens Neighborhood Youth Center - Playground Construction",
+    "category":3,
+    "year":"2004",
+    "sponsors":"1st 5 L.A. & County of Los Angeles",
+    "lat":"33.9687582820295",
+    "lng":"-118.161177635192"
+  },
+  {
+    "name":"Bandini Park - Playground Construction",
+    "category":3,
+    "year":"2004",
+    "sponsors":"1st 5 L.A. & County of Los Angeles",
+    "lat":"34.0089493926241",
+    "lng":"-118.170619010925"
+  },
+  {
+    "name":"Veteran's Memorial Park - Playground Construction",
+    "category":3,
+    "year":"2004",
+    "sponsors":"1st 5 L.A. & County of Los Angeles",
+    "lat":"33.9729223870875",
+    "lng":"-118.125450611114"
+  },
+  {
+    "name":"Rosewood Park - Playground Construction",
+    "category":3,
+    "year":"2004",
+    "sponsors":"1st 5 L.A. & County of Los Angeles",
+    "lat":"34.0024033984893",
+    "lng":"-118.155577182769"
+  },
+  {
+    "name":"Lugo Park - Playground Construction",
+    "category":3,
+    "year":"2004",
+    "sponsors":"1st 5 L.A. & County of Los Angeles",
+    "lat":"33.9645984222278",
+    "lng":"-118.193793296813"
+  },
+  {
+    "name":"Clara Street Park - Playground Construction",
+    "category":3,
+    "year":"2004",
+    "sponsors":"1st 5 L.A. & County of Los Angeles",
+    "lat":"33.9656017011504",
+    "lng":"-118.18168580532"
+  },
+  {
+    "name":"Salt Lake Park (South & North Ends) - Playground Construction",
+    "category":3,
+    "year":"2004",
+    "sponsors":"1st 5 L.A. & County of Los Angeles",
+    "lat":"33.9726",
+    "lng":"-118.204188"
+  },
+  {
+    "name":"Chesley Park - Playground Construction",
+    "category":3,
+    "year":"2004",
+    "sponsors":"1st 5 L.A. & County of Los Angeles",
+    "lat":"33.9795240331471",
+    "lng":"-118.232524394989"
+  },
+  {
+    "name":"Pixley Park - Playground Construction",
+    "category":3,
+    "year":"2004",
+    "sponsors":"1st 5 L.A., the County of Los Angeles & City of Maywood",
+    "lat":"33.99137",
+    "lng":"-118.19939"
+  },
+  {
+    "name":"Circle Park - Playground Construction",
+    "category":3,
+    "year":"2004",
+    "sponsors":"1st 5 L.A. & County of Los Angeles",
+    "lat":"33.9383042927626",
+    "lng":"-118.167357444763"
+  },
+  {
+    "name":"Hollydale Community Park - Playground Construction",
+    "category":3,
+    "year":"2004",
+    "sponsors":"1st 5 L.A. & County of Los Angeles",
+    "lat":"33.9153186459193",
+    "lng":"-118.16398859024"
+  },
+  {
+    "name":"South Gate Park - Playground Construction",
+    "category":3,
+    "year":"2004",
+    "sponsors":"1st 5 L.A. & County of Los Angeles",
+    "lat":"33.9475786954731",
+    "lng":"-118.183343410491"
+  },
+  {
+    "name":"Caesar Chavez Playground",
+    "category":3,
+    "year":"2004",
+    "sponsors":"1st 5 L.A. & County of Los Angeles",
+    "lat":"33.9532923637376",
+    "lng":"-118.226859569549"
+  },
+  {
+    "name":"Bethune Park",
+    "category":3,
+    "year":"2005",
+    "sponsors":"County of Los Angeles: Regional Park and Open Space District",
+    "lat":"33.9836520256994",
+    "lng":"-118.253059387207"
+  },
+  {
+    "name":"Saybrook Park",
+    "category":3,
+    "year":"2005",
+    "sponsors":"County of Los Angeles: Regional Park and Open Space District",
+    "lat":"34.0143032137737",
+    "lng":"-118.137230873107"
+  },
+  {
+    "name":"Hanon Park Construction",
+    "category":3,
+    "year":"2004",
+    "sponsors":"City of Bell Gardens",
+    "lat":"33.9711962657173",
+    "lng":"-118.135621547698"
+  },
+  {
+    "name":"Matthews Parkette",
+    "category":3,
+    "year":"2003",
+    "sponsors":"State of California Park: Department of Parks and Recreation & The City of Redondo Beach",
+    "lat":"33.87419",
+    "lng":"-118.37587"
+  },
+  {
+    "name":"Commonwealth Nursery Habitat Improvement",
+    "category":3,
+    "year":"2002",
+    "sponsors":"California Conservation Corps",
+    "lat":"34.1226",
+    "lng":"-118.28625"
+  },
+  {
+    "name":"San Miguel Island Restoration",
+    "category":7,
+    "year":"2002",
+    "sponsors":"California Conservation Corps & National Parks Service",
+    "lat":"34.03638",
+    "lng":"-120.36909"
+  },
+  {
+    "name":"Santa Rosa Island Archeological & Habitat Restoration",
+    "category":7,
+    "year":"2002",
+    "sponsors":"California Conservation Corps",
+    "lat":"33.96104",
+    "lng":"-120.10557"
+  },
+  {
+    "name":"Catalina Island",
+    "category":7,
+    "year":"2002",
+    "sponsors":"California Conservation Corps",
+    "lat":"33.37248",
+    "lng":"-118.3699"
+  },
+  {
+    "name":"Cypress Park",
+    "category":3,
+    "year":"2003",
+    "sponsors":"Santa Monica Mountains Conservancy",
+    "lat":"34.08894",
+    "lng":"-118.22551"
+  },
+  {
+    "name":"La Cienega / Stocker Landscaping",
+    "category":3,
+    "year":"2001",
+    "sponsors":"County of Los Angeles: Regional Park and Open Space District",
+    "lat":"33.99804",
+    "lng":"-118.36988"
+  },
+  {
+    "name":"Venice Blvd Landscaping",
+    "category":1,
+    "year":"2000",
+    "sponsors":"???",
+    "lat":"34.03531",
+    "lng":"-118.37787"
+  },
+  {
+    "name":"Hammel Center Greenhouse Restoration",
+    "category":3,
+    "year":"2000",
+    "sponsors":"Urban Resources Partnership",
+    "lat":"34.04213",
+    "lng":"-118.17524"
+  },
+  {
+    "name":"Radio Hill Landscaping",
+    "category":3,
+    "year":"1999",
+    "sponsors":"City of Los Angeles",
+    "lat":"34.0723909051678",
+    "lng":"-118.232932090759"
+  },
+  {
+    "name":"Whittier Narrows Park Improvements",
+    "category":1,
+    "year":"1998",
+    "sponsors":"County of Los Angeles: Department of Parks and Recreation",
+    "lat":"34.0334301386259",
+    "lng":"-118.052403330802"
+  },
+  {
+    "name":"Greenroads Media Mosaic Installations",
+    "category":3,
+    "year":"2009",
+    "sponsors":"Greenroad Media, Inc.",
+    "lat":"34.06139",
+    "lng":"-118.25074"
+  },
+  {
+    "name":"Bridge Restoration: Santa Monica Mountains",
+    "category":3,
+    "year":"2000",
+    "sponsors":"National Parks Service",
+    "lat":"34.07439",
+    "lng":"-118.84449"
+  },
+  {
+    "name":"Bridge Restoration: Palas Verdes",
+    "category":3,
+    "year":"2000",
+    "sponsors":"Palos Verdes Land Conservancy",
+    "lat":"33.74361",
+    "lng":"-118.35032"
+  },
+  {
+    "name":"La Salle Gateway Median Construction",
+    "category":3,
+    "year":"2010",
+    "sponsors":"City of Los Angeles",
+    "lat":"34.03825",
+    "lng":"-118.30332"
+  },
+  {
+    "name":"Lincoln Heights Sidewalk Improvements",
+    "category":3,
+    "year":"2003",
+    "sponsors":"City of Los Angeles",
+    "lat":"34.07374",
+    "lng":"-118.20862"
+  },
+  {
+    "name":"Latham Pocket Park Construction",
+    "category":3,
+    "year":"2003",
+    "sponsors":"City of Los Angeles",
+    "lat":"34.07374",
+    "lng":"-118.20862"
+  },
+  {
+    "name":"Wells Fargo Mural Restoration",
+    "category":6,
+    "year":"2010",
+    "sponsors":"California Department of Transportation",
+    "lat":"34.32408",
+    "lng":"-118.142881"
+  },
+  {
+    "name":"1st District Graffiti Prevention: Murals",
+    "category":6,
+    "year":"2008",
+    "sponsors":"L.A. County Parks and Recreation",
+    "lat":"33.98689",
+    "lng":"-117.97955"
+  },
+  {
+    "name":"John Marshall High School Mural",
+    "category":6,
+    "year":"1999",
+    "sponsors":"County of Los Angeles",
+    "lat":"34.1078604630714",
+    "lng":"-118.277564048767"
+  },
+  {
+    "name":"Alta Loma Elementary School Mural",
+    "category":6,
+    "year":"1999",
+    "sponsors":"County of Los Angeles",
+    "lat":"34.0428097370767",
+    "lng":"-118.338825702667"
+  },
+  {
+    "name":"Cheremoya Avenue Elementary School Mural",
+    "category":6,
+    "year":"1999",
+    "sponsors":"County of Los Angeles",
+    "lat":"34.105373102986",
+    "lng":"-118.320565223693"
+  },
+  {
+    "name":"Lockwood Avenue Elementary School Mural",
+    "category":6,
+    "year":"1999",
+    "sponsors":"County of Los Angeles",
+    "lat":"34.0890080042024",
+    "lng":"-118.287713527679"
+  },
+  {
+    "name":"Rosemont Ave Elementary School Mural",
+    "category":6,
+    "year":"1999",
+    "sponsors":"County of Los Angeles",
+    "lat":"34.072337583025",
+    "lng":"-118.26990365982"
+  },
+  {
+    "name":"Ramona Elementary School Mural",
+    "category":6,
+    "year":"1999",
+    "sponsors":"County of Los Angeles",
+    "lat":"34.0918512452154",
+    "lng":"-118.299601078033"
+  },
+  {
+    "name":"Cahuenga Elementary School Mural",
+    "category":6,
+    "year":"1999",
+    "sponsors":"County of Los Angeles",
+    "lat":"34.0705601590615",
+    "lng":"-118.304944038391"
+  },
+  {
+    "name":"Grant Elementary School Mural",
+    "category":6,
+    "year":"1999",
+    "sponsors":"County of Los Angeles",
+    "lat":"34.1007890621328",
+    "lng":"-118.312411308288"
+  },
+  {
+    "name":"Melrose Elementary School Mural",
+    "category":6,
+    "year":"1999",
+    "sponsors":"County of Los Angeles",
+    "lat":"34.0841920468987",
+    "lng":"-118.345327377319"
+  },
+  {
+    "name":"Queen Anne Place Elementary School Mural",
+    "category":6,
+    "year":"1999",
+    "sponsors":"County of Los Angeles",
+    "lat":"34.051752729303",
+    "lng":"-118.330950736999"
+  },
+  {
+    "name":"Santa Monica Boulevard Community Charter School Mural",
+    "category":6,
+    "year":"1999",
+    "sponsors":"County of Los Angeles",
+    "lat":"34.0893278735836",
+    "lng":"-118.315694332122"
+  },
+  {
+    "name":"24th Street Elementary School Mural",
+    "category":6,
+    "year":"1999",
+    "sponsors":"County of Los Angeles",
+    "lat":"34.0348971584633",
+    "lng":"-118.310673236846"
+  },
+  {
+    "name":"Vine Street Elementary School Mural",
+    "category":6,
+    "year":"1999",
+    "sponsors":"County of Los Angeles",
+    "lat":"34.0895411191662",
+    "lng":"-118.327195644378"
+  },
+  {
+    "name":"Wilton Place Elementary School Mural",
+    "category":6,
+    "year":"1999",
+    "sponsors":"County of Los Angeles",
+    "lat":"34.0583482483651",
+    "lng":"-118.316295146942"
+  },
+  {
+    "name":"Bancroft Middle School Mural",
+    "category":6,
+    "year":"1999",
+    "sponsors":"County of Los Angeles",
+    "lat":"34.0879950765225",
+    "lng":"-118.336486816406"
+  },
+  {
+    "name":"Burroughs Middle School Mural",
+    "category":6,
+    "year":"1999",
+    "sponsors":"County of Los Angeles",
+    "lat":"34.0654054186876",
+    "lng":"-118.336164951324"
+  },
+  {
+    "name":"LeConte Middle School Mural",
+    "category":6,
+    "year":"1999",
+    "sponsors":"County of Los Angeles",
+    "lat":"34.0957072382543",
+    "lng":"-118.317003250122"
+  },
+  {
+    "name":"Mount Vernon Middle School Mural",
+    "category":6,
+    "year":"1999",
+    "sponsors":"County of Los Angeles",
+    "lat":"34.0421518654174",
+    "lng":"-118.327238559722"
+  },
+  {
+    "name":"Fairfax High School Mural",
+    "category":6,
+    "year":"1999",
+    "sponsors":"County of Los Angeles",
+    "lat":"34.0828947126741",
+    "lng":"-118.360133171081"
+  },
+  {
+    "name":"Los Angeles High School Mural",
+    "category":6,
+    "year":"1999",
+    "sponsors":"County of Los Angeles",
+    "lat":"34.0551483301609",
+    "lng":"-118.332753181457"
+  },
+  {
+    "name":"Sycamore Canyon Restoration / Trails Project",
+    "category":7,
+    "year":"2010",
+    "sponsors":"L.A. County Parks and Recreation",
+    "lat":"34.1318",
+    "lng":"-117.72489"
+  },
+  {
+    "name":"Whittier Narrows Trail Work",
+    "category":3,
+    "year":"2008",
+    "sponsors":"L.A. County Parks and Recreation",
+    "lat":"34.02898",
+    "lng":"-118.05265"
+  },
+  {
+    "name":"Forest Recovery Team",
+    "category":7,
+    "year":"Ongoing",
+    "sponsors":"U.S. Department of Agriculture",
+    "lat":"34.14312",
+    "lng":"-116.98357"
+  },
+  {
+    "name":"Santa Monica Mountains Trail Construction",
+    "category":7,
+    "year":"2004",
+    "sponsors":"Santa Monica Mountains National Recreation Area",
+    "lat":"34.1124",
+    "lng":"-118.75878"
+  },
+  {
+    "name":"Anacapa Island Restoration Project",
+    "category":7,
+    "year":"2011",
+    "sponsors":"National Parks Service",
+    "lat":"34.01423",
+    "lng":"-119.36628"
+  },
+  {
+    "name":"Wildlands Recovery Project (Fuel Reduction / Trail Construction)",
+    "category":7,
+    "year":"Ongoing",
+    "sponsors":"Americorps, State of California: Department of Parks and Recreation, Moutains Recreation and Conservation Authority, and Santa Monica Mountains National Recreation Area",
+    "lat":"34.11506",
+    "lng":"-118.75579"
+  },
+  {
+    "name":"Obregon Park Solar Installation",
+    "category":2,
+    "year":"2010",
+    "sponsors":"L.A. County Parks and Recreation",
+    "lat":"34.03699",
+    "lng":"-118.17802"
+  },
+  {
+    "name":"Shipley Nature Center Rain Barrell Installation",
+    "category":2,
+    "year":"2011",
+    "sponsors":"The Boeing Corporation",
+    "lat":"33.7022425548325",
+    "lng":"-118.006553649902"
+  },
+  {
+    "name":"Long Beach Community Action Partnership Rain Barrell Installation",
+    "category":2,
+    "year":"2011",
+    "sponsors":"The Boeing Corporation",
+    "lat":"33.8124126865124",
+    "lng":"-118.189271092414"
+  },
+  {
+    "name":"Costco Burbank: PECI Energy Smart Jobs Audit",
+    "category":2,
+    "year":"2011",
+    "sponsors":"The California Conservation Corps",
+    "lat":"34.1857133547736",
+    "lng":"-118.323783874511"
+  },
+  {
+    "name":"99 Cents Only Store: PECI Energy Smart Jobs Audit",
+    "category":2,
+    "year":"2011",
+    "sponsors":"The California Conservation Corps",
+    "lat":"34.0634856421303",
+    "lng":"-118.362343311309"
+  },
+  {
+    "name":"Whole Foods Supermarket: PECI Energy Smart Jobs Audit ",
+    "category":2,
+    "year":"2011",
+    "sponsors":"The California Conservation Corps",
+    "lat":"33.9058270231317",
+    "lng":"-118.395946025848"
+  },
+  {
+    "name":"CBS Studios Solar Installation",
+    "category":2,
+    "year":"2010",
+    "sponsors":"California Power Save",
+    "lat":"34.0751991572528",
+    "lng":"-118.360004425048"
+  },
+  {
+    "name":"Residential Weatherization Program (Apartment Complex)",
+    "category":2,
+    "year":"2011",
+    "sponsors":"The Long Beach Community Action Partnership",
+    "lat":"33.8126890263566",
+    "lng":"-118.218641281127"
+  },
+  {
+    "name":"Residential Weatherization Program",
+    "category":2,
+    "year":"2010",
+    "sponsors":"The Long Beach Community Action Partnership",
+    "lat":"33.9385535221689",
+    "lng":"-117.9989361763"
+  },
+  {
+    "name":"Residential Weatherization Program",
+    "category":2,
+    "year":"2011",
+    "sponsors":"The Long Beach Community Action Partnership",
+    "lat":"33.9838299519062",
+    "lng":"-118.0428814888"
+  },
+  {
+    "name":"Residential Weatherization Program",
+    "category":2,
+    "year":"2010",
+    "sponsors":"The Long Beach Community Action Partnership",
+    "lat":"33.9693633355966",
+    "lng":"-118.117125034332"
+  },
+  {
+    "name":"California Science Center Training",
+    "category":4,
+    "year":"Ongoing",
+    "sponsors":"California Conservation Corps",
+    "lat":"34.014844",
+    "lng":"-118.285213"
+  },
+  {
+    "name":"Brownfields Job Training Program",
+    "category":4,
+    "year":"Ongoing",
+    "sponsors":"U.S. Environmental Protection Agency",
+    "lat":"34.06645",
+    "lng":"-118.232375"
+  },
+  {
+    "name":"Staples Center Recycling ",
+    "category":5,
+    "year":"Ongoing",
+    "sponsors":"State of California, AEG",
+    "lat":"34.0433964831701",
+    "lng":"-118.266813755035"
+  },
+  {
+    "name":"L.A. Live Recycling",
+    "category":5,
+    "year":"Ongoing",
+    "sponsors":"State of California, AEG, Levy Restaurants; CA Department of Conservation",
+    "lat":"34.0446766423739",
+    "lng":"-118.26554775238"
+  },
+  {
+    "name":"Dodger Stadium Recycling",
+    "category":5,
+    "year":"Ongoing",
+    "sponsors":"State of California, Levy Restaurants; CA Department of Conservation",
+    "lat":"34.0746837255547",
+    "lng":"-118.239090442657"
+  },
+  {
+    "name":"Rose Bowl Recycling",
+    "category":5,
+    "year":"Ongoing",
+    "sponsors":"City of Pasadena: Rose Bowl Stadium Operations; CA Department of Conservation",
+    "lat":"34.161321012563",
+    "lng":"-118.1676363945"
+  },
+  {
+    "name":"L.A. Coliseum Recycling",
+    "category":5,
+    "year":"Ongoing",
+    "sponsors":"State of California, City of Los Angeles, Los Angeles County; CA Department of Conservation",
+    "lat":"34.0153703802935",
+    "lng":"-118.28711271286"
+  },
+  {
+    "name":"Los Angeles Convention Center",
+    "category":5,
+    "year":"Ongoing",
+    "sponsors":"City of Los Angeles; CA Department of Conservation",
+    "lat":"34.0400715349665",
+    "lng":"-118.269989490509"
+  },
+  {
+    "name":"The Toshiba Classic Tournament Recycling",
+    "category":5,
+    "year":"Ongoing",
+    "sponsors":"Toshiba; CA Department of Conservation",
+    "lat":"33.6165491789374",
+    "lng":"-117.882421016693"
+  },
+  {
+    "name":"City of Redondo Beach - Park Recycling",
+    "category":5,
+    "year":"Ongoing",
+    "sponsors":"City of Redondo Beach",
+    "lat":"33.8313532702974",
+    "lng":"-118.37723493576"
+  },
+  {
+    "name":"Nokia Theatre Recycling",
+    "category":5,
+    "year":"Ongoing",
+    "sponsors":"Nokia, AEG; CA Department of Conservation",
+    "lat":"34.0451033578141",
+    "lng":"-118.266706466674"
+  },
+  {
+    "name":"Home Depot Center Recycling",
+    "category":5,
+    "year":"Ongoing",
+    "sponsors":"Home Depot, Levy Restaurants; CA Department of Conservation",
+    "lat":"33.8646072367193",
+    "lng":"-118.265225887298"
+  },
+  {
+    "name":"Paddle the LA River  Program",
+    "category":4,
+    "year":"2011",
+    "sponsors":"U.S. Army Corps of Engineers, City of Los Angeles, and Mountains Recreation and Conservation Authority",
+    "lat":"34.17128",
+    "lng":"-118.49407"
+  },
+  {
+    "name":"L.A. Conservation Corps Administrative Offices",
+    "category":8,
+    "year":"",
+    "sponsors":"-------------",
+    "lat":"34.0440010052023",
+    "lng":"-118.26189994812"
+  },
+  {
+    "name":"L.A. Conservation Corps Afterschool Program Offices",
+    "category":8,
+    "year":"",
+    "sponsors":"-------------",
+    "lat":"34.0850450777492",
+    "lng":"-118.22484254837"
+  },
+  {
+    "name":"L.A. Conservation Corps East Los Angeles Center",
+    "category":8,
+    "year":"",
+    "sponsors":"-------------",
+    "lat":"34.031394050876",
+    "lng":"-118.215315341949"
+  },
+  {
+    "name":"EcoAcademy High School",
+    "category":8,
+    "year":"",
+    "sponsors":"-------------",
+    "lat":"34.0429697591412",
+    "lng":"-118.278336524963"
+  },
+  {
+    "name":"L.A. Conservation Corps Commonwealth Nursery",
+    "category":8,
+    "year":"",
+    "sponsors":"-------------",
+    "lat":"34.1185019850305",
+    "lng":"-118.286125659942"
+  },
+  {
+    "name":"L.A. Conservation Corps Northeast Los Angeles Center",
+    "category":8,
+    "year":"",
+    "sponsors":"-------------",
+    "lat":"34.0664541671403",
+    "lng":"-118.232374191284"
+  },
+  {
+    "name":"L.A. Conservation Corps Pico Union Center",
+    "category":8,
+    "year":"",
+    "sponsors":"-------------",
+    "lat":"34.0443388244609",
+    "lng":"-118.277027606964"
+  },
+  {
+    "name":"L.A. Conservation Corps SEA Lab Site",
+    "category":8,
+    "year":"",
+    "sponsors":"-------------",
+    "lat":"33.8519558597473",
+    "lng":"-118.397147655487"
+  },
+  {
+    "name":"L.A. Conservation Corps South Los Angeles Center",
+    "category":8,
+    "year":"",
+    "sponsors":"-------------",
+    "lat":"34.0225734034183",
+    "lng":"-118.26990365982"
+  },
+  {
+    "name":"L.A. Conservation Corps Y.O. High School",
+    "category":8,
+    "year":"",
+    "sponsors":"-------------",
+    "lat":"33.9431997368037",
+    "lng":"-118.240377902984"
+  },
+  {
+    "name":"L.A. Corps Afterschool Program Site: Arroyo Seco Museum Science Magnet",
+    "category":8,
+    "year":"",
+    "sponsors":"-------------",
+    "lat":"34.101890676014",
+    "lng":"-118.203191757202"
+  },
+  {
+    "name":"L.A. Corps Afterschool Program Site: Carnegie Middle School",
+    "category":8,
+    "year":"",
+    "sponsors":"-------------",
+    "lat":"33.8296064556085",
+    "lng":"-118.25917482376"
+  },
+  {
+    "name":"L.A. Corps Afterschool Program Site: Cochran Middle School",
+    "category":8,
+    "year":"",
+    "sponsors":"-------------",
+    "lat":"34.0430053195589",
+    "lng":"-118.327431678771"
+  },
+  {
+    "name":"L.A. Corps Afterschool Program Site: Curtiss Middle School",
+    "category":8,
+    "year":"",
+    "sponsors":"-------------",
+    "lat":"33.8508866434173",
+    "lng":"-118.250784873962"
+  },
+  {
+    "name":"L.A. Corps Afterschool Program Site: Drew Middle School",
+    "category":8,
+    "year":"",
+    "sponsors":"-------------",
+    "lat":"33.9611235598567",
+    "lng":"-118.247673511505"
+  },
+  {
+    "name":"L.A. Corps Afterschool Program Site: Hollenbeck Middle School",
+    "category":8,
+    "year":"",
+    "sponsors":"-------------",
+    "lat":"34.0349682860531",
+    "lng":"-118.211259841918"
+  },
+  {
+    "name":"L.A. Corps Afterschool Program Site: Lorena Elementary School",
+    "category":8,
+    "year":"",
+    "sponsors":"-------------",
+    "lat":"34.0255433608917",
+    "lng":"-118.202698230743"
+  },
+  {
+    "name":"L.A. Corps Afterschool Program Site: Madison Middle School",
+    "category":8,
+    "year":"",
+    "sponsors":"-------------",
+    "lat":"34.1962385847759",
+    "lng":"-118.416502475738"
+  },
+  {
+    "name":"L.A. Corps Afterschool Program Site: Malabar Elementary School",
+    "category":8,
+    "year":"",
+    "sponsors":"-------------",
+    "lat":"34.0448366609156",
+    "lng":"-118.195338249206"
+  },
+  {
+    "name":"L.A. Corps Afterschool Program Site: Nightingale Middle School",
+    "category":8,
+    "year":"",
+    "sponsors":"-------------",
+    "lat":"34.0877285145926",
+    "lng":"-118.219134807586"
+  },
+  {
+    "name":"L.A. Corps Afterschool Program Site: Normandie Elementary School",
+    "category":8,
+    "year":"",
+    "sponsors":"-------------",
+    "lat":"34.0029370582048",
+    "lng":"-118.299000263214"
+  },
+  {
+    "name":"L.A. Corps Afterschool Program Site: Olive Vista Middle School",
+    "category":8,
+    "year":"",
+    "sponsors":"-------------",
+    "lat":"34.3128155490552",
+    "lng":"-118.450233936309"
+  },
+  {
+    "name":"L.A. Corps Afterschool Program Site: Pacoima Middle School",
+    "category":8,
+    "year":"",
+    "sponsors":"-------------",
+    "lat":"34.250033392569",
+    "lng":"-118.425514698028"
+  },
+  {
+    "name":"L.A. Corps Afterschool Program Site: Peary Middle School",
+    "category":8,
+    "year":"",
+    "sponsors":"-------------",
+    "lat":"33.8821378769967",
+    "lng":"-118.300459384918"
+  },
+  {
+    "name":"L.A. Corps Afterschool Program Site: Stevenson Middle School",
+    "category":8,
+    "year":"",
+    "sponsors":"-------------",
+    "lat":"34.0257745508258",
+    "lng":"-118.192420005798"
+  },
+  {
+    "name":"L.A. Corps Afterschool Program Site: Clay Middle School (not current)",
+    "category":8,
+    "year":"",
+    "sponsors":"-------------",
+    "lat":"33.9214083987324",
+    "lng":"-118.308978080749"
+  },
+  {
+    "name":"L.A. Corps Afterschool Program Site: San Fernando Middle School (not current)",
+    "category":8,
+    "year":"",
+    "sponsors":"-------------",
+    "lat":"34.2821661271829",
+    "lng":"-118.438475131988"
+  },
+  {
+    "name":"L.A. Corps Afterschool Program Site: Burbank Middle School (not current)",
+    "category":8,
+    "year":"",
+    "sponsors":"-------------",
+    "lat":"34.1193013775193",
+    "lng":"-118.183622360229"
+  },
+  {
+    "name":"L.A. Corps Afterschool Program Site: Maclay Middle School (not current)",
+    "category":8,
+    "year":"",
+    "sponsors":"-------------",
+    "lat":"34.272289987592",
+    "lng":"-118.405923843383"
+  },
+  {
+    "name":"L.A. Corps Afterschool Program Site: Markam Middle School (not current)",
+    "category":8,
+    "year":"",
+    "sponsors":"-------------",
+    "lat":"33.9396928473073",
+    "lng":"-118.24499130249"
+  },
+  {
+    "name":"Bougainvillea Garden Construction",
+    "category":3,
+    "year":"1999",
+    "sponsors":"??? (City of Los Angeles, The Garden Council)",
+    "lat":"33.9431285323624",
+    "lng":"-118.236923217773"
+  },
+  {
+    "name":"Crenshaw Community Garden Construction",
+    "category":3,
+    "year":"1999",
+    "sponsors":"??? (City of Los Angeles, The Garden Council)",
+    "lat":"34.046330152744",
+    "lng":"-118.327946662902"
+  },
+  {
+    "name":"El Sereno Community Garden Construction",
+    "category":3,
+    "year":"2009",
+    "sponsors":"City of Los Angeles",
+    "lat":"34.0936282223554",
+    "lng":"-118.162121772766"
+  },
+  {
+    "name":"Enrique Noguera Community Garden Construction",
+    "category":3,
+    "year":"2000",
+    "sponsors":"??? (City of Los Angeles, The Garden Council)",
+    "lat":"34.0943567722003",
+    "lng":"-118.333504199981"
+  },
+  {
+    "name":"Fountain Avenue Community Garden Construction",
+    "category":3,
+    "year":"2009",
+    "sponsors":"City of Los Angeles",
+    "lat":"34.0947299294485",
+    "lng":"-118.311767578125"
+  },
+  {
+    "name":"Francis Avenue Community Garden Construction",
+    "category":3,
+    "year":"2009",
+    "sponsors":"City of Los Angeles",
+    "lat":"34.0567838590024",
+    "lng":"-118.289537429809"
+  },
+  {
+    "name":"Jardin Del Rio Community Garden Construction",
+    "category":3,
+    "year":"2009",
+    "sponsors":"??? (City of Los Angeles, The Garden Council)",
+    "lat":"34.0916202354473",
+    "lng":"-118.234069347381"
+  },
+  {
+    "name":"Manzanita Street Community Garden Construction",
+    "category":3,
+    "year":"2008",
+    "sponsors":"??? (City of Los Angeles, The Garden Council)",
+    "lat":"34.0931839815676",
+    "lng":"-118.28114748001"
+  },
+  {
+    "name":"Millagro Allegro Community Garden Construction",
+    "category":3,
+    "year":"2010",
+    "sponsors":"??? (City of Los Angeles, The Garden Council)",
+    "lat":"34.1086777225666",
+    "lng":"-118.193707466125"
+  },
+  {
+    "name":"Mothers of East L.A. Community Garden Construction",
+    "category":3,
+    "year":"2010",
+    "sponsors":"City of Los Angeles",
+    "lat":"34.031394050876",
+    "lng":"-118.215315341949"
+  },
+  {
+    "name":"Proyecto Jardin Community Garden Construction",
+    "category":3,
+    "year":"2008",
+    "sponsors":"??? (City of Los Angeles, The Garden Council)",
+    "lat":"34.0516638374014",
+    "lng":"-118.216753005981"
+  },
+  {
+    "name":"Raymond Avenue Neighborhood Garden Construction",
+    "category":3,
+    "year":"2010",
+    "sponsors":"??? (City of Los Angeles, The Garden Council)",
+    "lat":"34.0317141377768",
+    "lng":"-118.297777175903"
+  },
+  {
+    "name":"Solano Canyon Garden Construction",
+    "category":3,
+    "year":"2010",
+    "sponsors":"??? (City of Los Angeles, The Garden Council)",
+    "lat":"34.0747725933126",
+    "lng":"-118.231709003448"
+  },
+  {
+    "name":"Stanford/Avalon Community Garden Construction",
+    "category":3,
+    "year":"2006",
+    "sponsors":"City of Los Angeles",
+    "lat":"33.9342453111731",
+    "lng":"-118.263638019561"
+  },
+  {
+    "name":"Union Avenue - Ceasar Chavez Peace Garden Construction",
+    "category":3,
+    "year":"2010",
+    "sponsors":"City of Los Angeles",
+    "lat":"34.0472902407436",
+    "lng":"-118.275310993194"
+  },
+  {
+    "name":"North Hollywood Community Garden",
+    "category":3,
+    "year":"2008",
+    "sponsors":"City of Los Angeles",
+    "lat":"34.1903460377439",
+    "lng":"-118.377921581268"
+  },
+  {
+    "name":"Vermont Square Community Garden Construction",
+    "category":3,
+    "year":"2008",
+    "sponsors":"City of Los Angeles",
+    "lat":"34.0000908343098",
+    "lng":"-118.291146755218"
+  },
+  {
+    "name":"Youth Green Community Garden Construction",
+    "category":3,
+    "year":"2008",
+    "sponsors":"City of Los Angeles",
+    "lat":"34.2544142396669",
+    "lng":"-118.409185409545"
+  },
+  {
+    "name":"El Cariso Smart Garden Construction",
+    "category":3,
+    "year":"2010",
+    "sponsors":"L.A. County Parks and Recreation",
+    "lat":"34.3169450092985",
+    "lng":"-118.419291973114"
+  },
+  {
+    "name":"Saturn Street Elementary School \"Edible Schoolyard\" Community Garden Construction ",
+    "category":3,
+    "year":"2010",
+    "sponsors":"??? (City of Los Angeles, The Garden Council)",
+    "lat":"34.0467035215911",
+    "lng":"-118.356120586395"
+  },
+  {
+    "name":"Central Basin Friendly Native Plants Garden",
+    "category":3,
+    "year":"2010",
+    "sponsors":"Central Basin Municipal Water District",
+    "lat":"33.9955722580013",
+    "lng":"-118.144440650939"
+  },
+  {
+    "name":"Mar Vista Enrichment Garden Construction",
+    "category":3,
+    "year":"2005",
+    "sponsors":"??? (City of Los Angeles, The Garden Council)",
+    "lat":"34.0163663902757",
+    "lng":"-118.434226512908"
+  },
+  {
+    "name":"Children's Hospital Garden Construction",
+    "category":3,
+    "year":"2004",
+    "sponsors":"??? (City of Los Angeles, The Garden Council)",
+    "lat":"34.0979816586928",
+    "lng":"-118.290481567382"
+  },
+  {
+    "name":"Reading Garden Construction: Woodcrest Elementary School",
+    "category":3,
+    "year":"2002",
+    "sponsors":"??? (City of Los Angeles, The Garden Council)",
+    "lat":"33.9373073678417",
+    "lng":"-118.29623222351"
+  },
+  {
+    "name":"Reading Garden Construction: Darby Elementary School",
+    "category":3,
+    "year":"2002",
+    "sponsors":"??? (City of Los Angeles, The Garden Council)",
+    "lat":"34.2663495603354",
+    "lng":"-118.533360958099"
+  },
+  {
+    "name":"Reading Garden Construction: Wilmington Middle School",
+    "category":3,
+    "year":"2002",
+    "sponsors":"??? (City of Los Angeles, The Garden Council)",
+    "lat":"33.7975514197104",
+    "lng":"-118.272778987884"
+  },
+  {
+    "name":"Reading Garden Construction: Evelyn Thurman Gratts Elementary School",
+    "category":3,
+    "year":"2002",
+    "sponsors":"??? (City of Los Angeles, The Garden Council)",
+    "lat":"34.0580282619808",
+    "lng":"-118.262887001037"
+  },
+  {
+    "name":"Reading Garden Construction: Figueroa Street Elementary School",
+    "category":3,
+    "year":"2002",
+    "sponsors":"??? (City of Los Angeles, The Garden Council)",
+    "lat":"33.9343165230439",
+    "lng":"-118.283722400665"
+  },
+  {
+    "name":"Esperanza Garden Construction",
+    "category":3,
+    "year":"1999",
+    "sponsors":"??? & Environmental Media Association",
+    "lat":"34.0319630934203",
+    "lng":"-118.276662826538"
+  },
+  {
+    "name":"O'melvany Park Garden Construction",
+    "category":3,
+    "year":"2001",
+    "sponsors":"??? (City of Los Angeles, The Garden Council)",
+    "lat":"34.3074274500256",
+    "lng":"-118.510766029357"
+  },
+  {
+    "name":"Gage Middle School Garden Construction",
+    "category":3,
+    "year":"2001",
+    "sponsors":"??? (City of Los Angeles, The Garden Council)",
+    "lat":"33.9830470738103",
+    "lng":"-118.213319778442"
+  },
+  {
+    "name":"Howard Finn Park Community Garden Construction",
+    "category":3,
+    "year":"2003",
+    "sponsors":"??? (City of Los Angeles, The Garden Council)",
+    "lat":"34.2569326800853",
+    "lng":"-118.300695419311"
+  },
+  {
+    "name":"University High School Community Garden Construction",
+    "category":3,
+    "year":"2008",
+    "sponsors":"The Environmental Media Association",
+    "lat":"34.0460101209951",
+    "lng":"-118.460898399353"
+  },
+  {
+    "name":"Nueva Esperanza Charter School Community Garden Construction",
+    "category":3,
+    "year":"2008",
+    "sponsors":"The Environmental Media Association",
+    "lat":"34.2889918650375",
+    "lng":"-118.439483642578"
+  }
+]
