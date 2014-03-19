@@ -18,10 +18,9 @@ exports.getProjects = function(callback) {
 }
 
 exports.updateProject = function(req, res) {
-    console.log(req.body);
 	var Project = mongoose.model('Project');
-   	var project = new Project();
-    //console.log(project);
+    var project = new Project();
+
     project.name = req.body.project_name;
     project.address = req.body.project_address;
     project.narrative = req.body.project_narratives;
@@ -42,14 +41,29 @@ exports.updateProject = function(req, res) {
             project.customFields.push(customFieldMap);
         }
     }
-    project.save(function(err) {
-    	if (err) {
-    		console.log("There was an error saving your project");
-    		console.log(err);
-    		return;
-    	}
-    	res.redirect('/admin');
-    });
+    if(req.body.p_id == ''){
+        project.save(function(err) {
+            if (err) {
+                console.log("There was an error saving your project");
+                console.log(err);
+                return;
+            }
+            res.redirect('/admin');
+        });
+    }else {
+        var temp = project.toObject();
+        delete temp._id;
+        Project.update({"_id": mongoose.Types.ObjectId(req.body.p_id)}, temp, {upsert:true}, 
+            function (err, numberAffected, raw) {
+                if (err){ 
+                    console.log("error updating record "+ err); 
+                    return;
+                }
+                console.log('The number of updated documents was %d', numberAffected);
+                res.redirect('/admin');
+            });
+    }
+
 }
 
 exports.download = function(req, res) {
@@ -68,20 +82,20 @@ exports.upload = function(req, res) {
 	var reader = csv.createCsvFileReader(req.files.csvFile.path, {columnsFromHeader:true, nestedQuotes:true});
     var writer = new csv.CsvWriter(process.stdout);
     reader.addListener('data', function(data) {
-    	var Project = mongoose.model('Project');
-   		var project = new Project();
-	    project.name = data.Name;
-	    project.narrative = data.Narrative;
-	    project.address = data.Address;
-	    project.category = data.Category;
-	    project.lat = data.Lat;
-   		project.lng = data.Lng;
-	  	project.save(function(err) {
-	    	if (err) {
-	    		console.log("There was an error saving your project");
-	    		console.log(err);
-	    		return;
-	    	}
-    	});
-	});
+            var Project = mongoose.model('Project');
+            var project = new Project();
+            project.name = data.Name;
+            project.narrative = data.Narrative;
+            project.address = data.Address;
+            project.category = data.Category;
+            project.lat = data.Lat;
+            project.lng = data.Lng;
+            project.save(function(err) {
+            if (err) {
+                console.log("There was an error saving your project");
+                console.log(err);
+                return;
+            }
+        });
+    });
 }
