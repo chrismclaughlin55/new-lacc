@@ -1,12 +1,11 @@
 var mongoose = require( 'mongoose' ),
 	 db = mongoose.createConnection('localhost', 'lacc');
 
-var ProjectSchema = new mongoose.Schema(
-	{
+var ProjectSchema = new mongoose.Schema({
 		name: String,
 		address: String,
 		narrative: String,
-		category: String,
+		category: {type : mongoose.Schema.Types.ObjectId, ref: 'Category'},
 		lat: Number,
 		lng: Number,
 		customFields: 
@@ -17,10 +16,8 @@ var ProjectSchema = new mongoose.Schema(
 				_id: false 
 			}
 		]
-	},
-
-	{versionKey: false}
-);
+});
 
 mongoose.model('Project', ProjectSchema );
 mongoose.connect('mongodb://localhost:27017/lacc');
+

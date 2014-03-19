@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var Project = require('../models/Project');
+var Project = require('../models/Category');
 var projectService = require('../routes/ProjectService');
 var csvConvertor   = require('../custom_modules/record.js');
 //var json2csv    = require('nice-json2csv');
@@ -16,6 +17,27 @@ exports.getProjects = function(callback) {
             return;
         }
         callback(projects);
+    });
+}
+
+exports.findCategory = function(projectData, projectCategory, callback) {
+    var Category = mongoose.model('Category');
+    Category.findOne({ name: projectCategory }, function(err, categoryReturned){
+        if (err) {
+            console.log("Could not return a category");
+            console.log(err);
+            return;
+        }
+        if(categoryReturned == null){ //If category does not exist create a new category. 
+            category = new Category({name : projectCategory});
+            console.log(category);
+            category.save(function(err, categoryCreated){
+                console.log('New Category Created');
+                callback(categoryCreated._id);
+            });
+        }else{
+            callback(categoryReturned._id);
+        }
     });
 }
 
@@ -67,6 +89,48 @@ exports.download = function(req, res) {
 }
 
 exports.upload = function(req, res) {
+    var reader = csv.createCsvFileReader("test.csv", {columnsFromHeader:true, nestedQuotes:true});
+    reader.addListener('data', function(data) {        
+        projectService.findCategory(data, data.Category, function(id){
+            var Project = mongoose.model('Project');
+            var project = new Project();
+            project.name = data.Name;
+            project.narrative = data.Narrative;
+            project.address = data.address;
+            project.category = id;
+            project.lat = data.Lat;
+            project.lng = data.Lng;
+            project.save(function(err){
+                console.log(project);
+                if(err){
+                    console.log("There was an error in saving your project");
+                    console.log(err);
+                    return;
+                }
+            });
+        });
+    });
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+exports.upload = function(req, res) {
 	var reader = csv.createCsvFileReader(req.files.csvFile.path, {columnsFromHeader:true, nestedQuotes:true});
     reader.addListener('data', function(data) {
     	var Project = mongoose.model('Project');
@@ -97,4 +161,4 @@ exports.upload = function(req, res) {
     	});
 	});
     res.redirect('/admin');
-}
+}*/

@@ -14,6 +14,7 @@ var record = function () {
 		this.data.Name = info.name;
 		this.data.Narrative = info.narrative;
 		this.data.Address = info.address;
+		this.data.Category = info.category;
 		this.data.Lat = info.lat;
 		this.data.Lng = info.lng;
 		for(var i = 0; i < info.customFields.length; i++){
