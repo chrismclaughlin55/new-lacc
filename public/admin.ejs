@@ -15,7 +15,7 @@
 		<script>
 
 			$(function() {
-			 $( "#radio" ).buttonset();
+				$("#radio").buttonset();
 			});
 
 			$(function(){
@@ -67,6 +67,13 @@
 				});
 			});
 
+			var image_html = '<input type="file" name="imgFile">';
+			$(function() {
+				$('#add_image').click(function() {
+					console.log("Clicking");
+					$("#image_injection_div").append(image_html);
+				});
+			});
 
 			$(function(){
 				$('#new_category').on('keyup',function() {
@@ -139,10 +146,10 @@
 										form="project_entry" placeholder="Project Narrative" required ></textarea>
 								</li>
 								<li>
-									<form method="post" enctype="multipart/form-data">
-										<input type="file" name="imgfile" accept="image/png, image/gif, image/jpeg" id="img_upload_button">
-										<input type="submit" name="submit" value="upload" id="img_submit_button">
-									</form>
+									<button type="button" id="add_image">
+										Add Image
+									</button>
+									<div id="image_injection_div"></div>
 								</li>
 								<li>
 									<button type="button" id="add_entry">
