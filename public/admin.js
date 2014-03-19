@@ -24,6 +24,7 @@ var updateData = function (m) {
     for (var i = 0; i < matches.length; ++i) {
         matches.item(i).parentNode.parentNode.removeChild(matches.item(i).parentNode);
     }
+    document.getElementById("custom_field_injection_div").innerHTML = '';
     for(i in m.data.customFields){
         document.getElementById("custom_field_injection_div").innerHTML +='<input name="custom_field_key" type="text" value="'+m.data.customFields[i]['key'] + '"class="field_key"><input name="custom_field_value" class="field_value" type="text" value="' + m.data.customFields[i]['value'] + '"></input>';
         
