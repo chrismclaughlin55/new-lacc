@@ -68,7 +68,7 @@ exports.download = function(req, res) {
 }
 
 exports.upload = function(req, res) {
-    var reader = csv.createCsvFileReader("projects.csv", {columnsFromHeader:true, nestedQuotes:true});
+    var reader = csv.createCsvFileReader(req.files.csvFile.path, {columnsFromHeader:true, nestedQuotes:true});
     reader.addListener('data', function(data) {        
         projectService.getCategoryIdByName(data.Category, function(categoryId) {
             var Project = mongoose.model('Project');
