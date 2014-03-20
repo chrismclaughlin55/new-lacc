@@ -20,27 +20,6 @@ exports.getProjects = function(callback) {
     });
 }
 
-exports.findCategory = function(projectData, projectCategory, callback) {
-    var Category = mongoose.model('Category');
-    Category.findOne({ name: projectCategory }, function(err, categoryReturned){
-        if (err) {
-            console.log("Could not return a category");
-            console.log(err);
-            return;
-        }
-        if(categoryReturned == null){ //If category does not exist create a new category. 
-            category = new Category({name : projectCategory});
-            console.log(category);
-            category.save(function(err, categoryCreated){
-                console.log('New Category Created');
-                callback(categoryCreated._id);
-            });
-        }else{
-            callback(categoryReturned._id);
-        }
-    });
-}
-
 exports.updateProject = function(req, res) {
     console.log(req.body);
 	var Project = mongoose.model('Project');
@@ -89,20 +68,35 @@ exports.download = function(req, res) {
 }
 
 exports.upload = function(req, res) {
-    var reader = csv.createCsvFileReader("test.csv", {columnsFromHeader:true, nestedQuotes:true});
+    var reader = csv.createCsvFileReader("projects.csv", {columnsFromHeader:true, nestedQuotes:true});
     reader.addListener('data', function(data) {        
-        projectService.findCategory(data, data.Category, function(id){
+        projectService.findCategory(data, data.Category, function(categoryId) {
             var Project = mongoose.model('Project');
             var project = new Project();
-            project.name = data.Name;
-            project.narrative = data.Narrative;
-            project.address = data.address;
-            project.category = id;
-            project.lat = data.Lat;
-            project.lng = data.Lng;
-            project.save(function(err){
-                console.log(project);
-                if(err){
+            for(var index in data) {
+                if(index == 'Name') {
+                    project.name = data.Name;
+                }else if(index == 'Narrative') {
+                    project.narrative = data.Narrative;
+                }else if(index == 'Address') {
+                    project.address = data.Address;
+                }else if(index == 'Lat') {
+                    project.lat = data.Lat;
+                }else if(index == 'Lng') {
+                    project.lng = data.Lng;
+                }else{
+                    if(data[index]!='' && index!='Category') {
+                        var customFieldMap = {
+                            key: index.toString(),
+                            value: data[index].toString()
+                        }
+                        project.customFields.push(customFieldMap);
+                    }
+                }
+            }
+            project.category = categoryId;
+            project.save(function(err) {
+                if(err) {
                     console.log("There was an error in saving your project");
                     console.log(err);
                     return;
@@ -110,55 +104,26 @@ exports.upload = function(req, res) {
             });
         });
     });
+    res.redirect('/admin');
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-exports.upload = function(req, res) {
-	var reader = csv.createCsvFileReader(req.files.csvFile.path, {columnsFromHeader:true, nestedQuotes:true});
-    reader.addListener('data', function(data) {
-    	var Project = mongoose.model('Project');
-   		var project = new Project();
-	    project.name = data.Name;
-	    project.narrative = data.Narrative;
-	    project.address = data.Address;
-	    project.category = data.Category;
-	    project.lat = data.Lat;
-   		project.lng = data.Lng;
-        for (var index in data){ //Checking for custom fields. 
-            if(!(index=='Name' || index=='Narrative' || index == 'Address' || index == 'Category' || index == 'Lat' || index == 'Lng')){
-                if(data[index]!=''){
-                    var customField = {
-                        key: index.toString(),
-                        value: data[index].toString()
-                    }
-                    project.customFields.push(customField);
-                }
-            }
+exports.findCategory = function(projectData, projectCategory, callback) {
+    var Category = mongoose.model('Category');
+    Category.findOne({ name: projectCategory }, function(err, categoryReturned) {
+        if (err) {
+            console.log("Could not return a category");
+            console.log(err);
+            return;
         }
-        project.save(function(err) {
-	    	if (err) {
-	    		console.log("There was an error saving your project");
-	    		console.log(err);
-	    		return;
-	    	}
-    	});
-	});
-    res.redirect('/admin');
-}*/
+        if(categoryReturned == null) { //If category does not exist create a new category. 
+            category = new Category({name : projectCategory});
+            category.save(function(err, categoryCreated) {
+                console.log('New Category Created');
+                console.log(category);
+                callback(categoryCreated._id);
+            });
+        }else {
+            callback(categoryReturned._id);
+        }
+    });
+}

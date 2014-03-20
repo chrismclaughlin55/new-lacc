@@ -6,3 +6,4 @@ var CategorySchema = new mongoose.Schema({
 });
 
 mongoose.model('Category', CategorySchema );
+//mongoose.connect('mongodb://localhost:27017/lacc');
