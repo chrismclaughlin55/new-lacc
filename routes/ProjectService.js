@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 var Project = require('../models/Project');
-var Project = require('../models/Category');
+var Category = require('../models/Category');
 var projectService = require('../routes/ProjectService');
 var csvConvertor   = require('../custom_modules/record.js');
 //var json2csv    = require('nice-json2csv');
@@ -56,21 +56,24 @@ exports.updateProject = function(req, res) {
 }
 
 exports.download = function(req, res) {
-	projectService.getProjects(function(records) {
-		var recordData = [];
-        records.forEach(function(r){
-            var tempRecord = csvConvertor(r);
-            recordData.push(tempRecord.getInformation());
+    var recordData = [];
+    projectService.getProjects(function(records) {
+        records.forEach(function(r) {
+            projectService.convertProjectToCsvRow(r, function(csvRecord) {
+                recordData.push(csvRecord);
+                if(recordData.length == records.length) {
+                    var csvData = JSON.stringify(recordData);
+                    res.csv(JSON.parse(csvData), "projects.csv");
+                }
+            });
         });
-        var csvData = JSON.stringify(recordData);
-        res.csv(JSON.parse(csvData), "projects.csv");
     });
 }
 
 exports.upload = function(req, res) {
     var reader = csv.createCsvFileReader("projects.csv", {columnsFromHeader:true, nestedQuotes:true});
     reader.addListener('data', function(data) {        
-        projectService.findCategory(data, data.Category, function(categoryId) {
+        projectService.getCategoryIdByName(data.Category, function(categoryId) {
             var Project = mongoose.model('Project');
             var project = new Project();
             for(var index in data) {
@@ -107,7 +110,32 @@ exports.upload = function(req, res) {
     res.redirect('/admin');
 }
 
-exports.findCategory = function(projectData, projectCategory, callback) {
+/* Helper function to convert each project into a CSV row. */
+exports.convertProjectToCsvRow = function(project, callback) {
+    projectService.getCategoryNameById(project.category, function(categoryName) {
+        csvConvertor(project, categoryName, function(instance) {
+            callback(instance.getInformation());
+        });
+    });
+}
+
+/* Input: CategoryId, Output: CategoryName */
+exports.getCategoryNameById = function(categoryId, callback) {
+    var Category = mongoose.model('Category');
+    Category.findById(categoryId, function(err, categoryReturned) {
+        if(categoryReturned!=null) {
+            callback(categoryReturned.name);
+        }else {
+            callback('');
+        }
+    });
+}
+
+/*
+    Input: A CSV Row. Check to see if category exists for the project. 
+    If category exits return category id. Else create a new category and return the category id. 
+*/
+exports.getCategoryIdByName = function(projectCategory, callback) {
     var Category = mongoose.model('Category');
     Category.findOne({ name: projectCategory }, function(err, categoryReturned) {
         if (err) {
@@ -127,3 +155,5 @@ exports.findCategory = function(projectData, projectCategory, callback) {
         }
     });
 }
+
+

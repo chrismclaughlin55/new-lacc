@@ -10,11 +10,11 @@ var record = function () {
 		Lng: '',
 	};
 
-	this.fill = function (info) {
+	this.fill = function (info, category) {
 		this.data.Name = info.name;
 		this.data.Narrative = info.narrative;
 		this.data.Address = info.address;
-		this.data.Category = info.category;
+		this.data.Category = category;
 		this.data.Lat = info.lat;
 		this.data.Lng = info.lng;
 		for(var i = 0; i < info.customFields.length; i++){
@@ -28,8 +28,9 @@ var record = function () {
 	};
 };
 
-	module.exports = function (info) {
+module.exports = function (info, category, callback) {
 		var instance = new record();
-		instance.fill(info);
-		return instance;
-	};
+		instance.fill(info, category);
+		callback(instance);
+};
+
