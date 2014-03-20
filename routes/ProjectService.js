@@ -3,10 +3,7 @@ var Project = require('../models/Project');
 var Category = require('../models/Category');
 var projectService = require('../routes/ProjectService');
 var csvConvertor   = require('../custom_modules/record.js');
-//var json2csv    = require('nice-json2csv');
-var csv         = require('ya-csv');
-
-
+var csv = require('ya-csv');
 
 exports.getProjects = function(callback) {
     var Project = mongoose.model('Project');

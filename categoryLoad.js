@@ -10,7 +10,7 @@ mongodb.MongoClient.connect("mongodb://localhost:27017/lacc", function(err,db) {
     for (var i = 1; i < 9; i++){
         (function(i){
             category = new Category({name : i.toString()});
-            category.save(function(err){
+            category.save(function(err) {
                 console.log("Category was saved.");
             });
         })(i);

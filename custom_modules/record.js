@@ -1,6 +1,9 @@
-// Provides a template for the csv file to follow.
+/*
+	Provides a template for a csv row to follow.
+*/
 
 var record = function () {
+	
 	this.data = {
 		Name: '',
 		Narrative: '',
@@ -17,7 +20,7 @@ var record = function () {
 		this.data.Category = category;
 		this.data.Lat = info.lat;
 		this.data.Lng = info.lng;
-		for(var i = 0; i < info.customFields.length; i++){
+		for(var i = 0; i < info.customFields.length; i++) {
 			if(info.customFields[i].value != '')
 				this.data[info.customFields[i].key] = info.customFields[i].value;
 		}
