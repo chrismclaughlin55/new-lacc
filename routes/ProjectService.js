@@ -132,21 +132,21 @@ exports.upload = function(req, res) {
         var projectReader = csv.createCsvFileReader(req.files.csvFile.path, {columnsFromHeader:true, nestedQuotes:true});
         projectReader.addListener('data', function(data) {
             data.name = data.name.replace(/"/g, "'"); //Converting double quotes to single quotes
-            projectService.checkIfProjectExists(data.name, data.lat, data.lng, function(projectReturned){
-                if(projectReturned!=null) {
-                    projectReturned.customFields.length = 0; //empty customFields and overwrite data.
+            projectService.checkIfProjectExists(data.name, data.lat, data.lng, function(existingProject){
+                if(existingProject!=null) {
+                    existingProject.customFields.length = 0; //empty customFields and overwrite data.
                     for(var index in data) {
                         if(index == 'narrative') {
-                            projectReturned.narrative = data.narrative;
+                            existingProject.narrative = data.narrative;
                         }else if(index == 'address'){
-                            projectReturned.address = data.address;
+                            existingProject.address = data.address;
                         }else {
                             if(data[index]!=null && data[index]!='' && index!='category') {
                                 var customFieldMap = {
                                     key: index.toString(),
                                     value: data[index].toString()
                                 }
-                                projectReturned.customFields.push(customFieldMap);
+                                existingProject.customFields.push(customFieldMap);
                             }
                         }
                     }
