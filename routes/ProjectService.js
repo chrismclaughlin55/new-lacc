@@ -89,9 +89,6 @@ exports.readImage = function(req, res) {
 }
 
 exports.download = function(req, res) {
-        var testString = "Saturn Street Elementary School \"Edible Schoolyard\" Community Garden Construction" + "HOLLOOAFAFSF$%#@$#@$@#$#@$@#$#$@$";
-        console.log(testString.toString());
-
     var recordData = [];
     projectService.getProjects(function(records) {
         records.forEach(function(r) {
