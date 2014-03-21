@@ -132,40 +132,61 @@ exports.upload = function(req, res) {
         var projectReader = csv.createCsvFileReader(req.files.csvFile.path, {columnsFromHeader:true, nestedQuotes:true});
         projectReader.addListener('data', function(data) {
             data.name = data.name.replace(/"/g, "'"); //Converting double quotes to single quotes
-            projectService.removeProject(data.name, data.lat, data.lng, function(){
-                var Project = mongoose.model('Project');
-                var project = new Project();
-                for(var index in data) {
-                    if(index == 'name') {
-                        project.name = data.name;
-                    }else if(index == 'narrative') {
-                        project.narrative = data.narrative;
-                    }else if(index == 'address') {
-                        project.address = data.address;
-                    }else if(index == 'lat') {
-                        project.lat = data.lat;
-                    }else if(index == 'lng') {
-                        project.lng = data.lng;
-                    }else{
-                        if(data[index]!=null && data[index]!='' && index!='category') {
-                            var customFieldMap = {
-                                key: index.toString(),
-                                value: data[index].toString()
+            projectService.checkIfProjectExists(data.name, data.lat, data.lng, function(projectReturned){
+                if(projectReturned!=null) {
+                    projectReturned.customFields.length = 0; //empty customFields and overwrite data.
+                    for(var index in data) {
+                        if(index == 'narrative') {
+                            projectReturned.narrative = data.narrative;
+                        }else if(index == 'address'){
+                            projectReturned.address = data.address;
+                        }else {
+                            if(data[index]!=null && data[index]!='' && index!='category') {
+                                var customFieldMap = {
+                                    key: index.toString(),
+                                    value: data[index].toString()
+                                }
+                                projectReturned.customFields.push(customFieldMap);
                             }
-                            project.customFields.push(customFieldMap);
                         }
                     }
-                }
-                project.category = categoryHelper[data.category];
-                console.log(project);
-                project.save(function(err) {
-                    if(err) {
-                        console.log("There was an error in saving your project");
-                        console.log(err);
-                        return;
+                    projectReturned.save(function(err){
+                        console.log("Project was updated.")
+                    });
+                }else {
+                    var Project = mongoose.model('Project');
+                    var project = new Project();
+                    for(var index in data) {
+                        if(index == 'name') {
+                            project.name = data.name;
+                        }else if(index == 'narrative') {
+                            project.narrative = data.narrative;
+                        }else if(index == 'address') {
+                            project.address = data.address;
+                        }else if(index == 'lat') {
+                            project.lat = data.lat;
+                        }else if(index == 'lng') {
+                            project.lng = data.lng;
+                        }else {
+                            if(data[index]!=null && data[index]!='' && index!='category') {
+                                var customFieldMap = {
+                                    key: index.toString(),
+                                    value: data[index].toString()
+                                }
+                                project.customFields.push(customFieldMap);
+                            }
+                        }
                     }
-                });
-            })
+                    project.category = categoryHelper[data.category];
+                    project.save(function(err) {
+                        if(err) {
+                            console.log("There was an error in saving your project");
+                            console.log(err);
+                            return;
+                        }
+                    });
+                }
+            });
         });
     });
     res.redirect('/admin');
@@ -217,18 +238,16 @@ exports.getCategoryIdByName = function(projectCategory, callback) {
     });
 }
 
-exports.removeProject = function(projectName, projectLat, projectLng, callback) {
+exports.checkIfProjectExists = function(projectName, projectLat, projectLng, callback) {
     var Project = mongoose.model('Project');
     Project.findOne({name: projectName.toString(), lat:projectLat, lng: projectLng}, function(err, projectReturned){
         if(err){
             console.log("Error in removing project.");
         }
         if(projectReturned!=null){
-           projectReturned.remove(function(err) {
-                callback();
-           });
+           callback(projectReturned);
         }else {
-            callback();
+            callback(null);
         }
         
     });
