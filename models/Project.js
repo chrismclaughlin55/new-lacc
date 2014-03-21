@@ -15,7 +15,7 @@ var ProjectSchema = new mongoose.Schema({
 				value: String,
 				_id: false 
 			}
-		]
+		],
 		images:
 		[
 			Buffer
