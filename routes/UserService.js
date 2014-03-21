@@ -26,16 +26,22 @@ passport.use('local-signup', new LocalStrategy({
 passport.use('local-login', new LocalStrategy(
     function(username, password, done){
         var User = mongoose.model('User');
-        User.findOne({'local.username':username},function(err,user){
-            if(err){return done(err);}
-            if(!user){return done(null, false);}
-            if(!user.validPassword(password)){return done(null, false);}
+        User.findOne({'local.username':username}, function(err,user){
+            if(err){
+                return done(err);
+            }
+            if(!user){
+                return done(null, false);
+            }
+            if(!user.validPassword(password)){
+                return done(null, false);
+            }
             return done(null, user);
         });
     }
 ));
 
-passport.serializeUser(function(user,done){
+passport.serializeUser(function(user, done){
     done(null, user.id);
 });
 
@@ -62,7 +68,7 @@ exports.hasLoggedIn = function(req, req, next){
 
 exports.logout = function(req,res){
     req.logout();
-    req.user=null;
+    req.user = null;
     res.redirect('/login');
 }
 
