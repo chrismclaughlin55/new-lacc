@@ -18,6 +18,7 @@ app.configure(function() {
 	app.set('port', process.env.PORT || 3000);
 	app.set('views', __dirname + '/public');
 	app.engine('html', require('ejs').renderFile);
+	app.use(express.bodyParser({uploadDir: __dirname + '/public/uploads'}));
 	app.use(express.favicon());
 	app.use(express.logger('dev'));
 	app.use(express.json());
@@ -44,6 +45,7 @@ app.post('/admin/update-project', projectService.updateProject);
 app.get('/admin/download', projectService.download);
 app.post('/admin/upload', projectService.upload);
 app.get('/login', userService.login);
+app.get('/project/:project/image/:image', projectService.readImage);
 
 io.sockets.on('connection', function(socket) {
     socket.on('projectsRequest', function() {

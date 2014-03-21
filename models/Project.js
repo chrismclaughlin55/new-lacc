@@ -1,5 +1,5 @@
 var mongoose = require( 'mongoose' ),
-	 db = mongoose.createConnection('localhost', 'lacc');
+db 			 = mongoose.createConnection('localhost', 'lacc');
 
 var ProjectSchema = new mongoose.Schema({
 		name: String,
@@ -16,8 +16,13 @@ var ProjectSchema = new mongoose.Schema({
 				_id: false 
 			}
 		]
+		images:
+		[
+			Buffer
+		]
 });
 
 mongoose.model('Project', ProjectSchema );
 mongoose.connect('mongodb://localhost:27017/lacc');
+
 
