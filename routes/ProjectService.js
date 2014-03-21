@@ -150,7 +150,7 @@ exports.upload = function(req, res) {
                             }
                         }
                     }
-                    projectReturned.save(function(err){
+                    existingProject.save(function(err){
                         console.log("Project was updated.")
                     });
                 }else {
