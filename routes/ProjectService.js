@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var Project = require('../models/Project');
 var Category = require('../models/Category');
 var projectService = require('../routes/ProjectService');
-var csvConvertor   = require('../custom_modules/record.js');
+var csvConvertor   = require('../custom_modules/CsvRecord.js');
 var csv = require('ya-csv');
 
 exports.getProjects = function(callback) {
@@ -53,6 +53,9 @@ exports.updateProject = function(req, res) {
 }
 
 exports.download = function(req, res) {
+        var testString = "Saturn Street Elementary School \"Edible Schoolyard\" Community Garden Construction" + "HOLLOOAFAFSF$%#@$#@$@#$#@$@#$#$@$";
+        console.log(testString.toString());
+
     var recordData = [];
     projectService.getProjects(function(records) {
         records.forEach(function(r) {
@@ -67,41 +70,69 @@ exports.download = function(req, res) {
     });
 }
 
+exports.storeCategories = function(req, callback) {
+    var callbackCounter = 0;
+    var categoryHelper = {}; //key: {categoryName} value: {_id of categoryName}
+    var categoryReader = csv.createCsvFileReader(req.files.csvFile.path, {columnsFromHeader:true, nestedQuotes:true});
+    categoryReader.addListener('data', function(data) { 
+        if(data.category!='')
+            categoryHelper[data.category] = '';
+    });  
+    categoryReader.addListener('end', function() {
+        for(var key in categoryHelper) {
+            (function(key) {
+                projectService.getCategoryIdByName(key, function(categoryId) {
+                    categoryHelper[key] = categoryId;
+                    callbackCounter++;
+                    if(callbackCounter == (Object.keys(categoryHelper).length)) {
+                        callback(categoryHelper);
+                    }
+                    
+                })
+            })(key);
+        }
+    });     
+}
+
 exports.upload = function(req, res) {
-    var reader = csv.createCsvFileReader(req.files.csvFile.path, {columnsFromHeader:true, nestedQuotes:true});
-    reader.addListener('data', function(data) {        
-        projectService.getCategoryIdByName(data.Category, function(categoryId) {
-            var Project = mongoose.model('Project');
-            var project = new Project();
-            for(var index in data) {
-                if(index == 'Name') {
-                    project.name = data.Name;
-                }else if(index == 'Narrative') {
-                    project.narrative = data.Narrative;
-                }else if(index == 'Address') {
-                    project.address = data.Address;
-                }else if(index == 'Lat') {
-                    project.lat = data.Lat;
-                }else if(index == 'Lng') {
-                    project.lng = data.Lng;
-                }else{
-                    if(data[index]!='' && index!='Category') {
-                        var customFieldMap = {
-                            key: index.toString(),
-                            value: data[index].toString()
+    projectService.storeCategories(req, function(categoryHelper) {
+        var projectReader = csv.createCsvFileReader(req.files.csvFile.path, {columnsFromHeader:true, nestedQuotes:true});
+        projectReader.addListener('data', function(data) {
+            data.name = data.name.replace(/"/g, "'"); //Converting double quotes to single quotes
+            projectService.removeProject(data.name, data.lat, data.lng, function(){
+                var Project = mongoose.model('Project');
+                var project = new Project();
+                for(var index in data) {
+                    if(index == 'name') {
+                        project.name = data.name;
+                    }else if(index == 'narrative') {
+                        project.narrative = data.narrative;
+                    }else if(index == 'address') {
+                        project.address = data.address;
+                    }else if(index == 'lat') {
+                        project.lat = data.lat;
+                    }else if(index == 'lng') {
+                        project.lng = data.lng;
+                    }else{
+                        if(data[index]!=null && data[index]!='' && index!='category') {
+                            var customFieldMap = {
+                                key: index.toString(),
+                                value: data[index].toString()
+                            }
+                            project.customFields.push(customFieldMap);
                         }
-                        project.customFields.push(customFieldMap);
                     }
                 }
-            }
-            project.category = categoryId;
-            project.save(function(err) {
-                if(err) {
-                    console.log("There was an error in saving your project");
-                    console.log(err);
-                    return;
-                }
-            });
+                project.category = categoryHelper[data.category];
+                console.log(project);
+                project.save(function(err) {
+                    if(err) {
+                        console.log("There was an error in saving your project");
+                        console.log(err);
+                        return;
+                    }
+                });
+            })
         });
     });
     res.redirect('/admin');
@@ -123,7 +154,7 @@ exports.getCategoryNameById = function(categoryId, callback) {
         if(categoryReturned!=null) {
             callback(categoryReturned.name);
         }else {
-            callback('');
+            callback(''); //Category does not exist.
         }
     });
 }
@@ -152,5 +183,23 @@ exports.getCategoryIdByName = function(projectCategory, callback) {
         }
     });
 }
+
+exports.removeProject = function(projectName, projectLat, projectLng, callback) {
+    var Project = mongoose.model('Project');
+    Project.findOne({name: projectName.toString(), lat:projectLat, lng: projectLng}, function(err, projectReturned){
+        if(err){
+            console.log("Error in removing project.");
+        }
+        if(projectReturned!=null){
+           projectReturned.remove(function(err) {
+                callback();
+           });
+        }else {
+            callback();
+        }
+        
+    });
+}
+
 
 
