@@ -7,6 +7,8 @@ html, body {
     background-color: #FFF;
     height: 600px;
     width: 80%;
+    max-width: 1100px;
+    min-width: 900px;
     box-shadow: 0px 20px 50px 20px #888488;
 
     position: relative;
@@ -28,7 +30,7 @@ html, body {
 }
 
 #left_column {
-    width:44%;
+    width:48%;
     overflow: hidden;
     position: relative;
     float:left;
@@ -57,16 +59,11 @@ html, body {
     height: 400px;
 }
 
-#edit_category_panel {
-    display:none;
-    overflow: auto;
-    height: 400px;
-}
-
+#edit_category_panel, 
 #database_panel {
     display:none;
-    height: 400px;
     overflow: auto;
+    height: 400px;
 }
 
 #img_submit_button {
@@ -83,13 +80,24 @@ html, body {
 
 }
 
+/* SOME ARE DEFINED HERE. */
 #add_image,
 #add_entry,
 #submit_button_id,
 #project_category,
-#add_point {
-    width: 208px;
+#update_cat,
+#import_button,
+#export_button
+{
+    width: 380px;
+    margin-left: 4px;
 }
+
+#add_point {
+    width: 382px;
+
+}
+
 
 /*JARED STUFF*/
 button {
@@ -122,6 +130,8 @@ ul, li
     margin:0px;
 }
 
+
+/* Defined here too */
 form input:not([type=submit]),
 form textarea,
 form select,
@@ -141,7 +151,8 @@ form textarea,
     border-width: 1px;
     padding: 3px;
     margin: 1px;
-    width: 200px;
+    width: 370px;
+    margin-left: 4px;
 }
 
 
@@ -151,18 +162,4 @@ form textarea,
     -webkit-border-radius: 1px;
     -khtml-border-radius: 1px;
 }
-
-
-/* Fix this shit 
-.field_key {
-    float:left;
-    width:-50px;
-
-}
-
-.field_value {
-    float:right;
-    width:45%;
-
-} */
 

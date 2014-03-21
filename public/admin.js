@@ -1,3 +1,5 @@
+
+/* Esri Map Loading */
 var mapCenter = [34.0345474, -118.28396350000001];
 var map;
 var cloudmade = 'http://{s}.tile.cloudmade.com/bcaf462f30bd4c02a7378b1bc17dd6b6/997/256/{z}/{x}/{y}.png';
@@ -274,3 +276,86 @@ document.addEventListener('DOMContentLoaded', function() {
 
     socket.emit('mapDataRequest', mapCenter);
 }, false);
+
+
+
+/* UX */
+$(function() {
+    $("#radio").buttonset();
+});
+
+$(function(){
+    $('#add_point_radio').click(function() {
+        $('#add_point_panel').show();
+        $('#edit_category_panel').hide(); 
+        $('#database_panel').hide();
+    });
+});
+
+$(function() {
+    $('#edit_category_radio').click(function(){
+        var to_continue = true;
+        if($("#add_point").css("color") == "rgb(221, 221, 222)") 
+            var to_continue = confirm("Changes to point will be deleted. Are you sure you want to continue?");
+        if (to_continue) {
+            $('#add_point_panel').hide();
+            $('#edit_category_panel').show();
+            $('#database_panel').hide();     
+            $('#new_category').focus();
+
+        }
+    });
+});
+
+$(function() {
+    $('#database_radio').click(function(){
+        $('#add_point_panel').hide();
+        $('#edit_category_panel').hide();
+        $('#database_panel').show();
+    });
+});
+
+  $(function(){
+    $('#add_point').click(function() {
+        this.disabled = true;
+        $(this).css("background", "#1e2506");
+        $(this).css("color", "#ddddde");
+        $("#add_point").wrap(function() {
+            return '<div id="disabled_div"></div>';
+        });
+    });
+});
+
+var custom_field = '<input name="custom_field_key" type="text" placeholder="Key" class="field_key"><textarea rows="4" cols="50" name="custom_field_value" class="field_value" type="text" placeholder="Value"></textarea>';
+$(function(){
+    $('#add_entry').click(function() {
+        $("#custom_field_injection_div").append(custom_field);
+    });
+});
+
+var image_html = '<input type="file" name="imgFile">';
+$(function() {
+    $('#add_image').click(function() {
+        console.log("Clicking");
+        $("#image_injection_div").append(image_html);
+    });
+});
+
+$(function(){
+    $('#new_category').on('keyup',function() {
+        if($('#new_category').val().length != 0) {
+            $('#update_cat').removeAttr("disabled");
+        }
+        else {
+            $('#update_cat').attr("disabled", "disabled");
+        }
+    });
+});
+
+$(function(){
+    $('#img_upload_button').click(function () {
+        $('#img_submit_button').show();
+    });
+});
+
+
