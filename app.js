@@ -5,6 +5,8 @@ var projectService = require('./routes/ProjectService');
 var categoryService = require('./routes/CategoryService');
 var userService = require('./routes/UserService');
 var mongoose    = require('mongoose');
+var passport    = require('passport'), LocalStrategy = require('passport-local').Strategy;
+var bcrypt        = require('bcrypt-nodejs');
 var http = require('http');
 var path = require('path');
 var json2csv = require('nice-json2csv');
@@ -14,6 +16,7 @@ var io = require('socket.io').listen(server, {log:false});
 
 // all environments
 app.configure(function() {
+	app.use(json2csv.expressDecorator);
 	app.set('port', process.env.PORT || 3000);
 	app.set('views', __dirname + '/public');
 	app.engine('html', require('ejs').renderFile);
@@ -24,7 +27,9 @@ app.configure(function() {
 	app.use(express.urlencoded());
 	app.use(express.methodOverride());
 	app.use(express.cookieParser('your secret here'));
-	app.use(express.session());
+	app.use(express.session({secret:'chacharealsmooth'}));
+    app.use(passport.initialize());
+    app.use(passport.session());
 	app.use(app.router);
 	app.use(express.static(path.join(__dirname, 'public')));
 });
@@ -37,12 +42,30 @@ if ('development' == app.get('env')) {
 // Routes
 app.get('/', categoryService.getCategoriesForIndex);
 app.get('/index', categoryService.getCategoriesForIndex);
-app.get('/admin', categoryService.getCategoriesForAdmin);
+
+app.get('/admin', userService.isLoggedIn, categoryService.getCategoriesForAdmin);
 app.post('/admin/update-category', categoryService.updateCategory);
 app.post('/admin/update-project', projectService.updateProject);
 app.get('/admin/download', projectService.download);
 app.get('/admin/upload', projectService.upload);
-app.get('/login', userService.login);
+
+app.get('/login',userService.login);
+app.get('/logout', userService.logout);
+app.post('/login-user',
+    passport.authenticate('local-login', {
+    successRedirect: '/admin',
+    failureRedirect:'/login'
+    })
+);
+app.post('/signup-user',
+    passport.authenticate('local-signup', {
+        successRedirect:'/login',
+        failureRedirect:'/'
+    })
+);
+
+
+
 app.get('/project/:project/image/:image', projectService.readImage);
 
 io.sockets.on('connection', function(socket) {

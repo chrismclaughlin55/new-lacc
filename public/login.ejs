@@ -28,7 +28,7 @@
 
             <div id="sidebar"></div>
                 <div id="center">
-                <form action="/login" method="post">
+                <form action="/login-user" method="post">
                     <div>
                         <label>Username:</label>
                         <input type="text" name="username"/>
@@ -40,8 +40,27 @@
                     <div>
                         <input type="submit" value="Log In"/>
                     </div>
-                    </form>
+                </form>
                 </div>
+                <form action="/signup-user" method="post">
+                    <div>
+                        <label>Username:</label>
+                        <input type="text" name="username"/>
+                    </div>
+                    <div>
+                        <label>Password:</label>
+                        <input type="password" name="password"/>
+                    </div>
+                    <div>
+                        <label>Type:</label>
+                        <input type="text" name="type"/>
+                    </div>
+                    <div>
+                        <input type="submit" value="Create User"/>
+                    </div>
+                </form>
+
+                </form>
         </div>
     </body>
 </html>

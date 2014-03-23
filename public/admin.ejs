@@ -2,9 +2,8 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
-
 		<title>LACC Admin</title>
-		<script src="/admin.js"></script>
+
 		<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.4.5/leaflet.css" />
 		<link rel="stylesheet" href="/admin.css">
 		<script src="http://cdn.leafletjs.com/leaflet-0.4.5/leaflet.js"></script>
@@ -12,93 +11,12 @@
 		<link rel="stylesheet" href="jquery-ui-1.10.4.custom/css/ui-lightness/jquery-ui-1.10.4.custom.css">
 		<script src="jquery-1.11.0.min.js"></script>
 		<script src="jquery-ui-1.10.4.custom/js/jquery-ui-1.10.4.custom.min.js"></script>
-		<script>
-
-			$(function() {
-				$("#radio").buttonset();
-			});
-
-			$(function(){
-				$('#add_point_radio').click(function() {
-					$('#add_point_panel').show();
-					$('#edit_category_panel').hide(); 
-					$('#database_panel').hide();
-				});
-			});
-
-			$(function() {
-				$('#edit_category_radio').click(function(){
-					var to_continue = true;
-					if($("#add_point").css("color") == "rgb(221, 221, 222)") 
-						var to_continue = confirm("Changes to point will be deleted. Are you sure you want to continue?");
-					if (to_continue) {
-						$('#add_point_panel').hide();
-						$('#edit_category_panel').show();
-						$('#database_panel').hide();     
-						$('#new_category').focus();
-
-					}
-				});
-			});
-
-			$(function() {
-				$('#database_radio').click(function(){
-					$('#add_point_panel').hide();
-					$('#edit_category_panel').hide();
-					$('#database_panel').show();
-				});
-			});
-
-			  $(function(){
-				$('#add_point').click(function() {
-					this.disabled = true;
-					$(this).css("background", "#1e2506");
-					$(this).css("color", "#ddddde");
-					$("#add_point").wrap(function() {
-						return '<div id="disabled_div"></div>';
-					});
-				});
-			});
-
-			var custom_field = '<input name="custom_field_key" type="text" placeholder="Key" class="field_key"><textarea rows="4" cols="50" name="custom_field_value" class="field_value" type="text" placeholder="Value"></textarea>';
-			$(function(){
-				$('#add_entry').click(function() {
-					$("#custom_field_injection_div").append(custom_field);
-				});
-			});
-
-			var image_html = '<input type="file" name="imgFile">';
-			$(function() {
-				$('#add_image').click(function() {
-					console.log("Clicking");
-					$("#image_injection_div").append(image_html);
-				});
-			});
-
-			$(function(){
-				$('#new_category').on('keyup',function() {
-					if($('#new_category').val().length != 0) {
-						$('#update_cat').removeAttr("disabled");
-					}
-					else {
-						$('#update_cat').attr("disabled", "disabled");
-					}
-				});
-			});
-
-			$(function(){
-				$('#img_upload_button').click(function () {
-					$('#img_submit_button').show();
-				});
-			});
-
-
-		</script>
+		<script src="/admin.js"></script>
 	</head>
 	<body>
 		<div id="letterbox">
 			<div id="foreground">
-				<span class="title_span">LACC Admin</span> <span class="logout_span"> <a href="#">Sign out</a></span>  <br />
+				<span class="title_span">LACC Admin</span> <span class="logout_span"> <a href="/logout">Sign out</a></span>  <br />
 				<div id="left_column">
 					<form >
 						<div id="radio">
@@ -113,13 +31,9 @@
 							Place New Point On Map
 						</button>
 						<form id="project_entry" enctype="multipart/form-data" action="/admin/update-project" method="post">
-							<input type="hidden" name="p_id" id="p_id" value=""/>
-							<input type="hidden" name="uv_cnt" id="uv_cnt" value="0"/>
-							<input type="hidden" name="image_cnt" id="image_cnt" value="0"/>
 							 <ul >
 								<li>
-									<input id="project_lat" name="project_lat"
-										type="text" placeholder="Project Latitude" required >
+									<input id="project_lat" name="project_lat" type="text" placeholder="Project Latitude" required>
 								</li>
 								<li>
 									<input id="project_lng" name="project_lng" placeholder="Project Longitude"
@@ -179,7 +93,7 @@
 									<span style="font-size:11px; align:center">(Choose an image/color radiobuttons) </span>
 								</li>
 								<li>
-									<button type="submit" id="update_cat" value="update_cat" style="width:210px"  disabled>
+									<button type="submit" id="update_cat" value="update_cat"  disabled>
 										Update Categories
 									</button>
 								</li>
@@ -200,7 +114,6 @@
 						</form>
 						<b style="color:red">TODO:Tooltips/Warnings for empty text field</b><br />
 
-						
 							<!-- <div id="color_buttons" style="display:block;">
 								<input type="radio" id="icon" name="marker_type" value="none" checked='checked' form="project_entry">None<br>
 								<input type="radio" id="icon" name="marker_type" value="green" form="project_entry">Green<br>
@@ -211,11 +124,12 @@
 
 					<div id="database_panel">
 						<form action="/admin/download" method="GET">
-							<button type="submit" class="btn" style="width:208px">Export Database</button>
+							<button type="submit" id="export_button" class="btn">Export Database</button>
 						</form>
 					   
 						<form action="/admin/upload" style = "float:left" method="POST" enctype="multipart/form-data">
-							<input type="file" name="csvFile"> <button type="submit" style="width:208px">Import File</button>
+							<input type="file" name="csvFile"> 
+							<button type="submit" id="import_button">Import File</button>
 						</form>
 					</div>
 
