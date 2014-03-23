@@ -16,9 +16,11 @@ var io = require('socket.io').listen(server);
 
 // all environments
 app.configure(function() {
+	app.use(json2csv.expressDecorator);
 	app.set('port', process.env.PORT || 3000);
 	app.set('views', __dirname + '/public');
 	app.engine('html', require('ejs').renderFile);
+	app.use(express.bodyParser({uploadDir: __dirname + '/public/uploads'}));
 	app.use(express.favicon());
 	app.use(express.logger('dev'));
 	app.use(express.json());
@@ -65,6 +67,7 @@ app.post('/signup-user',
 
 
 
+app.get('/project/:project/image/:image', projectService.readImage);
 
 io.sockets.on('connection', function(socket) {
     socket.on('projectsRequest', function() {

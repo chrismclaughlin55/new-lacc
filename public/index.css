@@ -1,5 +1,3 @@
-
-
 .leaflet-popup-content-wrapper { 
     border-radius: 1px;
     -moz-border-radius: 1px;
@@ -7,57 +5,21 @@
     -khtml-border-radius: 1px;
 }  
 
-html{
-
-    height: 120%;
-}
-
 body, p {
     background-color:#b8e5ee;
     padding: 0;
     margin: 0;
-    font: 12px 'Myriad Pro', Myriad, Tahoma, 'sans-serif';
-
-
 }
 
 #foreground {
     background-color: #FFF;
-    width: 980px;
-    height: 1080px;
+    width: 82%;
+    height: 700px;
     margin-left: auto ;
     margin-right: auto ;
+    margin-top: 30px;
+    margin-bottom: 30px;
     box-shadow: 0px 20px 60px 5px #888488;
-}
-
-
-#nav {
-    text-transform:uppercase;
-    font: "Myriad Pro";
-    background:#54b948;
-    width:980px;
-    height:28px;
-    margin-top: -10px;
-    float:left; //previously left
-}
-
-
-#nav li {
-    display:inline;
-    margin:15px; 
-}
-
-
-#nav a:link,
-#nav a:visited {
-    color:#FFF;
-    text-decoration:none;
-    
-}
-
-#bannerid {
-    width:980px; 
-    height:130px;
 }
 
 #title {
@@ -66,73 +28,21 @@ body, p {
     text-align: center;
     padding: 15px 0;
     padding-top: 50px;
-    font: 36px 'Myriad Pro', Myriad, Tahoma, 'sans-serif';
-}
-
-#sidebar { /* left */
-    position: relative;
-    width: 20%;
-    margin-right: 1%;
-    float: left;
-    padding:5px;
-}
-
-#gen_info {
-    position: relative;
-    float: right;
-}
-
-#gen_cat {
-    font: italic 12px Georgia, "Times New Roman", Times, serif;
-}
-
-#filters {
-    position: relative;
-    width: 17%;
-    float: right;
-    margin-left: 35px;
-}
-
-.filter_button {
-    position: relative;
-    margin-bottom: 10px;
-    border-radius: 1px;
-    -moz-border-radius: 1px;
-    -webkit-border-radius: 1px;
-    -khtml-border-radius: 1px;
-    outline: none;
-    border-style: solid;
-    border-width: 1px;
-    padding: 3px;
-    width: 140px;
-    border-color: #f0f0f0;
-    font: 16px Georgia, "Times New Roman", Times, serif;
-}
-
-.filter_button:hover {
-    cursor: pointer;
-    background: #ccc;
-}
-
-.toggle_off {
-    background: #f0f0f0;
-}
-
-.toggle_on {
-    background: #ccc;
+    font: 36px 'Helvetica', Helvetica, 'sans-serif';
+    color: #4E4D4D;
 }
 
 #center {
     position: relative;
-    width: 50%;
+    width: 100%;
     float: left;
 }
 
 #map {
     position: relative;
-    width: 120%;
-    height: 400px;
-    border: 2px solid #aaa;
+    width: 100%;
+    height: 500px;
+    border: 1px solid #aaa;
 }
 
 #project_title {
@@ -141,27 +51,3 @@ body, p {
     font: 24px Georgia, "Times New Roman", Times, serif;
     margin: 15px 0;
 }
-
-#photos {
-    position: relative;
-    width: 100%;
-    height: 100px;
-    margin: 5px 0;
-    border: 1px solid #cccccc;
-}
-
-.photos {
-    position: relative;
-    width: 100%;
-    height: 100px;
-    margin: 5px 0;
-    border: 1px solid #cccccc;
-}
-
-#narrative {
-    position: relative;
-    width: 100%;
-    font: 16px Georgia, "Times New Roman", Times, serif;
-    margin: 35px 0;
-}
-

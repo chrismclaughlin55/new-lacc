@@ -1,7 +1,5 @@
 var mapCenter = [34.0345474, -118.28396350000001];
 var map;
-var layers;
-var cat_names;
 var tile = 'http://{s}.tile.cloudmade.com/bcaf462f30bd4c02a7378b1bc17dd6b6/997/256/{z}/{x}/{y}.png'
 var Esri_WorldTopoMap = 'http://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}';  
 
@@ -10,9 +8,9 @@ document.addEventListener('DOMContentLoaded', function() {
         center: mapCenter,
         zoom: 13,
         maxZoom: 15,
-        minZoom: 0
+        minZoom: 9
     });
-    
+
     L.tileLayer( Esri_WorldTopoMap, {
     }).addTo(map);
 
@@ -21,14 +19,26 @@ document.addEventListener('DOMContentLoaded', function() {
     socket.on('projects', function(projects) {
         socket.on('categories', function(categories) {
             projects.forEach(function(project) {
-                var point = L.marker([project.lat, project.lng]).addTo(map);
+                var marker = L.marker([project.lat, project.lng]).addTo(map);
+                marker.project = project;
+                marker.on('click', function() { //This requires the user to double click a point right now... maybe it should happen regardless of load?
+                    // var imageTag = '<a rel="group" href="dummy1.jpg"><img src="dummy1.jpg" alt="" width="80" height="80"></a><img src="dummy2.jpeg" width="80" height="80">'
+                    //Roy: dummy image code:
+                    var imageTag = "";
+                    for (var i = 0; i < marker.project.images.length; i++) {
+                        var url = '/project/' + marker.project._id + '/image/' + i;
+                        imageTag += '<img src="' + url + '" width="100" height="100">';
+                    } 
+                    // TODO: We should put narrative / description in here.
+                    var narrativeTag = "<div>Give me example text and il format it correctly, then we'll put the right collection call here.</div>";
+                    marker.bindPopup(imageTag + narrativeTag);
+                });
                 // categoryList is a map from category_id to an array of points
                 // project.category is an _id
                 if (categoryMap[project.category]) {
-                    categoryMap[project.category].push(point);    
+                    categoryMap[project.category].push(marker);    
                 } else {
-                    categoryMap[project.category] = [];
-                    categoryMap[project.category].push(point);
+                    categoryMap[project.category] = [marker];
                 }
             });
             var overLayMap = {};
