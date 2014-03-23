@@ -16,8 +16,9 @@ passport.use('local-signup', new LocalStrategy({
         newUser.local.username = username;
         newUser.local.password = newUser.generateHash(password);
         newUser.save(function(err){
-            if(err)
+            if(err){
                 throw err;
+            }
             return done(null, newUser);
         });
     }
@@ -53,17 +54,21 @@ passport.deserializeUser(function(id,done){
 });
 
 exports.isLoggedIn = function(req,res, next){
-    if(req.isAuthenticated())
+    if(req.isAuthenticated()){
         next();
-    else
-      res.redirect('/login');
+    }
+    else{
+        res.redirect('/login');
+    }
 }
 
 exports.hasLoggedIn = function(req, req, next){
-    if(!req.isAuthenticated())
+    if(!req.isAuthenticated()){
         next();
-    else
+    }
+    else{
       res.redirect('/admin');
+    }
 }
 
 exports.logout = function(req,res){
@@ -73,5 +78,5 @@ exports.logout = function(req,res){
 }
 
 exports.login = function(req, res) {
-	res.render('login.ejs');
+    res.render('login.ejs');
 }
