@@ -10,7 +10,11 @@ document.addEventListener('DOMContentLoaded', function() {
         maxZoom: 15,
         minZoom: 9
     });
+/*<<<<<<< HEAD
 
+=======
+>>>>>>> eff1b5c173bd776619eedf0d14183d172e60f036
+*/
     L.tileLayer( Esri_WorldTopoMap, {
     }).addTo(map);
 

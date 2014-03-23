@@ -26,8 +26,8 @@ exports.getProjects = function(callback) {
 
 exports.updateProject = function(req, res) {
 	var Project = mongoose.model('Project');
-   	var project = new Project();
-    //console.log(project);
+    var project = new Project();
+
     project.name = req.body.project_name;
     project.address = req.body.project_address;
     project.narrative = req.body.project_narratives;
@@ -46,17 +46,32 @@ exports.updateProject = function(req, res) {
             project.customFields.push(customFieldMap);
         }
     }
-    projectService.storeImage(req, project, function() {
-        project.save(function(err) {
-            if (err) {
-                console.log("There was an error saving your project");
-                console.log(err);
+
+    if(req.body.p_id == ''){
+     project.save(function(err) {
+        if (err) {
+            console.log("There was an error saving your project");
+            console.log(err);
+            return;
+        }
+        res.redirect('/admin');
+    });
+ }else {
+    var temp = project.toObject();
+    delete temp._id;
+    Project.update({"_id": mongoose.Types.ObjectId(req.body.p_id)}, temp, {upsert:true}, 
+        function (err, numberAffected, raw) {
+            if (err){ 
+                console.log("error updating record "+ err); 
                 return;
             }
+            console.log('The number of updated documents was %d', numberAffected);
             res.redirect('/admin');
         });
-    });
+    }
+
 }
+
 
 exports.storeImage = function(req, project, callback) {
     if (req.files['imgFile']) {
@@ -84,6 +99,7 @@ exports.readImage = function(req, res) {
         res.contentType('image/png');
         res.send(project.images[image_id]);
     });
+   
 }
 
 exports.download = function(req, res) {
@@ -102,20 +118,20 @@ exports.upload = function(req, res) {
 	var reader = csv.createCsvFileReader(req.files.csvFile.path, {columnsFromHeader:true, nestedQuotes:true});
     var writer = new csv.CsvWriter(process.stdout);
     reader.addListener('data', function(data) {
-    	var Project = mongoose.model('Project');
-   		var project = new Project();
-	    project.name = data.Name;
-	    project.narrative = data.Narrative;
-	    project.address = data.Address;
-	    project.category = data.Category;
-	    project.lat = data.Lat;
-   		project.lng = data.Lng;
-	  	project.save(function(err) {
-	    	if (err) {
-	    		console.log("There was an error saving your project");
-	    		console.log(err);
-	    		return;
-	    	}
-    	});
-	});
+        var Project = mongoose.model('Project');
+        var project = new Project();
+        project.name = data.Name;
+        project.narrative = data.Narrative;
+        project.address = data.Address;
+        project.category = data.Category;
+        project.lat = data.Lat;
+        project.lng = data.Lng;
+        project.save(function(err) {
+            if (err) {
+                console.log("There was an error saving your project");
+                console.log(err);
+                return;
+            }
+        });
+    });
 }

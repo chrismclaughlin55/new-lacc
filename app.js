@@ -10,7 +10,7 @@ var path = require('path');
 var json2csv = require('nice-json2csv');
 var app = express();
 var server = app.listen(3000);
-var io = require('socket.io').listen(server);
+var io = require('socket.io').listen(server, {log:false});
 
 // all environments
 app.configure(function() {
@@ -19,7 +19,6 @@ app.configure(function() {
 	app.engine('html', require('ejs').renderFile);
 	app.use(express.bodyParser({uploadDir: __dirname + '/public/uploads'}));
 	app.use(express.favicon());
-	app.use(express.logger('dev'));
 	app.use(express.json());
 	app.use(express.bodyParser());
 	app.use(express.urlencoded());
