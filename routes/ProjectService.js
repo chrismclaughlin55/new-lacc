@@ -37,6 +37,7 @@ exports.updateProject = function(req, res) {
     project.category = req.body.project_category;
     project.lat = parseFloat(req.body.project_lat);
     project.lng = parseFloat(req.body.project_lng);
+    project.county = 2;
     if (req.body.custom_field_key) {
         for (var i = 0; i < req.body.custom_field_key.length; i++) {
             var custom_key = req.body.custom_field_key[i];

@@ -9,7 +9,6 @@ var Esri_WorldTopoMap = 'http://server.arcgisonline.com/ArcGIS/rest/services/Wor
 
 */                      
 var updateData = function (m) {
-    document.getElementById('p_id').value = m.data._id;
     document.getElementById('project_name').value = m.data.name;
     document.getElementById('project_category').value = m.data.category;
     document.getElementById('project_narrative').value = m.data.narrative;
@@ -40,7 +39,6 @@ var updateData = function (m) {
             document.getElementById('entry_list').appendChild(entry);
         }
     }
-    document.getElementById('image_cnt').value = 0;
     for (var key in m.data.image_path) {
         if (m.data.user_values.hasOwnProperty(key)) {
             var len = document.getElementById('image_cnt').value;
@@ -158,27 +156,6 @@ document.addEventListener('DOMContentLoaded', function() {
             newMarker.addTo(map);
     };
 
-
-/* TODO Not Implemented yet in UI
-    document.getElementById("add_image").onclick = function() {
-        var len = document.querySelectorAll('#entry_list .image_label').length;
-        var entry = document.createElement('li');
-        var label = document.createElement('input');
-        label.setAttribute('type', 'text');
-        label.setAttribute('placeholder', 'Image Name');
-        label.setAttribute('class', 'image_label');
-        label.setAttribute('name', 'image_label'+len);
-        var input = document.createElement('input');
-        input.setAttribute('type', 'file');
-        input.setAttribute('class', 'image_path');
-        input.setAttribute('name', 'image_path'+len);
-        entry.appendChild(label);
-        entry.appendChild(input);
-        document.getElementById('entry_list').appendChild(entry);
-        document.getElementById('image_cnt').value = len + 1;
-    }
-
-*/
     document.getElementById("add_entry").onclick = function() {
         var len = document.querySelectorAll('#entry_list .user_label').length;
         var entry = document.createElement('li');
@@ -195,7 +172,6 @@ document.addEventListener('DOMContentLoaded', function() {
         entry.appendChild(label);
         entry.appendChild(input);
         document.getElementById('entry_list').appendChild(entry);
-        document.getElementById('uv_cnt').value = len + 1;
     };
 
     var newMarker =
