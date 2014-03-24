@@ -50,26 +50,32 @@ exports.updateProject = function(req, res) {
     }
 
     if(req.body.p_id == ''){
-     project.save(function(err) {
-        if (err) {
-            console.log("There was an error saving your project");
-            console.log(err);
-            return;
-        }
-        res.redirect('/admin');
-    });
- }else {
-    var temp = project.toObject();
-    delete temp._id;
-    Project.update({"_id": mongoose.Types.ObjectId(req.body.p_id)}, temp, {upsert:true}, 
-        function (err, numberAffected, raw) {
-            if (err){ 
-                console.log("error updating record "+ err); 
+        project.save(function(err) {
+            if (err) {
+                console.log("There was an error saving your project");
+                console.log(err);
                 return;
             }
-            console.log('The number of updated documents was %d', numberAffected);
+            projectService.storeImage(req,project,function(){
+                console.log("project "+project.name+" has had an image added");
+            });
             res.redirect('/admin');
         });
+    }else {
+        var temp = project.toObject();
+        delete temp._id;
+        Project.update({"_id": mongoose.Types.ObjectId(req.body.p_id)}, temp, {upsert:true}, 
+            function (err, numberAffected, raw) {
+                if (err){ 
+                    console.log("error updating record "+ err); 
+                    return;
+                }
+                 projectService.storeImage(req,project,function(){
+                console.log("project "+project.name+" has had an image added");
+            });
+                console.log('The number of updated documents was %d', numberAffected);
+                res.redirect('/admin');
+            });
     }
 
 }
@@ -101,7 +107,7 @@ exports.readImage = function(req, res) {
         res.contentType('image/png');
         res.send(project.images[image_id]);
     });
-   
+
 }
 
 exports.download = function(req, res) {
@@ -144,7 +150,6 @@ exports.storeCategories = function(req, callback) {
 }
 
 exports.upload = function(req, res) {
-<<<<<<< HEAD
 	var reader = csv.createCsvFileReader(req.files.csvFile.path, {columnsFromHeader:true, nestedQuotes:true});
     var writer = new csv.CsvWriter(process.stdout);
     reader.addListener('data', function(data) {
@@ -164,8 +169,8 @@ exports.upload = function(req, res) {
             }
         });
     });
-}
-=======
+
+
     projectService.storeCategories(req, function(categoryHelper) {
         var projectReader = csv.createCsvFileReader(req.files.csvFile.path, {columnsFromHeader:true, nestedQuotes:true});
         projectReader.addListener('data', function(data) {
@@ -254,15 +259,15 @@ exports.getCategoryNameById = function(categoryId, callback) {
 /*
     Input: A CSV Row. Check to see if category exists for the project. 
     If category exits return category id. Else create a new category and return the category id. 
-*/
-exports.getCategoryIdByName = function(projectCategory, callback) {
-    var Category = mongoose.model('Category');
-    Category.findOne({ name: projectCategory }, function(err, categoryReturned) {
-        if (err) {
-            console.log("Could not return a category");
-            console.log(err);
-            return;
-        }
+    */
+    exports.getCategoryIdByName = function(projectCategory, callback) {
+        var Category = mongoose.model('Category');
+        Category.findOne({ name: projectCategory }, function(err, categoryReturned) {
+            if (err) {
+                console.log("Could not return a category");
+                console.log(err);
+                return;
+            }
         if(categoryReturned == null) { //If category does not exist create a new category. 
             category = new Category({name : projectCategory});
             category.save(function(err, categoryCreated) {
@@ -274,23 +279,23 @@ exports.getCategoryIdByName = function(projectCategory, callback) {
             callback(categoryReturned._id);
         }
     });
-}
+    }
 
-exports.checkIfProjectExists = function(projectName, projectLat, projectLng, callback) {
-    var Project = mongoose.model('Project');
-    Project.findOne({name: projectName.toString(), lat:projectLat, lng: projectLng}, function(err, projectReturned){
-        if(err){
-            console.log("Error in removing project.");
-        }
-        if(projectReturned!=null){
-           callback(projectReturned);
-        }else {
+    exports.checkIfProjectExists = function(projectName, projectLat, projectLng, callback) {
+        var Project = mongoose.model('Project');
+        Project.findOne({name: projectName.toString(), lat:projectLat, lng: projectLng}, function(err, projectReturned){
+            if(err){
+                console.log("Error in removing project.");
+            }
+            if(projectReturned!=null){
+             callback(projectReturned);
+         }else {
             callback(null);
         }
         
     });
-}
+    }
 
 
 
->>>>>>> 4a0b440ace9ff0cd795ddf8287371777133736b8
+

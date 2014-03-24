@@ -147,10 +147,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 point.on('mouseover', function(){
                     var popup = L.popup();
                     content = '';
-                    var fields = point.data.customFields;
-                    for(i in fields){
-                        content += fields[i]['key']+"->"+fields[i]["value"]+"\n";
-                    }
+                    content+= point.images[0];
                     console.log(content);
                     point.bindPopup(content).openPopup();
 
@@ -234,7 +231,8 @@ $(function(){
 var image_html = '<input type="file" name="imgFile">';
 $(function() {
     $('#add_image').click(function() {
-        console.log("Clicking");
+
+        console.log(image_html);
         $("#image_injection_div").append(image_html);
     });
 });
