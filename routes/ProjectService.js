@@ -50,32 +50,34 @@ exports.updateProject = function(req, res) {
     }
 
     if(req.body.p_id == ''){
-        project.save(function(err) {
-            if (err) {
-                console.log("There was an error saving your project");
-                console.log(err);
-                return;
-            }
-            projectService.storeImage(req,project,function(){
-                console.log("project "+project.name+" has had an image added");
+        projectService.storeImage(req,project,function(){
+            project.save(function(err) {
+                if (err) {
+                    console.log("There was an error saving your project");
+                    console.log(err);
+                    return;
+                }
+
+                res.redirect('/admin');
             });
-            res.redirect('/admin');
         });
     }else {
         var temp = project.toObject();
         delete temp._id;
-        Project.update({"_id": mongoose.Types.ObjectId(req.body.p_id)}, temp, {upsert:true}, 
-            function (err, numberAffected, raw) {
-                if (err){ 
-                    console.log("error updating record "+ err); 
-                    return;
-                }
-                 projectService.storeImage(req,project,function(){
-                console.log("project "+project.name+" has had an image added");
-            });
-                console.log('The number of updated documents was %d', numberAffected);
-                res.redirect('/admin');
-            });
+        projectService.storeImage(req,temp,function(){
+            Project.update({"_id": mongoose.Types.ObjectId(req.body.p_id)}, temp, {upsert:true}, 
+                function (err, numberAffected, raw) {
+                    if (err){ 
+                        console.log("error updating record "+ err); 
+                        return;
+                    }
+                    projectService.storeImage(req,project,function(){
+                        console.log("project "+project.name+" has had an image added");
+                    });
+                    console.log('The number of updated documents was %d', numberAffected);
+                    res.redirect('/admin');
+                });
+        });
     }
 
 }
@@ -230,9 +232,9 @@ exports.upload = function(req, res) {
                     });
                 }
             });
-        });
-    });
-    res.redirect('/admin');
+});
+});
+res.redirect('/admin');
 }
 
 /* Helper function to convert each project into a CSV row. */
