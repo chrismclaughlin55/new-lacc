@@ -54,7 +54,7 @@ passport.deserializeUser(function(id,done){
 });
 
 exports.isLoggedIn = function(req,res, next){
-    if(true){
+    if(req.isAuthenticated()){
         next();
     }
     else{

@@ -6,7 +6,7 @@ assert              = require('assert');
 
 var mongoose        = require('mongoose');
 var Project         = require('../models/Project');
-var Category = require('../models/Category');
+var Category        = require('../models/Category');
 var projectService  = require('../routes/ProjectService');
 var csvConvertor    = require('../custom_modules/CsvRecord.js');
 var json2csv        = require('nice-json2csv');
@@ -37,7 +37,7 @@ exports.updateProject = function(req, res) {
     project.category = req.body.project_category;
     project.lat = parseFloat(req.body.project_lat);
     project.lng = parseFloat(req.body.project_lng);
-    project.county = 2;
+    project.county = req.body.project_county;
     if (req.body.custom_field_key) {
         for (var i = 0; i < req.body.custom_field_key.length; i++) {
             var custom_key = req.body.custom_field_key[i];

@@ -73,8 +73,17 @@ document.addEventListener('DOMContentLoaded', function() {
                         lowLng = marker.project.lng;
                     }
                 });
-                // var polygon = L.polygon([[highLat, highLng], [highLat, lowLng], [lowLat, lowLng], [lowLat, highLng]]);
-                var polygon = L.polygon([[highLat, highLng], [highLat, lowLng], [lowLat, lowLng], [lowLat, highLng]]);
+                var polygonColor;
+                if (entry == 2) {
+                    polygonColor = "red";
+                } else {
+                    polygonColor = "blue";
+                }
+                var polygon = L.polygon([[highLat, highLng], [highLat, lowLng], [lowLat, lowLng], [lowLat, highLng]], {
+                    color: polygonColor,
+                    fillColor: polygonColor,
+                    fillOpacity: 0.5
+                });
                 polygonMap[entry] = polygon;
             }
         });
@@ -93,8 +102,13 @@ $(function(){
         }
     });
 });
+
 $(function(){
     $('#county-3').click(function () {
-        polygonMap[3].addTo(map);
-    });
+        if ($('#county-3').is(':checked')) {
+            polygonMap[3].addTo(map);
+        } else {
+            map.removeLayer(polygonMap[3]);
+        }
+    });  
 });
