@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <title>LACC Asset Mapping Project</title>
+        <title>LACC Login</title>
         <script src="/index.js">
         </script>
         <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.4.5/leaflet.css" />
@@ -13,54 +13,27 @@
     </head>
     <body >
         <div id = "foreground">
-            <img id="bannerid"  src="banner.png">
-            <div id="nav">        
-                <ul>
-                    <li id="nav_about" title="about"><a href="about.php">About The Corps</a></li>
-                    <li id="nav_conservation" title="conservation"><a href="conservation.php">Conservation Work Programs</a></li>
-                    <li id="nav_education" title="education"><a href="education.php">Education Program</a></li>
-                    <li id="nav_support" title="support"><a href="support-services.php">Support Services</a></li>
-                    <li id="nav_jobs" title="jobs"><a href="jobs.php">Jobs At The Corps</a></li>
-                    <li id="nav_hire" title="hire"><a href="hire.php">Hire The Corps</a></li>
-                </ul>
-            </div>
-            <div id="title">LACC Conservation Projects</div>
+            <div id="title">
+                Admin Login <br /> <br />
 
-            <div id="sidebar"></div>
-                <div id="center">
-                <form action="/login-user" method="post">
-                    <div>
-                        <label>Username:</label>
-                        <input type="text" name="username"/>
+                <div id="sidebar"></div>
+                    <div id="center">
+                    <form action="/login-user" method="post">
+                        <div>
+                            <label>Username:</label>
+                            <input type="text" name="username"/>
+                        </div>
+                        <div>
+                            <label>Password:</label>
+                            <input type="password" name="password"/>
+                        </div>
+                        <div>
+                            <input type="submit" value="Log In"/>
+                        </div>
+                    </form>
                     </div>
-                    <div>
-                        <label>Password:</label>
-                        <input type="password" name="password"/>
-                    </div>
-                    <div>
-                        <input type="submit" value="Log In"/>
-                    </div>
-                </form>
+                    </form>
                 </div>
-                <form action="/signup-user" method="post">
-                    <div>
-                        <label>Username:</label>
-                        <input type="text" name="username"/>
-                    </div>
-                    <div>
-                        <label>Password:</label>
-                        <input type="password" name="password"/>
-                    </div>
-                    <div>
-                        <label>Type:</label>
-                        <input type="text" name="type"/>
-                    </div>
-                    <div>
-                        <input type="submit" value="Create User"/>
-                    </div>
-                </form>
-
-                </form>
         </div>
     </body>
 </html>
