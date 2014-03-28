@@ -31,11 +31,11 @@ document.addEventListener('DOMContentLoaded', function() {
                     var imageTag = "";
                     for (var i = 0; i < marker.project.images.length; i++) {
                         var url = '/project/' + marker.project._id + '/image/' + i;
-                        imageTag += '<img src="' + url + '" width="100" height="100">';
+                        imageTag += '<div><img src="' + url + '" width="100" height="100"></div>';
                     } 
-                    // TODO: We should put narrative / description in here.
-                    var narrativeTag = "<div>Give me example text and il format it correctly, then we'll put the right collection call here.</div>";
-                    marker.bindPopup(imageTag + narrativeTag);
+
+                    var narrativeTag = "<div><div><strong>" + marker.project.name + ": </strong>" + marker.project.narrative + "</div><div>" + marker.project.customFields[0].key + ": " + marker.project.customFields[0].value + "</div>"  +  "<div>" + marker.project.customFields[1].key + ": " + marker.project.customFields[1].value + "</div>" + "<div>" + marker.project.address + "</div></div>";
+                    marker.bindPopup(narrativeTag + imageTag);
                 });
                 // categoryList is a map from category_id to an array of points
                 // project.category is an _id

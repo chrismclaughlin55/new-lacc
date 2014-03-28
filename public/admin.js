@@ -10,10 +10,6 @@ var Esri_WorldTopoMap = 'http://server.arcgisonline.com/ArcGIS/rest/services/Wor
 */        
 // Need to refactor this code to make more elegant. This looks like garbage.              
 var updateData = function (m) {
-    for(i in m.data.customFields){
-        console.log(i);
-    }
-    document.getElementById('p_id').value = m.data._id;
     document.getElementById('project_name').value = m.data.name;
     document.getElementById('project_category').value = m.data.category;
     document.getElementById('project_narrative').value = m.data.narrative;
@@ -123,7 +119,6 @@ document.addEventListener('DOMContentLoaded', function() {
         entry.appendChild(label);
         entry.appendChild(input);
         document.getElementById('entry_list').appendChild(entry);
-        document.getElementById('uv_cnt').value = len + 1;
     };
 
     map.setView(mapCenter, 13);
