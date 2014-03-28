@@ -6,7 +6,7 @@ assert              = require('assert');
 
 var mongoose        = require('mongoose');
 var Project         = require('../models/Project');
-var Category = require('../models/Category');
+var Category        = require('../models/Category');
 var projectService  = require('../routes/ProjectService');
 var csvConvertor    = require('../custom_modules/CsvRecord.js');
 var json2csv        = require('nice-json2csv');
@@ -179,14 +179,14 @@ exports.upload = function(req, res) {
             data.name = data.name.replace(/"/g, "'"); //Converting double quotes to single quotes
             projectService.checkIfProjectExists(data.name, data.lat, data.lng, function(existingProject){
                 if(existingProject!=null) {
-                    existingProject.customFields.length = 0; //empty customFields and overwrite data.
+                    existingProject.customFields = []; //empty customFields and overwrite data.
                     for(var index in data) {
                         if(index == 'narrative') {
                             existingProject.narrative = data.narrative;
                         }else if(index == 'address'){
                             existingProject.address = data.address;
                         }else {
-                            if(data[index]!=null && data[index]!='' && index!='category') {
+                            if(data[index]!=null && data[index]!='' && index!='category' && index!= 'name' && index!='lat' && index!='lng') {
                                 var customFieldMap = {
                                     key: index.toString(),
                                     value: data[index].toString()
@@ -301,3 +301,4 @@ exports.getCategoryNameById = function(categoryId, callback) {
 
 
 
+}
