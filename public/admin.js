@@ -24,7 +24,7 @@ var updateData = function (m) {
     }
     document.getElementById("custom_field_injection_div").innerHTML = '';
     for(i in m.data.customFields){
-        document.getElementById("custom_field_injection_div").innerHTML +='<input name="custom_field_key" type="text" value="'+m.data.customFields[i]['key'] + '"class="field_key"><input name="custom_field_value" class="field_value" type="text" value="' + m.data.customFields[i]['value'] + '"></input>';
+        document.getElementById("custom_field_injection_div").innerHTML +='<input name="custom_field_key" type="text" value="'+m.data.customFields[i]['key'] + '"class="field_key"><textarea name="custom_field_value" class="field_value" type="text" ">' + m.data.customFields[i]['value'] + '</textarea>';
         
 
 
@@ -142,10 +142,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 point.on('mouseover', function(){
                     var popup = L.popup();
                     content = '';
-                    var fields = point.data.customFields;
-                    for(i in fields){
-                        content += fields[i]['key']+"->"+fields[i]["value"]+"\n";
-                    }
+                    content+= point.images[0];
                     console.log(content);
                     point.bindPopup(content).openPopup();
 
@@ -229,7 +226,8 @@ $(function(){
 var image_html = '<input type="file" name="imgFile">';
 $(function() {
     $('#add_image').click(function() {
-        console.log("Clicking");
+
+        console.log(image_html);
         $("#image_injection_div").append(image_html);
     });
 });
