@@ -297,8 +297,3 @@ exports.getCategoryNameById = function(categoryId, callback) {
         
     });
     }
-
-
-
-
-}

@@ -24,7 +24,7 @@ var updateData = function (m) {
     }
     document.getElementById("custom_field_injection_div").innerHTML = '';
     for(i in m.data.customFields){
-        document.getElementById("custom_field_injection_div").innerHTML +='<input name="custom_field_key" type="text" value="'+m.data.customFields[i]['key'] + '"class="field_key"><input name="custom_field_value" class="field_value" type="text" value="' + m.data.customFields[i]['value'] + '"></input>';
+        document.getElementById("custom_field_injection_div").innerHTML +='<input name="custom_field_key" type="text" value="'+m.data.customFields[i]['key'] + '"class="field_key"><textarea name="custom_field_value" class="field_value" type="text" ">' + m.data.customFields[i]['value'] + '</textarea>';
         
 
 
