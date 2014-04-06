@@ -98,7 +98,6 @@ html, body {
 
 }
 
-
 /*JARED STUFF*/
 button {
     background: #dddddd;
@@ -130,7 +129,6 @@ ul, li
     margin:0px;
 }
 
-
 /* Defined here too */
 form input:not([type=submit]),
 form textarea,
@@ -155,11 +153,9 @@ form textarea,
     margin-left: 4px;
 }
 
-
 .leaflet-popup-content-wrapper {
     border-radius: 1px;
     -moz-border-radius: 1px;
     -webkit-border-radius: 1px;
     -khtml-border-radius: 1px;
 }
-
