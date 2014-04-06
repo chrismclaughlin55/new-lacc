@@ -17,7 +17,6 @@ document.addEventListener('DOMContentLoaded', function() {
 */
     L.tileLayer( Esri_WorldTopoMap, {
     }).addTo(map);
-
     var categoryIdToName = {};
     var categoryMap = {};
     var socket = io.connect('http://localhost:3000');
@@ -54,5 +53,4 @@ document.addEventListener('DOMContentLoaded', function() {
         L.control.layers(null, overLayMap).addTo(map);
     });
     socket.emit('categoriesRequest');
-
 }, false);

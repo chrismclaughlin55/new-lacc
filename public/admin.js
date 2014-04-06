@@ -157,11 +157,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     socket.emit('projectsRequest');
     socket.on('categories', function(categories) {
-        var overLayMap = {};
-        categories.forEach(function(category) {
-            overLayMap[category.name] = L.layerGroup(categoryMap[category._id]);
-        });
-        L.control.layers(null, overLayMap).addTo(map);
+        //Do category stuff here
     });
     socket.emit('categoriesRequest');
 }, false);
