@@ -18,10 +18,10 @@ document.addEventListener('DOMContentLoaded', function() {
     L.tileLayer( Esri_WorldTopoMap, {
     }).addTo(map);
 
+    var categoryIdToName = {};
     var categoryMap = {};
     var socket = io.connect('http://localhost:3000');
     socket.on('projects', function(projects) {
-        socket.on('categories', function(categories) {
             projects.forEach(function(project) {
                 var marker = L.marker([project.lat, project.lng]).addTo(map);
                 marker.project = project;
@@ -33,7 +33,6 @@ document.addEventListener('DOMContentLoaded', function() {
                         var url = '/project/' + marker.project._id + '/image/' + i;
                         imageTag += '<div><img src="' + url + '" width="100" height="100"></div>';
                     } 
-
                     var narrativeTag = "<div><div><strong>" + marker.project.name + ": </strong>" + marker.project.narrative + "</div><div>" + marker.project.customFields[0].key + ": " + marker.project.customFields[0].value + "</div>"  +  "<div>" + marker.project.customFields[1].key + ": " + marker.project.customFields[1].value + "</div>" + "<div>" + marker.project.address + "</div></div>";
                     marker.bindPopup(narrativeTag + imageTag);
                 });
@@ -45,13 +44,15 @@ document.addEventListener('DOMContentLoaded', function() {
                     categoryMap[project.category] = [marker];
                 }
             });
-            var overLayMap = {};
-            categories.forEach(function(category) {
-                overLayMap[category.name] = L.layerGroup(categoryMap[category._id]);
-            });
-            L.control.layers(null, overLayMap).addTo(map);
-        });
     });
     socket.emit('projectsRequest');
+    socket.on('categories', function(categories) {
+        var overLayMap = {};
+        categories.forEach(function(category) {
+            overLayMap[category.name] = L.layerGroup(categoryMap[category._id]);
+        });
+        L.control.layers(null, overLayMap).addTo(map);
+    });
     socket.emit('categoriesRequest');
+
 }, false);
