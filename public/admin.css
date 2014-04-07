@@ -6,8 +6,8 @@ html, body {
 #letterbox {
     background-color: #FFF;
     height: 600px;
-    width: 80%;
-    max-width: 1100px;
+    width: 95%;
+    max-width: 1200px;
     min-width: 900px;
     box-shadow: 0px 20px 50px 20px #888488;
 
@@ -30,7 +30,7 @@ html, body {
 }
 
 #left_column {
-    width:48%;
+    width:42%;
     overflow: hidden;
     position: relative;
     float:left;
@@ -38,7 +38,7 @@ html, body {
 
 #map {
     position: relative;
-    width: 48%;
+    width: 55%;
     height: 450px;
     bottom: 20px;
     margin-right:0px;

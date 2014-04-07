@@ -49,4 +49,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     socket.emit('projectsRequest');
     socket.emit('categoriesRequest');
+
+    L.Util.requestAnimFrame(map.invalidateSize,map,!1,map._container);
+
 }, false);
