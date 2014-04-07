@@ -126,16 +126,27 @@
 					</div>
 
 					<div id="database_panel">
-						<form action="/admin/download" method="GET">
-							<button type="submit" id="export_button" class="btn">Export Database</button>
-						</form>
-					   
-						<form action="/admin/upload" style = "float:left" method="POST" enctype="multipart/form-data">
+						
+						Database Operation:
+						<select id="database_category">
+						  <option value="import">Import Database</option>
+						  <option value="export">Export Database</option>
+						  <option value="register_user">Register User</option>
+						</select>
+
+						<br /> <br />
+
+						<form action="/admin/upload" style = "float:left;" method="POST" enctype="multipart/form-data" id="import_form">
 							<input type="file" name="csvFile"> 
 							<button type="submit" id="import_button">Import File</button>
 						</form>
 
-						<form action="/signup-user" method="post">		                
+						<form action="/admin/download" method="GET" style="display:none" id="export_form">
+							<button type="submit" id="export_button" class="btn">Export Database</button>
+						</form>
+					   
+
+						<form action="/signup-user" method="post" id="register_user_form" style="display:none">		                
 		                    <div>
 		                        <input placeholder="Username" type="text" name="username"/>
 		                    </div>

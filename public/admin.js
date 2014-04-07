@@ -222,3 +222,25 @@ $(function(){
 });
 
 
+$(function(){
+	$("#database_category").change(function() {
+	  if($('#database_category').val() == 'import') {
+	  	$('#import_form').show();
+	  	$('#export_form').hide();
+	  	$('#register_user_form').hide();
+	  }
+	  else if($('#database_category').val() == 'export') {
+	  	$('#import_form').hide();
+	  	$('#export_form').show();
+	  	$('#register_user_form').hide();
+	  }
+	  else if($('#database_category').val() == 'register_user') {
+	  	$('#import_form').hide();
+	  	$('#export_form').hide();
+	  	$('#register_user_form').show();
+	  }
+
+
+
+	});
+});

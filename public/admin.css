@@ -85,6 +85,7 @@ html, body {
 #add_entry,
 #submit_button_id,
 #project_category,
+#database_category,
 #update_cat,
 #import_button,
 #export_button
@@ -132,9 +133,9 @@ ul, li
 /* Defined here too */
 form input:not([type=submit]),
 form textarea,
-form select,
 form input:not([type=submit]),
 form textarea,
+select,
 .input
  {
     background: #f0f0f0;
