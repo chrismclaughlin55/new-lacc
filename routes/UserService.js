@@ -19,23 +19,25 @@ passport.use('local-signup', new LocalStrategy({
             if(err){
                 throw err;
             }
-            return done(null, newUser);
+            return done(null, newUser, req.flash('errors', 'User Successfully Added'));
         });
     }
 ));
 
-passport.use('local-login', new LocalStrategy(
-    function(username, password, done){
+passport.use('local-login', new LocalStrategy({
+    passReqToCallback: true
+    },
+    function(req,username, password, done){
         var User = mongoose.model('User');
         User.findOne({'local.username':username}, function(err,user){
             if(err){
                 return done(err);
             }
             if(!user){
-                return done(null, false);
+                return done(null, false, req.flash('errors', 'Invalid Username or Password'));
             }
             if(!user.validPassword(password)){
-                return done(null, false);
+                return done(null, false, req.flash('errors', 'Invalid Username or Password'));
             }
             return done(null, user);
         });
@@ -58,6 +60,7 @@ exports.isLoggedIn = function(req,res, next){
         next();
     }
     else{
+        req.flash('errors', 'You Must Log In Before Using the Admin Page');
         res.redirect('/login');
     }
 }
@@ -78,5 +81,5 @@ exports.logout = function(req,res){
 }
 
 exports.login = function(req, res) {
-    res.render('login.ejs');
+    res.render('login.ejs', {message: req.flash('errors')});
 }
