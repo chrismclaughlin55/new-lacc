@@ -5,19 +5,16 @@ var map;
 var cloudmade = 'http://{s}.tile.cloudmade.com/bcaf462f30bd4c02a7378b1bc17dd6b6/997/256/{z}/{x}/{y}.png';
 var Esri_WorldStreetMap = 'http://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}';
 var Esri_WorldTopoMap = 'http://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}';
-/*
 
-*/        
 // Need to refactor this code to make more elegant. This looks like garbage.              
 var updateData = function (m) {
-    document.getElementById('project_name').value = m.data.name;
-    document.getElementById('project_category').value = m.data.category;
-    document.getElementById('project_narrative').value = m.data.narrative;
-    document.getElementById('project_address').value = m.data.address;
-    document.getElementById('project_lat').value = m.getLatLng().lat;
-    document.getElementById('project_lng').value = m.getLatLng().lng;
+    $('#project_name').val(m.data.name);
+    $('#project_category').val(m.data.category);
+    $('#project_narrative').val(m.data.narrative);
+    $('#project_address').val(m.data.address);
+    $('#project_lat').val(m.getLatLng().lat);
+	$('#project_lng').val(m.getLatLng().lng);
     var matches = document.querySelectorAll('#entry_list .user_label');
-
 
     for (var i = 0; i < matches.length; ++i) {
         matches.item(i).parentNode.parentNode.removeChild(matches.item(i).parentNode);
@@ -25,30 +22,7 @@ var updateData = function (m) {
     document.getElementById("custom_field_injection_div").innerHTML = '';
     for(i in m.data.customFields){
         document.getElementById("custom_field_injection_div").innerHTML +='<input name="custom_field_key" type="text" value="'+m.data.customFields[i]['key'] + '"class="field_key"><textarea name="custom_field_value" class="field_value" type="text" ">' + m.data.customFields[i]['value'] + '</textarea>';
-        
-
-
     }
-    // for (var key in m.data.user_values) {
-    //     if (m.data.user_values.hasOwnProperty(key)) {
-    //         var entry = document.createElement('li');
-    //         var label = document.createElement('input');
-    //         label.setAttribute('type', 'text');
-    //         label.setAttribute('placeholder', 'Label');
-    //         label.setAttribute('class', 'user_label');
-    //         label.setAttribute('name', 'user_label'+len);
-    //         label.value = key;
-    //         var input = document.createElement('input');
-    //         input.setAttribute('type', 'text');
-    //         input.setAttribute('placeholder', 'Value');
-    //         input.setAttribute('class', 'user_value');
-    //         input.setAttribute('name', 'user_value'+len);
-    //         input.value = m.data.user_values[key];
-    //         entry.appendChild(label);
-    //         entry.appendChild(input);
-    //         document.getElementById('entry_list').appendChild(entry);
-    //     }
-    // }
 }
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -70,10 +44,9 @@ document.addEventListener('DOMContentLoaded', function() {
             shadowAnchor: [4, 62],  // the same for the shadow
             popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
         });
-        var ic = pinIcon;
 
-        var newMarker =
-        L.marker(map.getCenter(), {icon: ic, draggable:'true', clickable:'true'});
+        var ic = pinIcon;
+        var newMarker = L.marker(map.getCenter(), {icon: ic, draggable:'true', clickable:'true'});
 
         newMarker.data = {
             _id: '',
@@ -96,9 +69,9 @@ document.addEventListener('DOMContentLoaded', function() {
             updateData(newMarker);
         });
 
-        if(document.getElementById("add_point").value == "add_point")
+        if($("#add_point").val() == "add_point")
             console.log("add point value = add_point")
-        if(document.getElementById("add_point").value == "edit_point")
+        if($("#add_point").val() == "edit_point")
             console.log("add point value = edit_point")
         newMarker.addTo(map);
     };
@@ -129,19 +102,16 @@ document.addEventListener('DOMContentLoaded', function() {
         projects.forEach(function(project) {
             var point = L.marker([project.lat, project.lng], {draggable:'true', clickable:'true'}).addTo(map);
             point.data = project;
-
             point.on('click', function() {
                 updateData(point);
             });
-
             point.on('dragend', function(){
                 updateData(point);
             });
-            
-            point.on('mouseover', function(){
+            point.on('click', function(){
                 var popup = L.popup();
                 content = '';
-                content+= point.images[0];
+                content += point.images[0];
                 console.log(content);
                 point.bindPopup(content).openPopup();
             });
@@ -154,15 +124,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 categoryMap[project.category].push(point);
             }
         });
-    });
+	});
     socket.emit('projectsRequest');
     socket.on('categories', function(categories) {
-        //Do category stuff here
+        //Do Category Stuff Here;
     });
     socket.emit('categoriesRequest');
 }, false);
-
-
 
 /* UX */
 $(function() {
@@ -245,3 +213,25 @@ $(function(){
 });
 
 
+$(function(){
+	$("#database_category").change(function() {
+	  if($('#database_category').val() == 'import') {
+	  	$('#import_form').show();
+	  	$('#export_form').hide();
+	  	$('#register_user_form').hide();
+	  }
+	  else if($('#database_category').val() == 'export') {
+	  	$('#import_form').hide();
+	  	$('#export_form').show();
+	  	$('#register_user_form').hide();
+	  }
+	  else if($('#database_category').val() == 'register_user') {
+	  	$('#import_form').hide();
+	  	$('#export_form').hide();
+	  	$('#register_user_form').show();
+	  }
+
+
+
+	});
+});
