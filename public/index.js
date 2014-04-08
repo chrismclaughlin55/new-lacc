@@ -10,17 +10,13 @@ document.addEventListener('DOMContentLoaded', function() {
         //maxZoom: 15,
         //minZoom: 9
     });
-
     L.tileLayer( Esri_WorldTopoMap, {}).addTo(map);
-
     var categoryMap = {};
     var socket = io.connect('http://localhost:3000');
     socket.on('projects', function(projects) {
-        socket.on('categories', function(categories) {
             projects.forEach(function(project) {
                 var marker = L.marker([project.lat, project.lng]).addTo(map);
                 marker.project = project;
-                
                 var narrativeTag = "<div><div><strong>" + project.name + ": </strong>" + project.narrative + "</div>";
                 for (var i = 0; i < marker.project.customFields.length; i++)
                     narrativeTag += "<div>" + marker.project.customFields[i].key + ": " + marker.project.customFields[i].value + "</div>";  
@@ -31,7 +27,6 @@ document.addEventListener('DOMContentLoaded', function() {
                     var url = '/project/' + marker.project._id + '/image/' + i;
                     imageTag += '<div><img src="' + url + '" width="100" height="100"></div>';
                 } 
-
                 marker.bindPopup(narrativeTag + imageTag);
                 // categoryList is a map from category_id to an array of points
                 // project.category is an _id
@@ -41,15 +36,15 @@ document.addEventListener('DOMContentLoaded', function() {
                     categoryMap[project.category] = [marker];
                 }
             });
-            var overLayMap = {};
-            for (var i = 0; i < categories.length; i++) 
-                overLayMap[categories[i].name] = L.layerGroup(categoryMap[categories[i]._id]);
-            L.control.layers(null, overLayMap).addTo(map);
-        });
     });
     socket.emit('projectsRequest');
+    socket.on('categories', function(categories) {
+        var overLayMap = {};
+        categories.forEach(function(category) {
+            overLayMap[category.name] = L.layerGroup(categoryMap[category._id]);
+        });
+        L.control.layers(null, overLayMap).addTo(map);
+    });
     socket.emit('categoriesRequest');
-
     L.Util.requestAnimFrame(map.invalidateSize,map,!1,map._container);
-
 }, false);
