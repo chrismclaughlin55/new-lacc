@@ -48,3 +48,12 @@ document.addEventListener('DOMContentLoaded', function() {
     socket.emit('categoriesRequest');
     L.Util.requestAnimFrame(map.invalidateSize,map,!1,map._container);
 }, false);
+
+function resize_map(){
+    var maxWidth = $(window).width();
+    var maxHeight = $(window).height();
+    $("#map").width(maxWidth).height(maxHeight-90);
+}
+
+$(window).on('resize load', resize_map );
+
