@@ -3,6 +3,8 @@ var map;
 var tile = 'http://{s}.tile.cloudmade.com/bcaf462f30bd4c02a7378b1bc17dd6b6/997/256/{z}/{x}/{y}.png'
 var Esri_WorldTopoMap = 'http://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}';  
 
+
+
 document.addEventListener('DOMContentLoaded', function() {
     map = L.map('map', {
         center: mapCenter,
@@ -11,6 +13,7 @@ document.addEventListener('DOMContentLoaded', function() {
         //minZoom: 9
     });
     L.tileLayer( Esri_WorldTopoMap, {}).addTo(map);
+    resize_map();
     var categoryMap = {};
     var socket = io.connect('http://localhost:3000');
     socket.on('projects', function(projects) {
@@ -25,7 +28,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 for (var i = 0; i < marker.project.images.length; i++) {
                     var url = '/project/' + marker.project._id + '/image/' + i;
-                    imageTag += '<div><img src="' + url + '" width="100" height="100"></div>';
+
+                    //thumbnail + lightbox
+                    url = '"' + url + '"';
+                    imageTag = '<div class="lightbox_thumbnail"><a ' + "onclick='lightbox_onclick("  + url + ")'"
+                    + '><img src=' + url + ' width="100" height="100"></a></div>'; 
                 } 
                 marker.bindPopup(narrativeTag + imageTag);
                 // categoryList is a map from category_id to an array of points
@@ -56,4 +63,9 @@ function resize_map(){
 }
 
 $(window).on('resize load', resize_map );
+
+function lightbox_onclick(img_url) {
+    document.getElementById('lightbox').style.display='inline';
+    $("#lightbox_image").attr('src', img_url);
+}   
 
