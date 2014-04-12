@@ -2,24 +2,11 @@ var mapCenter = [34.0345474, -118.28396350000001];
 var map;
 var tile = 'http://{s}.tile.cloudmade.com/bcaf462f30bd4c02a7378b1bc17dd6b6/997/256/{z}/{x}/{y}.png'
 var Esri_WorldTopoMap = 'http://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}';  
+var markers = new L.layerGroup();
 var markerArray = new Array();
 
 
 
-// document.getElementById('filter').onsubmit = 
-filter(){
-    var string = document.getElementById('filtered_string');
-    var regex = new Regexp(string, 'i');
-    markerArray.forEach(function(element, index, array){
-        
-            map.removeLayer(element);
-
-        }
- //
-    );
-     console.log("filtered string called");
-    alert("in array");
-}
 
 document.addEventListener('DOMContentLoaded', function() {
     map = L.map('map', {
@@ -28,22 +15,34 @@ document.addEventListener('DOMContentLoaded', function() {
         //maxZoom: 15,
         //minZoom: 9
     });
+ document.getElementById('filter').onsubmit = function (){
+    console.log("filtered called");
+    var string = document.getElementById('filtered_string');
+    var regex = new Regexp(string, 'i');
+    for ( x in markerArray){
+        marker =  L.marker([project.lat, project.lng]);
+        marker.project = x;
+        marker.addTo(map);
+
+    }
+}
 
 
-
-
+    markers.addTo(map);
     L.tileLayer( Esri_WorldTopoMap, {}).addTo(map);
 
     var categoryMap = {};
     var socket = io.connect('http://localhost:3000');
 
-        socket.on('projects', function(projects) {
+    socket.on('projects', function(projects) {
         socket.on('categories', function(categories) {
             projects.forEach(function(project) {
-                var marker = L.marker([project.lat, project.lng]).addTo(map);
-                marker.project = project;
-                markerArray.push(marker);
+                var marker = L.marker([project.lat, project.lng]).addTo(markers);
+                markerArray.push(project);
+
                 console.log(markerArray.length);
+
+                marker.project = project;
                 var narrativeTag = "<div><div><strong>" + project.name + ": </strong>" + project.narrative + "</div>";
                 for (var i = 0; i < marker.project.customFields.length; i++)
                     narrativeTag += "<div>" + marker.project.customFields[i].key + ": " + marker.project.customFields[i].value + "</div>";  
@@ -64,16 +63,20 @@ document.addEventListener('DOMContentLoaded', function() {
                     categoryMap[project.category] = [marker];
                 }
             });
-            var overLayMap = {};
-            for (var i = 0; i < categories.length; i++) 
-                overLayMap[categories[i].name] = L.layerGroup(categoryMap[categories[i]._id]);
-            L.control.layers(null, overLayMap).addTo(map);
-        });
-    });
-     socket.emit('projectsRequest');
-     socket.emit('categoriesRequest');
+var overLayMap = {};
+for (var i = 0; i < categories.length; i++) 
+    overLayMap[categories[i].name] = L.layerGroup(categoryMap[categories[i]._id]);
+L.control.layers(null, overLayMap).addTo(map);
+});
+});
+socket.emit('projectsRequest');
+socket.emit('categoriesRequest');
 
-    L.Util.requestAnimFrame(map.invalidateSize,map,!1,map._container);
+L.Util.requestAnimFrame(map.invalidateSize,map,!1,map._container);
+map.removeLayer(markers);
+
+console.log(markerArray.length+" made it here");
+
 
 }, false);
 
