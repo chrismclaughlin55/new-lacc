@@ -40,15 +40,31 @@ if ('development' == app.get('env')) {
 }
 
 // Routes
+
+// Index
 app.get('/', categoryService.getCategoriesForIndex);
 app.get('/index', categoryService.getCategoriesForIndex);
+app.post('/', function( req, res){
 
+    projectService.filterProject("test", function(data){
+        io.sockets.on("connection", function(socket){
+
+// socket.emit("projects", data);
+        // res.redirect('/');
+        });
+        
+    })
+
+});
+
+// Admin
 app.get('/admin', userService.isLoggedIn, categoryService.getCategoriesForAdmin);
 app.post('/admin/update-category', categoryService.updateCategory);
 app.post('/admin/update-project', projectService.updateProject);
 app.get('/admin/download', projectService.download);
 app.post('/admin/upload', projectService.upload);
 
+// User Authentication
 app.get('/login',userService.login);
 app.get('/logout', userService.logout);
 app.post('/login-user',
@@ -78,5 +94,14 @@ io.sockets.on('connection', function(socket) {
     	categoryService.getCategories(function(categories) {
     		socket.emit('categories', categories);
     	});
+
+    });
+    socket.on('filterRequest', function(){
+        projectService.filterProject("test", function(data){
+
+           // socket.emit('project', data);
+        });
+
+
     });
 });

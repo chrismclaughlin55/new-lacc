@@ -25,6 +25,28 @@ exports.getProjects = function(callback) {
         callback(projects);
     });
 }
+exports.filterProject = function(string, callback){
+    var Project = mongoose.model('Project');
+
+    var string = string;
+    console.log("string: " + string);
+    var filteredProjects;
+    var results;
+  
+   filteredProjects = Project.find({name: new RegExp(string, 'i')}, function( err, results){
+
+    if(err){
+console.log(err);
+    console.log("There was an error filtering");
+    res.redirect('/');
+    }
+    console.log(results);    
+
+      callback(results);
+   });
+   
+};
+
 
 exports.updateProject = function(req, res) {
 	var Project = mongoose.model('Project');
@@ -82,7 +104,12 @@ exports.updateProject = function(req, res) {
 
 }
 
+/*export.searchByName = function(req, callback){
 
+
+
+}
+*/
 exports.storeImage = function(req, project, callback) {
     if (req.files['imgFile']) {
         if (req.files['imgFile'].length) {
