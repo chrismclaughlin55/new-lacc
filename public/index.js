@@ -16,7 +16,8 @@ document.addEventListener('DOMContentLoaded', function() {
         //minZoom: 9
     });
  
- document.getElementById('filter').onSubmit = function (){
+
+ document.getElementById('filter').onclick = function (){
     console.log("filtered called");
     var string = document.getElementById('filtered_string');
     var regex = new Regexp(string, 'i');
@@ -24,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function() {
         marker =  L.marker([project.lat, project.lng]);
         marker.project = x;
         marker.addTo(map);
-
+    
     });
 }
 
