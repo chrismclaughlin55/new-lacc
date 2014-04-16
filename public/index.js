@@ -18,14 +18,22 @@ document.addEventListener('DOMContentLoaded', function() {
  
 
  document.getElementById('filter').onclick = function (){
-    console.log("filtered called");
-    var string = document.getElementById('filtered_string');
-    var regex = new Regexp(string, 'i');
-    markerArray.forEach(function(marker){
+    console.log("filtered called arr size: "+markerArray.length);
+    var string = document.getElementById('filtered_string').value;
+    var regex = new RegExp(string, 'i');
+    // map.
+    console.log(string);
+map.removeLayer(markers);
+
+markers = new L.layerGroup();
+    markerArray.forEach(function(project){
+        if(regex.test(project.name)){
+            console.log(project.name);
         marker =  L.marker([project.lat, project.lng]);
-        marker.project = x;
-        marker.addTo(map);
-    
+        marker.project = project;
+        marker.addTo(markers);
+    }
+    markers.addTo(map);
     });
 }
 
