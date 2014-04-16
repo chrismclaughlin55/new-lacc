@@ -15,16 +15,17 @@ document.addEventListener('DOMContentLoaded', function() {
         //maxZoom: 15,
         //minZoom: 9
     });
- document.getElementById('filter').onsubmit = function (){
+ 
+ document.getElementById('filter').onSubmit = function (){
     console.log("filtered called");
     var string = document.getElementById('filtered_string');
     var regex = new Regexp(string, 'i');
-    for ( x in markerArray){
+    markerArray.forEach(function(marker){
         marker =  L.marker([project.lat, project.lng]);
         marker.project = x;
         marker.addTo(map);
 
-    }
+    });
 }
 
 
