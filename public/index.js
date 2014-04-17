@@ -83,7 +83,7 @@ socket.emit('projectsRequest');
 socket.emit('categoriesRequest');
 
 L.Util.requestAnimFrame(map.invalidateSize,map,!1,map._container);
-map.removeLayer(markers);
+// map.removeLayer(markers);
 
 console.log(markerArray.length+" made it here");
 
