@@ -160,8 +160,15 @@
 
 					</div>
 
+					 <% if(message.length > 0){ %>
+                      <span style="color:red; font-size:13px"><div class="error messages"><%= message %></div></span>
+                    <% } %>
+
 				</div>
 				
+
+	            
+
 				<div id="map"></div>
 				
 			</div>
