@@ -13,6 +13,7 @@ var json2csv = require('nice-json2csv');
 var app = express();
 var server = app.listen(3000);
 var io = require('socket.io').listen(server, {log:false});
+var flash = require('connect-flash');
 
 // all environments
 app.configure(function() {
@@ -30,6 +31,7 @@ app.configure(function() {
 	app.use(express.session({secret:'chacharealsmooth'}));
     app.use(passport.initialize());
     app.use(passport.session());
+    app.use(flash());
 	app.use(app.router);
 	app.use(express.static(path.join(__dirname, 'public')));
 });
@@ -70,13 +72,15 @@ app.get('/logout', userService.logout);
 app.post('/login-user',
     passport.authenticate('local-login', {
     successRedirect: '/admin',
-    failureRedirect:'/login'
+    failureRedirect: '/login',
+    failureFlash: true
     })
 );
 app.post('/signup-user',
     passport.authenticate('local-signup', {
         successRedirect:'/login',
-        failureRedirect:'/'
+        failureRedirect:'/',
+        failureFlash: true
     })
 );
 

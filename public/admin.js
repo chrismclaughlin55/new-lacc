@@ -99,47 +99,38 @@ document.addEventListener('DOMContentLoaded', function() {
     var categoryMap = {};
     var socket = io.connect('http://localhost:3000');
     socket.on('projects', function(projects) {
-        socket.on('categories', function(categories) {
-            projects.forEach(function(project) {
-                var point = L.marker([project.lat, project.lng], {draggable:'true', clickable:'true'}).addTo(map);
-                point.data = project;
-
-                point.on('click', function() {
-                   updateData(point);
-               });
-
-                point.on('dragend', function(){
-                    updateData(point);
-                });
-
-                point.on('click', function(){
-                    var popup = L.popup();
-                    content = '';
-                    content += point.images[0];
-                    console.log(content);
-                    point.bindPopup(content).openPopup();
-
-                });
-                // categoryList is a map from category_id to an array of points
-                // project.category is an _id
-                if (categoryMap[project.category]) {
-                    categoryMap[project.category].push(point);    
-                } else {
-                    categoryMap[project.category] = [];
-                    categoryMap[project.category].push(point);
-                }
+        projects.forEach(function(project) {
+            var point = L.marker([project.lat, project.lng], {draggable:'true', clickable:'true'}).addTo(map);
+            point.data = project;
+            point.on('click', function() {
+                updateData(point);
             });
-			var overLayMap = {};
-			categories.forEach(function(category) {
-	    		overLayMap[category.name] = L.layerGroup(categoryMap[category._id]);
-			});
-
-			L.control.layers(null, overLayMap).addTo(map);
-			});
-		});
-		socket.emit('projectsRequest');
-		socket.emit('categoriesRequest');
-		}, false);
+            point.on('dragend', function(){
+                updateData(point);
+            });
+            point.on('click', function(){
+                var popup = L.popup();
+                content = '';
+                content += point.images[0];
+                console.log(content);
+                point.bindPopup(content).openPopup();
+            });
+            // categoryList is a map from category_id to an array of points
+            // project.category is an _id
+            if (categoryMap[project.category]) {
+                categoryMap[project.category].push(point);    
+            } else {
+                categoryMap[project.category] = [];
+                categoryMap[project.category].push(point);
+            }
+        });
+	});
+    socket.emit('projectsRequest');
+    socket.on('categories', function(categories) {
+        //Do Category Stuff Here;
+    });
+    socket.emit('categoriesRequest');
+}, false);
 
 /* UX */
 $(function() {

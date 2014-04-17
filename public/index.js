@@ -8,6 +8,8 @@ var markerArray = new Array();
 
 
 
+
+
 document.addEventListener('DOMContentLoaded', function() {
     map = L.map('map', {
         center: mapCenter,
@@ -15,7 +17,6 @@ document.addEventListener('DOMContentLoaded', function() {
         //maxZoom: 15,
         //minZoom: 9
     });
- 
 
  document.getElementById('filter').onclick = function (){
     console.log("filtered called arr size: "+markerArray.length);
@@ -39,13 +40,13 @@ markers = new L.layerGroup();
 
 
     markers.addTo(map);
-    L.tileLayer( Esri_WorldTopoMap, {}).addTo(map);
 
+    L.tileLayer( Esri_WorldTopoMap, {}).addTo(map);
+    resize_map();
     var categoryMap = {};
     var socket = io.connect('http://localhost:3000');
 
     socket.on('projects', function(projects) {
-        socket.on('categories', function(categories) {
             projects.forEach(function(project) {
                 var marker = L.marker([project.lat, project.lng]).addTo(markers);
                 markerArray.push(project);
@@ -61,9 +62,12 @@ markers = new L.layerGroup();
                 
                 for (var i = 0; i < marker.project.images.length; i++) {
                     var url = '/project/' + marker.project._id + '/image/' + i;
-                    imageTag += '<div><img src="' + url + '" width="100" height="100"></div>';
-                } 
 
+                    //thumbnail + lightbox
+                    url = '"' + url + '"';
+                    imageTag = '<div class="lightbox_thumbnail"><a ' + "onclick='lightbox_onclick("  + url + ")'"
+                    + '><img src=' + url + ' width="100" height="100"></a></div>'; 
+                } 
                 marker.bindPopup(narrativeTag + imageTag);
                 // categoryList is a map from category_id to an array of points
                 // project.category is an _id
@@ -73,21 +77,33 @@ markers = new L.layerGroup();
                     categoryMap[project.category] = [marker];
                 }
             });
-var overLayMap = {};
-for (var i = 0; i < categories.length; i++) 
-    overLayMap[categories[i].name] = L.layerGroup(categoryMap[categories[i]._id]);
-L.control.layers(null, overLayMap).addTo(map);
+
+
 });
-});
-socket.emit('projectsRequest');
-socket.emit('categoriesRequest');
 
-L.Util.requestAnimFrame(map.invalidateSize,map,!1,map._container);
-// map.removeLayer(markers);
-
-console.log(markerArray.length+" made it here");
-
-
+    socket.emit('projectsRequest');
+    socket.on('categories', function(categories) {
+        var overLayMap = {};
+        categories.forEach(function(category) {
+            overLayMap[category.name] = L.layerGroup(categoryMap[category._id]);
+        });
+        L.control.layers(null, overLayMap).addTo(map);
+    });
+    socket.emit('categoriesRequest');
+    L.Util.requestAnimFrame(map.invalidateSize,map,!1,map._container);
 }, false);
+
+function resize_map(){
+    var maxWidth = $(window).width();
+    var maxHeight = $(window).height();
+    $("#map").width(maxWidth).height(maxHeight-90);
+}
+
+$(window).on('resize load', resize_map );
+
+function lightbox_onclick(img_url) {
+    document.getElementById('lightbox').style.display='inline';
+    $("#lightbox_image").attr('src', img_url);
+}   
 
 
