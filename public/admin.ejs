@@ -3,7 +3,6 @@
 	<head>
 		<meta charset="utf-8">
 		<title>LACC Admin</title>
-
 		<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.4.5/leaflet.css" />
 		<link rel="stylesheet" href="/admin.css">
 		<script src="http://cdn.leafletjs.com/leaflet-0.4.5/leaflet.js"></script>
@@ -25,7 +24,6 @@
 							<input type="radio" id="database_radio" name="radio_panel" ><label for="database_radio">Database</label>
 						</div>
 					</form > 
-
 					<div id="add_point_panel">   
 						<button type="button" id="add_point" value="add_point">
 							Place New Point On Map
@@ -82,7 +80,6 @@
 							</ul>
 						</form>
 					</div>
-
 					<div id="edit_category_panel">
 						<form id="project_entry" enctype="multipart/form-data" action="/admin/update-category" method="post">
 							<ul id="entry_list">
@@ -102,14 +99,12 @@
 								</li>
 							</ul>
 						</form>
-
 						Current Categories:
 							<form>
 								<% for (var i = 0; i < categories.length; i++) { %>
 									<input class="input" value="<%=categories[i]['name'] %>"> <br>
 								<% }%>
 							</form>
-						
 						<form id="category_entry">
 							<input type="hidden" name="c_id" id="c_id" value=""/>
 							<input type="hidden" name="cat_cnt" id="cat_cnt" value="0"/>
@@ -118,29 +113,22 @@
 						<b style="color:red">TODO:Tooltips/Warnings for empty text field</b><br />
 
 					</div>
-
 					<div id="database_panel">
-						
 						Database Operation:
 						<select id="database_category">
 						  <option value="import">Import Database</option>
 						  <option value="export">Export Database</option>
 						  <option value="register_user">Register User</option>
 						</select>
-
-						<br /> <br />
-
+						<br/> <br/>
 						<form action="/admin/upload" style = "float:left;" method="POST" enctype="multipart/form-data" id="import_form">
 							<input type="file" name="csvFile"> 
 							<button type="submit" id="import_button">Import File</button>
 						</form>
-
 						<form action="/admin/download" method="GET" style="display:none" id="export_form">
 							<button type="submit" id="export_button" class="btn">Export Database</button>
 						</form>
-					   
-
-						<form action="/signup-user" method="post" id="register_user_form" style="display:none">		                
+						<form action="/signup-user" method="post" id="register_user_form" style="display:none">         
 		                    <div>
 		                        <input placeholder="Username" type="text" name="username"/>
 		                    </div>
@@ -151,20 +139,9 @@
 		                        <input type="submit" value="Create User"/>
 		                    </div>
 	                	</form>
-
 					</div>
-
-					 <% if(message.length > 0){ %>
-                      <span style="color:red; font-size:13px"><div class="error messages"><%= message %></div></span>
-                    <% } %>
-
 				</div>
-				
-
-	            
-
-				<div id="map"></div>
-				
+				<div id="map"></div>	
 			</div>
 		</div>        
 	</body>
