@@ -60,6 +60,7 @@ exports.isLoggedIn = function(req,res, next){
         next();
     }
     else{
+
         req.flash('errors', 'You Must Log In Before Using the Admin Page');
         res.redirect('/login');
     }

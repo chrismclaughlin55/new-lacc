@@ -2,6 +2,11 @@ var mapCenter = [34.0345474, -118.28396350000001];
 var map;
 var tile = 'http://{s}.tile.cloudmade.com/bcaf462f30bd4c02a7378b1bc17dd6b6/997/256/{z}/{x}/{y}.png'
 var Esri_WorldTopoMap = 'http://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}';  
+var markers = new L.layerGroup();
+var markerArray = new Array();
+
+
+
 
 
 
@@ -12,13 +17,42 @@ document.addEventListener('DOMContentLoaded', function() {
         //maxZoom: 15,
         //minZoom: 9
     });
+
+ document.getElementById('filter').onclick = function (){
+    console.log("filtered called arr size: "+markerArray.length);
+    var string = document.getElementById('filtered_string').value;
+    var regex = new RegExp(string, 'i');
+    // map.
+    console.log(string);
+map.removeLayer(markers);
+
+markers = new L.layerGroup();
+    markerArray.forEach(function(project){
+        if(regex.test(project.name)){
+            console.log(project.name);
+        marker =  L.marker([project.lat, project.lng]);
+        marker.project = project;
+        marker.addTo(markers);
+    }
+    markers.addTo(map);
+    });
+}
+
+
+    markers.addTo(map);
+
     L.tileLayer( Esri_WorldTopoMap, {}).addTo(map);
     resize_map();
     var categoryMap = {};
     var socket = io.connect('http://localhost:3000');
+
     socket.on('projects', function(projects) {
             projects.forEach(function(project) {
-                var marker = L.marker([project.lat, project.lng]).addTo(map);
+                var marker = L.marker([project.lat, project.lng]).addTo(markers);
+                markerArray.push(project);
+
+                console.log(markerArray.length);
+
                 marker.project = project;
                 var narrativeTag = "<div><div><strong>" + project.name + ": </strong>" + project.narrative + "</div>";
                 for (var i = 0; i < marker.project.customFields.length; i++)
@@ -43,7 +77,10 @@ document.addEventListener('DOMContentLoaded', function() {
                     categoryMap[project.category] = [marker];
                 }
             });
-    });
+
+
+});
+
     socket.emit('projectsRequest');
     socket.on('categories', function(categories) {
         var overLayMap = {};
@@ -68,4 +105,5 @@ function lightbox_onclick(img_url) {
     document.getElementById('lightbox').style.display='inline';
     $("#lightbox_image").attr('src', img_url);
 }   
+
 
