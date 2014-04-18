@@ -25,9 +25,10 @@ document.addEventListener('DOMContentLoaded', function() {
             if (regex.test(project.name)) {
                 marker =  L.marker([project.lat, project.lng]);
                 marker.project = project;
+                marker.bindPopup(marker.project.narrativeTag + marker.project.imageTag);
                 marker.addTo(markers);
             }
-            markers.addTo(map);
+             markers.addTo(map);
         });
     }
 
@@ -44,21 +45,21 @@ document.addEventListener('DOMContentLoaded', function() {
             markerArray.push(project);
 
             marker.project = project;
-            var narrativeTag = "<div><div><strong>" + project.name + ": </strong>" + project.narrative + "</div>";
+            project.narrativeTag = "<div><div><strong>" + project.name + ": </strong></br>" + project.narrative + "</div>";
             for (var i = 0; i < marker.project.customFields.length; i++)
-                narrativeTag += "<div>" + marker.project.customFields[i].key + ": " + marker.project.customFields[i].value + "</div>";  
-            narrativeTag += "<div>" + marker.project.address + "</div></div>";
-            var imageTag = "";
+                project.narrativeTag += "<div>" + marker.project.customFields[i].key + ": " + marker.project.customFields[i].value + "</div>";  
+            project.narrativeTag += "<div>" + marker.project.address + "</div></div>";
+            marker.project.imageTag = "";
             
             for (var i = 0; i < marker.project.images.length; i++) {
                 var url = '/project/' + marker.project._id + '/image/' + i;
 
                 //thumbnail + lightbox
                 url = '"' + url + '"';
-                imageTag = '<div class="lightbox_thumbnail"><a ' + "onclick='lightbox_onclick("  + url + ")'"
+                marker.project.imageTag = '<div class="lightbox_thumbnail"><a ' + "onclick='lightbox_onclick("  + url + ")'"
                 + '><img src=' + url + ' width="100" height="100"></a></div>'; 
             } 
-            marker.bindPopup(narrativeTag + imageTag);
+            marker.bindPopup(marker.project.narrativeTag + marker.project.imageTag);
             // categoryList is a map from category_id to an array of points
             // project.category is an _id
             if (categoryMap[project.category]) {
@@ -67,17 +68,17 @@ document.addEventListener('DOMContentLoaded', function() {
                 categoryMap[project.category] = [marker];
             }
         });
+});
+socket.emit('projectsRequest');
+socket.on('categories', function(categories) {
+    var overLayMap = {};
+    categories.forEach(function(category) {
+        overLayMap[category.name] = L.layerGroup(categoryMap[category._id]);
     });
-    socket.emit('projectsRequest');
-    socket.on('categories', function(categories) {
-        var overLayMap = {};
-        categories.forEach(function(category) {
-            overLayMap[category.name] = L.layerGroup(categoryMap[category._id]);
-        });
-        L.control.layers(null, overLayMap).addTo(map);
-    });
-    socket.emit('categoriesRequest');
-    L.Util.requestAnimFrame(map.invalidateSize,map,!1,map._container);
+    L.control.layers(null, overLayMap).addTo(map);
+});
+socket.emit('categoriesRequest');
+L.Util.requestAnimFrame(map.invalidateSize,map,!1,map._container);
 }, false);
 
 function resize_map(){
