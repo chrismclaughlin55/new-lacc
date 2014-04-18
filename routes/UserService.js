@@ -24,10 +24,8 @@ passport.use('local-signup', new LocalStrategy({
     }
 ));
 
-passport.use('local-login', new LocalStrategy({
-    passReqToCallback: true
-    },
-    function(req,username, password, done){
+passport.use('local-login', new LocalStrategy({ passReqToCallback: true },
+    function(req,username, password, done) {
         var User = mongoose.model('User');
         User.findOne({'local.username':username}, function(err,user){
             if(err){
@@ -58,9 +56,7 @@ passport.deserializeUser(function(id,done){
 exports.isLoggedIn = function(req,res, next){
     if(req.isAuthenticated()) {
         next();
-    }
-    else{
-
+    } else {
         req.flash('errors', 'You Must Log In Before Using the Admin Page');
         res.redirect('/login');
     }
@@ -69,8 +65,7 @@ exports.isLoggedIn = function(req,res, next){
 exports.hasLoggedIn = function(req, req, next){
     if(!req.isAuthenticated()){
         next();
-    }
-    else{
+    } else {
       res.redirect('/admin');
     }
 }

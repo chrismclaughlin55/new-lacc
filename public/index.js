@@ -5,11 +5,6 @@ var Esri_WorldTopoMap = 'http://server.arcgisonline.com/ArcGIS/rest/services/Wor
 var markers = new L.layerGroup();
 var markerArray = new Array();
 
-
-
-
-
-
 document.addEventListener('DOMContentLoaded', function() {
     map = L.map('map', {
         center: mapCenter,
@@ -18,26 +13,23 @@ document.addEventListener('DOMContentLoaded', function() {
         //minZoom: 9
     });
 
- document.getElementById('filter').onclick = function (){
-    console.log("filtered called arr size: "+markerArray.length);
-    var string = document.getElementById('filtered_string').value;
-    var regex = new RegExp(string, 'i');
-    // map.
-    console.log(string);
-map.removeLayer(markers);
+    document.getElementById('filter').onclick = function () {
+        console.log("filtered called arr size: "+markerArray.length);
+        var string = document.getElementById('filtered_string').value;
+        var regex = new RegExp(string, 'i');
+        // map.
+        map.removeLayer(markers);
 
-markers = new L.layerGroup();
-    markerArray.forEach(function(project){
-        if(regex.test(project.name)){
-            console.log(project.name);
-        marker =  L.marker([project.lat, project.lng]);
-        marker.project = project;
-        marker.addTo(markers);
+        markers = new L.layerGroup();
+        markerArray.forEach(function(project) {
+            if (regex.test(project.name)) {
+                marker =  L.marker([project.lat, project.lng]);
+                marker.project = project;
+                marker.addTo(markers);
+            }
+            markers.addTo(map);
+        });
     }
-    markers.addTo(map);
-    });
-}
-
 
     markers.addTo(map);
 
@@ -47,40 +39,35 @@ markers = new L.layerGroup();
     var socket = io.connect('http://localhost:3000');
 
     socket.on('projects', function(projects) {
-            projects.forEach(function(project) {
-                var marker = L.marker([project.lat, project.lng]).addTo(markers);
-                markerArray.push(project);
+        projects.forEach(function(project) {
+            var marker = L.marker([project.lat, project.lng]).addTo(markers);
+            markerArray.push(project);
 
-                console.log(markerArray.length);
+            marker.project = project;
+            var narrativeTag = "<div><div><strong>" + project.name + ": </strong>" + project.narrative + "</div>";
+            for (var i = 0; i < marker.project.customFields.length; i++)
+                narrativeTag += "<div>" + marker.project.customFields[i].key + ": " + marker.project.customFields[i].value + "</div>";  
+            narrativeTag += "<div>" + marker.project.address + "</div></div>";
+            var imageTag = "";
+            
+            for (var i = 0; i < marker.project.images.length; i++) {
+                var url = '/project/' + marker.project._id + '/image/' + i;
 
-                marker.project = project;
-                var narrativeTag = "<div><div><strong>" + project.name + ": </strong>" + project.narrative + "</div>";
-                for (var i = 0; i < marker.project.customFields.length; i++)
-                    narrativeTag += "<div>" + marker.project.customFields[i].key + ": " + marker.project.customFields[i].value + "</div>";  
-                narrativeTag += "<div>" + marker.project.address + "</div></div>";
-                var imageTag = "";
-                
-                for (var i = 0; i < marker.project.images.length; i++) {
-                    var url = '/project/' + marker.project._id + '/image/' + i;
-
-                    //thumbnail + lightbox
-                    url = '"' + url + '"';
-                    imageTag = '<div class="lightbox_thumbnail"><a ' + "onclick='lightbox_onclick("  + url + ")'"
-                    + '><img src=' + url + ' width="100" height="100"></a></div>'; 
-                } 
-                marker.bindPopup(narrativeTag + imageTag);
-                // categoryList is a map from category_id to an array of points
-                // project.category is an _id
-                if (categoryMap[project.category]) {
-                    categoryMap[project.category].push(marker);    
-                } else {
-                    categoryMap[project.category] = [marker];
-                }
-            });
-
-
-});
-
+                //thumbnail + lightbox
+                url = '"' + url + '"';
+                imageTag = '<div class="lightbox_thumbnail"><a ' + "onclick='lightbox_onclick("  + url + ")'"
+                + '><img src=' + url + ' width="100" height="100"></a></div>'; 
+            } 
+            marker.bindPopup(narrativeTag + imageTag);
+            // categoryList is a map from category_id to an array of points
+            // project.category is an _id
+            if (categoryMap[project.category]) {
+                categoryMap[project.category].push(marker);    
+            } else {
+                categoryMap[project.category] = [marker];
+            }
+        });
+    });
     socket.emit('projectsRequest');
     socket.on('categories', function(categories) {
         var overLayMap = {};

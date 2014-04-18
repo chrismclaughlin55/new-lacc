@@ -148,14 +148,13 @@ $(function(){
 $(function() {
     $('#edit_category_radio').click(function(){
         var to_continue = true;
-        if($("#add_point").css("color") == "rgb(221, 221, 222)") 
+        if ($("#add_point").css("color") == "rgb(221, 221, 222)") 
             var to_continue = confirm("Changes to point will be deleted. Are you sure you want to continue?");
         if (to_continue) {
             $('#add_point_panel').hide();
             $('#edit_category_panel').show();
             $('#database_panel').hide();     
             $('#new_category').focus();
-
         }
     });
 });
@@ -189,8 +188,6 @@ $(function(){
 var image_html = '<input type="file" name="imgFile">';
 $(function() {
     $('#add_image').click(function() {
-
-        console.log(image_html);
         $("#image_injection_div").append(image_html);
     });
 });
@@ -212,26 +209,20 @@ $(function(){
     });
 });
 
-
 $(function(){
-	$("#database_category").change(function() {
-	  if($('#database_category').val() == 'import') {
-	  	$('#import_form').show();
-	  	$('#export_form').hide();
-	  	$('#register_user_form').hide();
-	  }
-	  else if($('#database_category').val() == 'export') {
-	  	$('#import_form').hide();
-	  	$('#export_form').show();
-	  	$('#register_user_form').hide();
-	  }
-	  else if($('#database_category').val() == 'register_user') {
-	  	$('#import_form').hide();
-	  	$('#export_form').hide();
-	  	$('#register_user_form').show();
-	  }
-
-
-
-	});
+    $("#database_category").change(function() {
+	    if($('#database_category').val() == 'import') {
+	        $('#import_form').show();
+            $('#export_form').hide();
+	  	    $('#register_user_form').hide();
+        } else if ($('#database_category').val() == 'export') {
+	  	    $('#import_form').hide();
+	  	    $('#export_form').show();
+	  	    $('#register_user_form').hide();
+	    } else if ($('#database_category').val() == 'register_user') {
+	  	    $('#import_form').hide();
+	  	    $('#export_form').hide();
+	  	    $('#register_user_form').show();
+	    }
+    });
 });
