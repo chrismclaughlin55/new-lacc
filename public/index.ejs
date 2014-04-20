@@ -16,12 +16,15 @@
         <div id="project_title"></div>
         <div id="main">
             <div id="title">LA Conservation Corps Projects <span style="font-size: 14px;">A visual history of LACC public works.
-            <input type="text" name="filtered_string" id="filter" placeholder="Search projects"/> </span>
+            <input type="text" name="filtered_string" id="filter" placeholder="Search projects"/> </span><br>
             <select id="location_filter" name="location" >
                 <option value="" class="input">All Projects</option>
                 <option value='true' class="input">Project Inside LA</option>
                 <option value='false' class="input">Projects Outside LA </option>
             </select>
+            <% for (var i = 0; i < categories.length; i++) { %>
+              <font size="2"><%=categories[i]['name'] %></font><input type="checkbox" class="categories" value="<%=categories[i]['_id'] %>">
+            <% }%>
             </div>
             <div id="map"></div>
             <div id="project_title"></div>

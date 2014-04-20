@@ -34,6 +34,19 @@ document.addEventListener('DOMContentLoaded', function()
         $('#filter').val("");
         $('#filter').attr("style",""); //back to default css
     });
+
+    $('.categories').change(function() {
+        projectFilter.categories = [];
+        $('.categories').each(function() {
+            if ($(this).is(':checked')) {
+                projectFilter.categories.push($(this).val());
+            }
+        });
+        map.removeLayer(markers);
+        markers = new L.layerGroup();
+        socket.emit('projectsRequest', projectFilter);
+    });
+
     updateMap(socket, function() {
         markers.addTo(map);
     });
@@ -65,39 +78,6 @@ function updateMap(socket, callback) {
         });
         callback(markers);
     });
-}
-
-function filter(map) {
-    var string = document.getElementById('filter').value;
-    var regex = new RegExp(string, 'i');
-    map.removeLayer(markers);
-    markers = new L.layerGroup();
-    var found = false;
-    markerArray.forEach(function(project) {
-        if (regex.test(project.name)) {
-            found = true;
-            marker =  L.marker([project.lat, project.lng]);
-            marker.project = project;
-            marker.bindPopup(marker.project.narrativeTag + marker.project.imageTag);
-            marker.addTo(markers);
-        }
-         markers.addTo(map);
-    });
-    if (found == false) {
-        $('#filter').val("No results found");
-        $('#filter').attr("style","color:red");
-        document.getElementById("filter").setSelectionRange(0, 16); 
-        markerArray.forEach(function(project) 
-        {
-            marker = L.marker([project.lat, project.lng]);
-            marker.project = project;
-            marker.bindPopup(marker.project.narrativeTag + marker.project.imageTag);
-            marker.addTo(markers);
-            markers.addTo(map);
-        });
-    } else {
-        $('#filter').val("");
-    }
 }
 
 function resize_map() {

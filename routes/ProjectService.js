@@ -1,9 +1,3 @@
-GridStore           = require('mongodb').GridStore,
-Grid                = require('mongodb').Grid,
-Code                = require('mongodb').Code,
-BSON                = require('mongodb').pure().BSON,
-assert              = require('assert');
-
 var mongoose        = require('mongoose');
 var Project         = require('../models/Project');
 var Category        = require('../models/Category');
@@ -12,6 +6,13 @@ var csvConvertor    = require('../custom_modules/CsvRecord.js');
 var json2csv        = require('nice-json2csv');
 var csv             = require('ya-csv');
 var fs              = require('fs');
+
+GridStore           = require('mongodb').GridStore,
+Grid                = require('mongodb').Grid,
+Code                = require('mongodb').Code,
+BSON                = require('mongodb').pure().BSON,
+assert              = require('assert');
+ObjectId            = mongoose.Types.ObjectId;
 
 
 exports.getProjects = function(projectFilter, callback) {
@@ -23,6 +24,12 @@ exports.getProjects = function(projectFilter, callback) {
         }
         if (projectFilter.insideLA) {
             filter.insideLA = eval(projectFilter.insideLA);
+        }
+        if (projectFilter.categories && projectFilter.categories.length) {
+            filter.$or = [];
+            projectFilter.categories.forEach(function(cat) {
+                filter.$or.push({category : ObjectId(cat)});
+            });
         }
     }
     Project.find(filter, function(err, projects) {
