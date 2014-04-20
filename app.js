@@ -41,23 +41,9 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
-// Routes
-
 // Index
 app.get('/', categoryService.getCategoriesForIndex);
 app.get('/index', categoryService.getCategoriesForIndex);
-app.post('/', function( req, res){
-
-    projectService.filterProject("test", function(data){
-        io.sockets.on("connection", function(socket){
-
-// socket.emit("projects", data);
-        // res.redirect('/');
-        });
-        
-    })
-
-});
 
 // Admin
 app.get('/admin', userService.isLoggedIn, categoryService.getCategoriesForAdmin);
@@ -84,8 +70,6 @@ app.post('/signup-user',
     })
 );
 
-
-
 app.get('/project/:project/image/:image', projectService.readImage);
 
 io.sockets.on('connection', function(socket) {
@@ -98,14 +82,6 @@ io.sockets.on('connection', function(socket) {
     	categoryService.getCategories(function(categories) {
     		socket.emit('categories', categories);
     	});
-
-    });
-    socket.on('filterRequest', function(){
-        projectService.filterProject("test", function(data){
-
-           // socket.emit('project', data);
-        });
-
 
     });
 });
