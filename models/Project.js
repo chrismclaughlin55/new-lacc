@@ -2,12 +2,13 @@ var mongoose = require( 'mongoose' ),
 db 			 = mongoose.createConnection('localhost', 'lacc');
 
 var ProjectSchema = new mongoose.Schema({
-		name: String,
+		name: String,		
 		address: String,
 		narrative: String,
 		category: {type : mongoose.Schema.Types.ObjectId, ref: 'Category'},
 		lat: Number,
 		lng: Number,
+		insideLA: Boolean,
 		customFields: 
 		[
 			{

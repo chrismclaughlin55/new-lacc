@@ -73,8 +73,10 @@ app.post('/signup-user',
 app.get('/project/:project/image/:image', projectService.readImage);
 
 io.sockets.on('connection', function(socket) {
-    socket.on('projectsRequest', function() {
+    socket.on('projectsRequest', function(test) {
+        console.log(test.x);
     	projectService.getProjects(function(projects) {
+            console.log("EMMITING");
     		socket.emit('projects', projects);
     	});
     });
