@@ -12,7 +12,12 @@ passport.use('local-signup', new LocalStrategy({
     function(req, username, password, done){
         var User = mongoose.model('User');
         var newUser = new User();
-        newUser.type = "manager";
+        if(req.body.admin == "true"){
+            newUser.admin = true;
+        }
+        else{
+            newUser.admin = false;
+        }
         newUser.local.username = username;
         newUser.local.password = newUser.generateHash(password);
         newUser.save(function(err){

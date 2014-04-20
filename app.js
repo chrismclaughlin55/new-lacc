@@ -62,13 +62,14 @@ app.post('/login-user',
     failureFlash: true
     })
 );
-app.post('/signup-user',
-    passport.authenticate('local-signup', {
-        successRedirect:'/login',
-        failureRedirect:'/',
-        failureFlash: true
+
+app.post('/signup-user', passport.authenticate('local-signup', {
+    successRedirect: '/login',
+    failureRedirect: '/login',
+    failureFlash: true
     })
 );
+
 
 app.get('/project/:project/image/:image', projectService.readImage);
 
