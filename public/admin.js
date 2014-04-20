@@ -115,14 +115,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 console.log(content);
                 point.bindPopup(content).openPopup();
             });
-            // categoryList is a map from category_id to an array of points
-            // project.category is an _id
-            if (categoryMap[project.category]) {
-                categoryMap[project.category].push(point);    
-            } else {
-                categoryMap[project.category] = [];
-                categoryMap[project.category].push(point);
-            }
         });
 	});
     socket.emit('projectsRequest');

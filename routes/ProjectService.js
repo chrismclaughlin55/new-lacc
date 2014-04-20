@@ -14,34 +14,26 @@ var csv             = require('ya-csv');
 var fs              = require('fs');
 
 
-exports.getProjects = function(callback) {
+exports.getProjects = function(projectFilter, callback) {
     var Project = mongoose.model('Project');
-    Project.find(function(err, projects) {
+    var filter = {};
+    if (projectFilter) {
+        if (projectFilter.name) {
+            filter.name = eval(projectFilter.name);
+        }
+        if (projectFilter.insideLA) {
+            filter.insideLA = eval(projectFilter.insideLA);
+        }
+    }
+    Project.find(filter, function(err, projects) {
         if (err) {
             console.log("Could not return projects");
             console.log(err);
             return;
         }
         callback(projects);
-    });
+    }); 
 }
-
-exports.filterProject = function(string, callback){
-    var Project = mongoose.model('Project');
-    var string = string;
-    var filteredProjects;
-    var results;
-  
-   filteredProjects = Project.find({name: new RegExp(string, 'i')}, function(err, results){
-        if (err) {
-            console.log(err);
-            console.log("There was an error filtering");
-            res.redirect('/');
-        }
-        callback(results);
-    });
-};
-
 
 exports.updateProject = function(req, res) {
 	var Project = mongoose.model('Project');
@@ -55,7 +47,6 @@ exports.updateProject = function(req, res) {
     project.lat = parseFloat(req.body.project_lat);
     project.lng = parseFloat(req.body.project_lng);
     project.insideLA = req.body.location === 'true';
-    console.log("Project inside la is : " + project.insideLA);
     if (req.body.custom_field_key) {
         for (var i = 0; i < req.body.custom_field_key.length; i++) {
             var custom_key = req.body.custom_field_key[i];

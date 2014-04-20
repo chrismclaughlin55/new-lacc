@@ -4,41 +4,40 @@ var tile = 'http://{s}.tile.cloudmade.com/bcaf462f30bd4c02a7378b1bc17dd6b6/997/2
 var Esri_WorldTopoMap = 'http://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}';  
 var markerArray = new Array();
 var markers = new L.layerGroup();
+var projectFilter = {};
 
 document.addEventListener('DOMContentLoaded', function() 
 {
     map = L.map('map', {center: mapCenter, zoom: 14,/*maxZoom: 15,//minZoom: 9*/});
     L.tileLayer( Esri_WorldTopoMap, {}).addTo(map);
     resize_map();
-    var categoryMap = {};
     var socket = io.connect('http://localhost:3000');
     $('#location_filter').change(function() {
-        socket.emit('projectsRequest', { name: filter });
         map.removeLayer(markers);
         markers = new L.layerGroup();
-        updateMap(socket, function() {
-            markers.addTo(map);
-        });
+        projectFilter.insideLA = $('#location_filter').val(); 
+        socket.emit('projectsRequest', projectFilter);
     });
 
     $('#filter').keypress(function(e) {
         $('#filter').attr("style",""); //default css on reset (by typing)
         var keyCode = e.keyCode || e.which;
         if (keyCode == '13') {
-            socket.emit('projectsRequest', { name: filter });
-            updateMap(socket);
+            map.removeLayer(markers);
+            markers = new L.layerGroup();
+            projectFilter.name = "/" + $('#filter').val() + "/i";
+            socket.emit('projectsRequest', projectFilter);
         }
     });
 
-    $('#filter').click(function()
-    {
+    $('#filter').click(function() {
         $('#filter').val("");
         $('#filter').attr("style",""); //back to default css
     });
     updateMap(socket, function() {
         markers.addTo(map);
     });
-    socket.emit('projectsRequest', { name: filter });
+    socket.emit('projectsRequest', projectFilter);
     L.Util.requestAnimFrame(map.invalidateSize,map,!1,map._container);
 }, false);
 
@@ -64,7 +63,7 @@ function updateMap(socket, callback) {
             } 
             marker.bindPopup(marker.project.narrativeTag + marker.project.imageTag);
         });
-    callback(markers);
+        callback(markers);
     });
 }
 
