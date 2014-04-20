@@ -39,7 +39,7 @@ exports.getProjects = function(projectFilter, callback) {
             return;
         }
         callback(projects);
-    }); 
+    });
 }
 
 exports.updateProject = function(req, res) {
