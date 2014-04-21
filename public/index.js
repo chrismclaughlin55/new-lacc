@@ -5,6 +5,7 @@ var Esri_WorldTopoMap = 'http://server.arcgisonline.com/ArcGIS/rest/services/Wor
 var markerArray = new Array();
 var markers = new L.layerGroup();
 var projectFilter = {};
+var iconMap = {};
 
 document.addEventListener('DOMContentLoaded', function() 
 {
@@ -12,6 +13,7 @@ document.addEventListener('DOMContentLoaded', function()
     L.tileLayer( Esri_WorldTopoMap, {}).addTo(map);
     resize_map();
     var socket = io.connect('http://localhost:3000');
+
     $('#location_filter').change(function() {
         map.removeLayer(markers);
         markers = new L.layerGroup();
@@ -57,7 +59,11 @@ document.addEventListener('DOMContentLoaded', function()
 function updateMap(socket, callback) {
     socket.on('projects', function(projects) {
         projects.forEach(function(project) {
-            var marker = L.marker([project.lat, project.lng]).addTo(markers);
+            var icon = L.icon({
+                iconUrl: '/category/' + project.category + '/image',
+                iconSize:     [30, 30], // size of the icon
+            });
+            var marker = L.marker([project.lat, project.lng], {icon: icon}).addTo(markers);
             marker.project = project;
             marker.project.narrativeTag = "<div><div><strong>" + project.name + ": </strong></br>" + project.narrative + "</div>";
             for (var i = 0; i < marker.project.customFields.length; i++)

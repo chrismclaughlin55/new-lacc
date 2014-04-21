@@ -87,7 +87,7 @@ exports.updateProject = function(req, res) {
                     console.log("error updating record "+ err); 
                     return;
                 }
-                projectService.storeImage(req,project,function(){
+                projectService.storeImage(req, project, function(){
                     console.log("project "+project.name+" has had an image added");
                 });
                 console.log('The number of updated documents was %d', numberAffected);
