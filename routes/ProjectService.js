@@ -136,7 +136,8 @@ exports.readImage = function(req, res) {
 
 exports.download = function(req, res) {
     var recordData = [];
-    projectService.getProjects(function(records) {
+    var Project = mongoose.model('Project');
+    Project.find(function(err, records) {
         records.forEach(function(r) {
             projectService.convertProjectToCsvRow(r, function(csvRecord) {
                 recordData.push(csvRecord);
@@ -147,6 +148,24 @@ exports.download = function(req, res) {
             });
         });
     });
+}
+
+exports.downloadByFilter = function(req, res) {
+    var recordData = [];    
+    projectService.getProjects(req.query, function(records) {
+        records.forEach(function(r) {
+            projectService.convertProjectToCsvRow(r, function(csvRecord) {
+                recordData.push(csvRecord);
+                if(recordData.length == records.length) {
+                    var csvData = JSON.stringify(recordData);
+                    console.log(csvData);
+                    res.send("Saral"); //This doesnt even work.
+                    //res.csv(JSON.parse(csvData), "projects.csv");
+                }
+            });
+        });
+    });
+
 }
 
 exports.storeCategories = function(req, callback) {

@@ -44,6 +44,7 @@ if ('development' == app.get('env')) {
 // Index
 app.get('/', categoryService.getCategoriesForIndex);
 app.get('/index', categoryService.getCategoriesForIndex);
+app.get('/download', projectService.downloadByFilter);
 
 // Admin
 app.get('/admin', userService.isLoggedIn, categoryService.getCategoriesForAdmin);
@@ -85,4 +86,5 @@ io.sockets.on('connection', function(socket) {
     	});
 
     });
+    
 });
