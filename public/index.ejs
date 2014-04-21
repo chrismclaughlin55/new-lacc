@@ -4,8 +4,6 @@
         <meta charset="utf-8">
         <title>LACC Asset Mapping Project</title>
         <script src="jquery-1.11.0.min.js"></script>
-        <link rel="stylesheet" href="fancybox/source/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
-        <script type="text/javascript" src="fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
         <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.4.5/leaflet.css" />
         <script src="http://cdn.leafletjs.com/leaflet-0.4.5/leaflet.js"></script>
         <script src="/socket.io/socket.io.js"></script>
@@ -16,16 +14,27 @@
         <div id="project_title"></div>
         <div id="main">
             <div id="title">LA Conservation Corps Projects <span style="font-size: 14px;">A visual history of LACC public works.
-            <input type="text" name="filtered_string" id="filter" placeholder="Search projects"/> </span><br>
-            <select id="location_filter" name="location" >
-                <option value="" class="input">All Projects</option>
-                <option value='true' class="input">Project Inside LA</option>
-                <option value='false' class="input">Projects Outside LA </option>
-            </select>
-            <% for (var i = 0; i < categories.length; i++) { %>
-              <font size="2"><%=categories[i]['name'] %></font><input type="checkbox" class="categories" value="<%=categories[i]['_id'] %>">
-            <% }%>
+            
+            <button id="filters_button" class="filters_class">filters</button>
+
+
+            <input type="text" name="filtered_string" id="filter" class="filters_class" placeholder="Search projects"/> 
+
+            <div id="filters_panel" class="filters_class">
+	            <select id="location_filter" name="location" >
+	                <option value="" class="input">All Projects</option>
+	                <option value='true' class="input">Project Inside LA</option>
+	                <option value='false' class="input">Projects Outside LA </option>
+	            </select>
+	            
+	            <% for (var i = 0; i < categories.length; i++) { %>
+              	<font size="2"><%=categories[i]['name'] %></font><input type="checkbox" class="categories" value="<%=categories[i]['_id'] %>">
+            	<% }%>
+
             </div>
+			</span>
+
+			</div>
             <div id="map"></div>
             <div id="project_title"></div>
             <div id="lightbox" class="lightbox" style="display:none"

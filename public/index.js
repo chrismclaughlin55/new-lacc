@@ -14,14 +14,16 @@ document.addEventListener('DOMContentLoaded', function()
     resize_map();
     var socket = io.connect('http://localhost:3000');
 
-    $('#location_filter').change(function() {
+    $('#location_filter').change(function() 
+    {
         map.removeLayer(markers);
         markers = new L.layerGroup();
         projectFilter.insideLA = $('#location_filter').val(); 
         socket.emit('projectsRequest', projectFilter);
     });
 
-    $('#filter').keypress(function(e) {
+    $('#filter').keypress(function(e) 
+    {
         $('#filter').attr("style",""); //default css on reset (by typing)
         var keyCode = e.keyCode || e.which;
         if (keyCode == '13') {
@@ -32,15 +34,35 @@ document.addEventListener('DOMContentLoaded', function()
         }
     });
 
-    $('#filter').click(function() {
+    $('#filter').click(function() 
+    {
         $('#filter').val("");
         $('#filter').attr("style",""); //back to default css
     });
 
-    $('.categories').change(function() {
+    $('#filters_button').click(function()
+    {
+        $('#filter').toggle();
+        $('#filters_panel').toggle();
+        console.log($('#filters_button').text());
+        if($('#filters_button').text() == "filters")
+        {
+            $('#filters_button').text('hide');
+        }
+        else
+        {
+            $('#filters_button').text('filters');   
+        }
+
+    });
+
+    $('.categories').change(function() 
+    {
         projectFilter.categories = [];
-        $('.categories').each(function() {
-            if ($(this).is(':checked')) {
+        $('.categories').each(function() 
+        {
+            if ($(this).is(':checked')) 
+            {
                 projectFilter.categories.push($(this).val());
             }
         });
@@ -49,17 +71,22 @@ document.addEventListener('DOMContentLoaded', function()
         socket.emit('projectsRequest', projectFilter);
     });
 
-    updateMap(socket, function() {
+    updateMap(socket, function() 
+    {
         markers.addTo(map);
     });
     socket.emit('projectsRequest', projectFilter);
     L.Util.requestAnimFrame(map.invalidateSize,map,!1,map._container);
 }, false);
 
-function updateMap(socket, callback) {
-    socket.on('projects', function(projects) {
-        projects.forEach(function(project) {
-            var icon = L.icon({
+function updateMap(socket, callback) 
+{
+    socket.on('projects', function(projects) 
+    {
+        projects.forEach(function(project) 
+        {
+            var icon = L.icon(
+            {
                 iconUrl: '/category/' + project.category + '/image',
                 iconSize:     [30, 30], // size of the icon
             });
@@ -86,15 +113,17 @@ function updateMap(socket, callback) {
     });
 }
 
-function resize_map() {
+function resize_map() 
+{
     var maxWidth = $(window).width();
     var maxHeight = $(window).height();
     $("#map").width(maxWidth).height(maxHeight-90);
 }
 
-$(window).on('resize load', resize_map );
+$(window).on('resize load', resize_map);
 
-function lightbox_onclick(img_url) {
+function lightbox_onclick(img_url) 
+{
     document.getElementById('lightbox').style.display='inline';
     $("#lightbox_image").attr('src', img_url);
 }   
