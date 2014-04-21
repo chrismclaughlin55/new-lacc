@@ -52,6 +52,13 @@
 									</select>
 								</li>
 								<li>
+									<select id="location" name="location" >
+										<option value="" disabled selected>Location</option>
+										<option value='true' class="input">Inside LA </option>
+										<option value='false' class="input">Outside LA </option>
+									</select>
+								</li>
+								<li>
 									<textarea id="project_address" name="project_address"
 										form="project_entry" placeholder="Project Address" required ></textarea>
 								</li>
@@ -68,7 +75,7 @@
 								</li>
 								<li>
 									<button type="button" id="add_entry">
-										Add Custom Field 
+										Add Custom 	Field 
 									</button>
 									<div id="custom_field_injection_div"></div>
 								</li>
@@ -81,13 +88,17 @@
 						</form>
 					</div>
 					<div id="edit_category_panel">
-						<form id="project_entry" enctype="multipart/form-data" action="/admin/update-category" method="post">
+						<form id="category_entry" enctype="multipart/form-data" action="/admin/update-category" method="post">
 							<ul id="entry_list">
 								<li>
 									New Category:
 								</li>
 								<li>
 									<input id="new_category" name="new_category" type="text" placeholder="New Project Category">
+								</li>
+								<li>
+									Add Image
+									<input id="category_image" type="file" name="category_image">
 								</li>
 								<li> 
 									<span style="font-size:11px; align:center">(Choose an image/color radiobuttons) </span>

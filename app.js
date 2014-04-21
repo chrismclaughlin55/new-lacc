@@ -71,10 +71,11 @@ app.post('/signup-user',
 );
 
 app.get('/project/:project/image/:image', projectService.readImage);
+app.get('/category/:category/image', categoryService.readImage);
 
 io.sockets.on('connection', function(socket) {
-    socket.on('projectsRequest', function() {
-    	projectService.getProjects(function(projects) {
+    socket.on('projectsRequest', function(projectFilter) {
+    	projectService.getProjects(projectFilter, function(projects) {
     		socket.emit('projects', projects);
     	});
     });

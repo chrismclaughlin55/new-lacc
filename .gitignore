@@ -6,6 +6,9 @@ lib-cov
 *.out
 *.pid
 *.gz
+*.png
+*.jpg
+*.gif
 lacc.pem
 pids
 logs
