@@ -49,6 +49,11 @@ document.addEventListener('DOMContentLoaded', function()
         socket.emit('projectsRequest', projectFilter);
     });
 
+    $('#Csv_Download').click(function() {
+        var search = '/download/?' + $.param(projectFilter);
+        window.location.href = search;
+    });
+
     updateMap(socket, function() {
         markers.addTo(map);
     });
