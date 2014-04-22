@@ -47,10 +47,10 @@ app.get('/index', categoryService.getCategoriesForIndex);
 
 // Admin
 app.get('/admin', userService.isLoggedIn, categoryService.getCategoriesForAdmin);
-app.post('/admin/update-category', categoryService.updateCategory);
-app.post('/admin/update-project', projectService.updateProject);
-app.get('/admin/download', projectService.download);
-app.post('/admin/upload', projectService.upload);
+app.post('/admin/update-category', userService.isLoggedIn, categoryService.updateCategory);
+app.post('/admin/update-project', userService.isLoggedIn, projectService.updateProject);
+app.get('/admin/download', userService.isLoggedIn, projectService.download);
+app.post('/admin/upload', userService.isLoggedIn, projectService.upload);
 
 // User Authentication
 app.get('/login',userService.login);
