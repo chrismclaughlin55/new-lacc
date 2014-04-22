@@ -54,8 +54,6 @@ exports.updateProject = function(req, res) {
     project.lat = parseFloat(req.body.project_lat);
     project.lng = parseFloat(req.body.project_lng);
     project.insideLA = req.body.location === 'true';
-    console.log(req.body.custom_field_key.length);
-    console.log(req.body.custom_field_key instanceof Array);
     if (req.body.custom_field_key) {
         if (req.body.custom_field_key instanceof Array) {
             for (var i = 0; i < req.body.custom_field_key.length; i++) {
