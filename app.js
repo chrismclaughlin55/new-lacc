@@ -50,7 +50,7 @@ app.get('/download', projectService.downloadByFilter);
 app.get('/admin', userService.isLoggedIn, categoryService.getCategoriesForAdmin);
 app.post('/admin/update-category', categoryService.updateCategory);
 app.post('/admin/update-project', projectService.updateProject);
-app.get('/admin/download', projectService.download);
+app.get('/admin/download', projectService.downloadByFilter);
 app.post('/admin/upload', projectService.upload);
 
 // User Authentication

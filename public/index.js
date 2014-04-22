@@ -49,14 +49,10 @@ document.addEventListener('DOMContentLoaded', function()
         socket.emit('projectsRequest', projectFilter);
     });
 
-    //DOING THE AJAX CALL RIGHT HERE
     $('#Csv_Download').click(function() {
-        console.log('HIT');
-        $.ajax('/download', {
-            type: 'GET',
-            data: projectFilter,
-            success: function(){console.log("Success")}
-        });
+        var search = '/download/?' + $.param(projectFilter);
+        console.log(search);
+        window.location.href = search;
     });
 
     updateMap(socket, function() {
@@ -93,8 +89,6 @@ function updateMap(socket, callback) {
         callback(markers);
     });
 }
-
-
 
 function resize_map() {
     var maxWidth = $(window).width();
