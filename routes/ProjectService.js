@@ -1,9 +1,3 @@
-GridStore           = require('mongodb').GridStore,
-Grid                = require('mongodb').Grid,
-Code                = require('mongodb').Code,
-BSON                = require('mongodb').pure().BSON,
-assert              = require('assert');
-
 var mongoose        = require('mongoose');
 var Project         = require('../models/Project');
 var Category        = require('../models/Category');
@@ -13,10 +7,32 @@ var json2csv        = require('nice-json2csv');
 var csv             = require('ya-csv');
 var fs              = require('fs');
 
+GridStore           = require('mongodb').GridStore,
+Grid                = require('mongodb').Grid,
+Code                = require('mongodb').Code,
+BSON                = require('mongodb').pure().BSON,
+assert              = require('assert');
+ObjectId            = mongoose.Types.ObjectId;
 
-exports.getProjects = function(callback) {
+
+exports.getProjects = function(projectFilter, callback) {
     var Project = mongoose.model('Project');
-    Project.find(function(err, projects) {
+    var filter = {};
+    if (projectFilter) {
+        if (projectFilter.name) {
+            filter.name = eval(projectFilter.name);
+        }
+        if (projectFilter.insideLA) {
+            filter.insideLA = eval(projectFilter.insideLA);
+        }
+        if (projectFilter.categories && projectFilter.categories.length) {
+            filter.$or = [];
+            projectFilter.categories.forEach(function(cat) {
+                filter.$or.push({category : ObjectId(cat)});
+            });
+        }
+    }
+    Project.find(filter, function(err, projects) {
         if (err) {
             console.log("Could not return projects");
             console.log(err);
@@ -25,23 +41,6 @@ exports.getProjects = function(callback) {
         callback(projects);
     });
 }
-
-exports.filterProject = function(string, callback){
-    var Project = mongoose.model('Project');
-    var string = string;
-    var filteredProjects;
-    var results;
-  
-   filteredProjects = Project.find({name: new RegExp(string, 'i')}, function(err, results){
-        if (err) {
-            console.log(err);
-            console.log("There was an error filtering");
-            res.redirect('/');
-        }
-        callback(results);
-    });
-};
-
 
 exports.updateProject = function(req, res) {
 	var Project = mongoose.model('Project');
@@ -54,18 +53,28 @@ exports.updateProject = function(req, res) {
     project.category = req.body.project_category;
     project.lat = parseFloat(req.body.project_lat);
     project.lng = parseFloat(req.body.project_lng);
+    project.insideLA = req.body.location === 'true';
     if (req.body.custom_field_key) {
-        for (var i = 0; i < req.body.custom_field_key.length; i++) {
-            var custom_key = req.body.custom_field_key[i];
-            var custom_value = req.body.custom_field_value[i];
-            var customFieldMap = { 
+        if (req.body.custom_field_key instanceof Array) {
+            for (var i = 0; i < req.body.custom_field_key.length; i++) {
+                var custom_key = req.body.custom_field_key[i];
+                var custom_value = req.body.custom_field_value[i];
+                var customFieldMap = { 
+                    key: custom_key,
+                    value: custom_value
+                };
+                project.customFields.push(customFieldMap);
+            }
+        } else {
+            var custom_key = req.body.custom_field_key;
+            var custom_value = req.body.custom_field_value;
+            var customFieldMap = {
                 key: custom_key,
                 value: custom_value
             };
             project.customFields.push(customFieldMap);
         }
     }
-
     if(req.body.p_id == ''){
         projectService.storeImage(req,project,function(){
             project.save(function(err) {
@@ -87,7 +96,7 @@ exports.updateProject = function(req, res) {
                     console.log("error updating record "+ err); 
                     return;
                 }
-                projectService.storeImage(req,project,function(){
+                projectService.storeImage(req, project, function(){
                     console.log("project "+project.name+" has had an image added");
                 });
                 console.log('The number of updated documents was %d', numberAffected);

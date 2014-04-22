@@ -30,7 +30,7 @@ passport.use('local-signup', new LocalStrategy({
 ));
 
 passport.use('local-login', new LocalStrategy({ passReqToCallback: true },
-    function(req,username, password, done) {
+    function(req, username, password, done) {
         var User = mongoose.model('User');
         User.findOne({'local.username':username}, function(err,user){
             if(err){
