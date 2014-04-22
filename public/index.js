@@ -117,7 +117,7 @@ function resize_map()
 {
     var maxWidth = $(window).width();
     var maxHeight = $(window).height();
-    $("#map").width(maxWidth).height(maxHeight-90);
+    $("#map").width(maxWidth).height(maxHeight-68);
 }
 
 $(window).on('resize load', resize_map);
