@@ -54,18 +54,29 @@ exports.updateProject = function(req, res) {
     project.lat = parseFloat(req.body.project_lat);
     project.lng = parseFloat(req.body.project_lng);
     project.insideLA = req.body.location === 'true';
+    console.log(req.body.custom_field_key.length);
+    console.log(req.body.custom_field_key instanceof Array);
     if (req.body.custom_field_key) {
-        for (var i = 0; i < req.body.custom_field_key.length; i++) {
-            var custom_key = req.body.custom_field_key[i];
-            var custom_value = req.body.custom_field_value[i];
-            var customFieldMap = { 
+        if (req.body.custom_field_key instanceof Array) {
+            for (var i = 0; i < req.body.custom_field_key.length; i++) {
+                var custom_key = req.body.custom_field_key[i];
+                var custom_value = req.body.custom_field_value[i];
+                var customFieldMap = { 
+                    key: custom_key,
+                    value: custom_value
+                };
+                project.customFields.push(customFieldMap);
+            }
+        } else {
+            var custom_key = req.body.custom_field_key;
+            var custom_value = req.body.custom_field_value;
+            var customFieldMap = {
                 key: custom_key,
                 value: custom_value
             };
             project.customFields.push(customFieldMap);
         }
     }
-
     if(req.body.p_id == ''){
         projectService.storeImage(req,project,function(){
             project.save(function(err) {

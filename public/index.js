@@ -72,12 +72,10 @@ function updateMap(socket, callback) {
             }
             marker.project.narrativeTag += "<div>" + marker.project.address + "</div></div>";
             marker.project.imageTag = "";
-            
-            for (var i = 0; i < marker.project.images.length; i++) 
-            {
+            for (var i = 0; i < marker.project.images.length; i++) {
                 var url = '/project/' + marker.project._id + '/image/' + i;
                 url = '"' + url + '"';
-                marker.project.imageTag = '<div class="lightbox_thumbnail"><a ' + "onclick='lightbox_onclick("  + url + ")'"
+                marker.project.imageTag += '<div class="lightbox_thumbnail"><a ' + "onclick='lightbox_onclick("  + url + ")'"
                 + '><img src=' + url + ' width="100" height="100"></a></div>'; 
             } 
             marker.bindPopup(marker.project.narrativeTag + marker.project.imageTag);
