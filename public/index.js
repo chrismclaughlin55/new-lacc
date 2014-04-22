@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', function()
     {
         $('#filter').toggle();
         $('#filters_panel').toggle();
-        console.log($('#filters_button').text());
+        //console.log($('#filters_button').text());
         if($('#filters_button').text() == "filters")
         {
             $('#filters_button').text('hide');
@@ -77,6 +77,7 @@ document.addEventListener('DOMContentLoaded', function()
     });
     socket.emit('projectsRequest', projectFilter);
     L.Util.requestAnimFrame(map.invalidateSize,map,!1,map._container);
+    $("#filter-categories").multipleSelect({placeholder: "Filter Categories"});
 }, false);
 
 function updateMap(socket, callback) 
@@ -117,7 +118,7 @@ function resize_map()
 {
     var maxWidth = $(window).width();
     var maxHeight = $(window).height();
-    $("#map").width(maxWidth).height(maxHeight-68);
+    $("#map").width(maxWidth).height(maxHeight-95);
 }
 
 $(window).on('resize load', resize_map);
