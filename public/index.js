@@ -51,7 +51,6 @@ document.addEventListener('DOMContentLoaded', function()
 
     $('#Csv_Download').click(function() {
         var search = '/download/?' + $.param(projectFilter);
-        console.log(search);
         window.location.href = search;
     });
 
