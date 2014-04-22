@@ -70,7 +70,7 @@ exports.readImage = function(req, res) {
             var img = fs.readFileSync('./public/pin.png');
         	res.send(img);
         } else {
-        	if (category.image.length) {
+        	if (category.image && category.image.length) {
         		res.send(category.image);
         	} else {
         		var img = fs.readFileSync('./public/pin.png');
