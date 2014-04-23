@@ -59,7 +59,6 @@ document.addEventListener('DOMContentLoaded', function()
 
     $('#filter').click(function() 
     {
-        //$('#filter').val("");
         $('#filter').attr("style",""); //back to default css
     });
 
@@ -82,10 +81,6 @@ document.addEventListener('DOMContentLoaded', function()
         width: 150, 
         onClick:function(view)
         {
-            //PARTHA
-            //this is the unique category clicked off, but fuck that we can just look at all of them
-            //console.log(view.label + '(' + view.value + ') ' + (view.checked ? 'checked' : 'unchecked'));
-            console.log("Selected values: (unique id's)" + $("#filter-categories").multipleSelect("getSelects"));
             projectFilter.categories = $("#filter-categories").multipleSelect("getSelects");
             map.removeLayer(markers);
             markers = new L.layerGroup();
@@ -94,11 +89,6 @@ document.addEventListener('DOMContentLoaded', function()
         },
         onCheckAll:function(view)
         {
-            //PARTHA
-            //this is the array of category ids:
-            console.log("Selected values: (unique id's)" + $("#filter-categories").multipleSelect("getSelects"));
-            //this is the array of category names:
-            //console.log("Selected texts: " + $("#filter-categories").multipleSelect("getSelects", "text"));
             projectFilter.categories = $("#filter-categories").multipleSelect("getSelects");
             map.removeLayer(markers);
             markers = new L.layerGroup();
@@ -113,9 +103,13 @@ document.addEventListener('DOMContentLoaded', function()
         single:true,
         onClick:function(view)
         {
+            projectFilter.insideLA = view.value;
+            map.removeLayer(markers);
+            markers = new L.layerGroup();
+            socket.emit('projectsRequest', projectFilter);
             //PARTHA
             //do your backend magic here using the value. Since they can't mess with this, these "value"'s' will always be unique.
-            console.log("Title: " + view.label + ', "value: "' + view.value + ',' + (view.checked ? 'checked' : 'unchecked'));
+            // console.log("Title: " + view.label + ', "value: "' + view.value + ',' + (view.checked ? 'checked' : 'unchecked'));
         }
     });
 }, false);
