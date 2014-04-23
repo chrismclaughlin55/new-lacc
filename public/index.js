@@ -6,6 +6,26 @@ var markerArray = new Array();
 var markers = new L.layerGroup();
 var projectFilter = {};
 var iconMap = {};
+var opts = {
+  lines: 11, // The number of lines to draw
+  length: 23, // The length of each line
+  width: 10, // The line thickness
+  radius: 30, // The radius of the inner circle
+  corners: 1, // Corner roundness (0..1)
+  rotate: 40, // The rotation offset
+  direction: 1, // 1: clockwise, -1: counterclockwise
+  color: '#000', // #rgb or #rrggbb or array of colors
+  speed: 0.8, // Rounds per second
+  trail: 60, // Afterglow percentage
+  shadow: false, // Whether to render a shadow
+  hwaccel: false, // Whether to use hardware acceleration
+  className: 'spinner', // The CSS class to assign to the spinner
+  zIndex: 2e9, // The z-index (defaults to 2000000000)
+  top: '50%', // Top position relative to parent
+  left: '50%' // Left position relative to parent
+};
+var target;
+var spinner;
 
 document.addEventListener('DOMContentLoaded', function() 
 {
@@ -27,6 +47,11 @@ document.addEventListener('DOMContentLoaded', function()
         $('#filter').attr("style",""); //default css on reset (by typing)
         var keyCode = e.keyCode || e.which;
         if (keyCode == '13') {
+            
+            target = document.getElementById('main');
+            spinner = new Spinner().spin();
+            target.appendChild(spinner.el);
+
             map.removeLayer(markers);
             markers = new L.layerGroup();
             projectFilter.name = "/" + $('#filter').val() + "/i";
@@ -38,21 +63,6 @@ document.addEventListener('DOMContentLoaded', function()
     {
         $('#filter').val("");
         $('#filter').attr("style",""); //back to default css
-    });
-
-    $('#filters_button').click(function()
-    {
-        $('#filter').toggle();
-        $('#filters_panel').toggle();
-        if($('#filters_button').text() == "filters")
-        {
-            $('#filters_button').text('hide');
-        }
-        else
-        {
-            $('#filters_button').text('filters');   
-        }
-
     });
 
     $('.categories').change(function() 
@@ -78,6 +88,7 @@ document.addEventListener('DOMContentLoaded', function()
     updateMap(socket, function() 
     {
         markers.addTo(map);
+        // spinner.stop();
     });
     socket.emit('projectsRequest', projectFilter);
     L.Util.requestAnimFrame(map.invalidateSize,map,!1,map._container);
