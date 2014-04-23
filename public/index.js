@@ -6,12 +6,34 @@ var markerArray = new Array();
 var markers = new L.layerGroup();
 var projectFilter = {};
 var iconMap = {};
+var opts = {
+  lines: 11, // The number of lines to draw
+  length: 23, // The length of each line
+  width: 10, // The line thickness
+  radius: 30, // The radius of the inner circle
+  corners: 1, // Corner roundness (0..1)
+  rotate: 40, // The rotation offset
+  direction: 1, // 1: clockwise, -1: counterclockwise
+  color: '#000', // #rgb or #rrggbb or array of colors
+  speed: 0.8, // Rounds per second
+  trail: 60, // Afterglow percentage
+  shadow: false, // Whether to render a shadow
+  hwaccel: false, // Whether to use hardware acceleration
+  className: 'spinner', // The CSS class to assign to the spinner
+  zIndex: 2e9, // The z-index (defaults to 2000000000)
+  top: '50%', // Top position relative to parent
+  left: '50%' // Left position relative to parent
+};
+var target;
+var spinner;
 
 document.addEventListener('DOMContentLoaded', function() 
 {
     map = L.map('map', {center: mapCenter, zoom: 14,minZoom:9/*maxZoom: 15,//minZoom: 9*/});
     L.tileLayer( Esri_WorldTopoMap, {}).addTo(map);
     resize_map();
+    target = document.getElementById('spinner');
+    spinner = new Spinner(opts);
     var socket = io.connect('http://localhost:3000');
 
     $('#location_filter').change(function() 
@@ -26,8 +48,8 @@ document.addEventListener('DOMContentLoaded', function()
     {
         $('#filter').attr("style",""); //default css on reset (by typing)
         var keyCode = e.keyCode || e.which;
-        if (keyCode == '13')  //TODO put red error message on failure
-        {
+        if (keyCode == '13') { //TODO put red error message on failure
+            spinner.spin(target);
             map.removeLayer(markers);
             markers = new L.layerGroup();
             projectFilter.name = "/" + $('#filter').val() + "/i";
@@ -37,7 +59,7 @@ document.addEventListener('DOMContentLoaded', function()
 
     $('#filter').click(function() 
     {
-        $('#filter').val("");
+        //$('#filter').val("");
         $('#filter').attr("style",""); //back to default css
     });
 
@@ -50,6 +72,7 @@ document.addEventListener('DOMContentLoaded', function()
     updateMap(socket, function() 
     {
         markers.addTo(map);
+        spinner.stop();
     });
     socket.emit('projectsRequest', projectFilter);
     L.Util.requestAnimFrame(map.invalidateSize,map,!1,map._container);
@@ -59,8 +82,10 @@ document.addEventListener('DOMContentLoaded', function()
         width: 150, 
         onClick:function(view)
         {
+            //PARTHA
             //this is the unique category clicked off, but fuck that we can just look at all of them
             //console.log(view.label + '(' + view.value + ') ' + (view.checked ? 'checked' : 'unchecked'));
+            console.log("Selected values: (unique id's)" + $("#filter-categories").multipleSelect("getSelects"));
             projectFilter.categories = $("#filter-categories").multipleSelect("getSelects");
             map.removeLayer(markers);
             markers = new L.layerGroup();
@@ -69,8 +94,9 @@ document.addEventListener('DOMContentLoaded', function()
         },
         onCheckAll:function(view)
         {
+            //PARTHA
             //this is the array of category ids:
-            //console.log("Selected values: (unique id's)" + $("#filter-categories").multipleSelect("getSelects"));
+            console.log("Selected values: (unique id's)" + $("#filter-categories").multipleSelect("getSelects"));
             //this is the array of category names:
             //console.log("Selected texts: " + $("#filter-categories").multipleSelect("getSelects", "text"));
             projectFilter.categories = $("#filter-categories").multipleSelect("getSelects");
@@ -87,13 +113,11 @@ document.addEventListener('DOMContentLoaded', function()
         single:true,
         onClick:function(view)
         {
+            //PARTHA
             //do your backend magic here using the value. Since they can't mess with this, these "value"'s' will always be unique.
-            console.log("Title: "view.label + ', "value: "' + view.value + ',' + (view.checked ? 'checked' : 'unchecked'));
+            console.log("Title: " + view.label + ', "value: "' + view.value + ',' + (view.checked ? 'checked' : 'unchecked'));
         }
     });
-
-    //$("#filter-categories").multipleSelect('onClick')function(){console.log("this one works");});
-
 }, false);
 
 function updateMap(socket, callback) 
