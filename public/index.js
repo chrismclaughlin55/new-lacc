@@ -9,7 +9,7 @@ var iconMap = {};
 
 document.addEventListener('DOMContentLoaded', function() 
 {
-    map = L.map('map', {center: mapCenter, zoom: 14,/*maxZoom: 15,//minZoom: 9*/});
+    map = L.map('map', {center: mapCenter, zoom: 14,minZoom:9/*maxZoom: 15,//minZoom: 9*/});
     L.tileLayer( Esri_WorldTopoMap, {}).addTo(map);
     resize_map();
     var socket = io.connect('http://localhost:3000');
@@ -26,7 +26,8 @@ document.addEventListener('DOMContentLoaded', function()
     {
         $('#filter').attr("style",""); //default css on reset (by typing)
         var keyCode = e.keyCode || e.which;
-        if (keyCode == '13') {
+        if (keyCode == '13') 
+        {
             map.removeLayer(markers);
             markers = new L.layerGroup();
             projectFilter.name = "/" + $('#filter').val() + "/i";
@@ -52,7 +53,6 @@ document.addEventListener('DOMContentLoaded', function()
         {
             $('#filters_button').text('filters');   
         }
-
     });
 
     $('.categories').change(function() 
@@ -70,7 +70,8 @@ document.addEventListener('DOMContentLoaded', function()
         socket.emit('projectsRequest', projectFilter);
     });
 
-    $('#Csv_Download').click(function() {
+    $('#Csv_Download').click(function() 
+    {
         var search = '/download/?' + $.param(projectFilter);
         window.location.href = search;
     });
@@ -81,7 +82,8 @@ document.addEventListener('DOMContentLoaded', function()
     });
     socket.emit('projectsRequest', projectFilter);
     L.Util.requestAnimFrame(map.invalidateSize,map,!1,map._container);
-    $("#filter-categories").multipleSelect({placeholder: "Filter Categories"});
+    $("#filter-categories").multipleSelect({placeholder: "Categories", width: 150});
+    $("#location_radio").multipleSelect({placeholder: "Location", width: 120, single:true});
 }, false);
 
 function updateMap(socket, callback) 

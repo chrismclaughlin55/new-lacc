@@ -8,7 +8,6 @@
 body, p {
     padding: 0;
     margin: 0;
-    /*background-color: #444;*/
     background-color: rgb(183,216,163);
     height: 100%;
     width:98%;
@@ -32,8 +31,6 @@ body, p {
     border: 1px solid #aaa;
     border-top-width:2px;
     border-bottom-width:7px;
-
-
     vertical-align: bottom;
     margin-bottom: -100px;
 }
@@ -91,17 +88,20 @@ body, p {
     height:19px; 
 }
 
+#location_radio {
+    width:80px;
+}
+
 #filter-categories {
     margin-bottom:40px;
-    width:150px;   
+    width:95px;   
 }
 
 #title_span {
     font-size: 14px;
 }
 
-#filters_download {
+#Csv_Download {
     margin-right: 20px;
     height:25px;
 }
-
