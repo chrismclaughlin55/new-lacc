@@ -55,17 +55,26 @@ exports.updateProject = function(req, res) {
     project.lng = parseFloat(req.body.project_lng);
     project.insideLA = req.body.location === 'true';
     if (req.body.custom_field_key) {
-        for (var i = 0; i < req.body.custom_field_key.length; i++) {
-            var custom_key = req.body.custom_field_key[i];
-            var custom_value = req.body.custom_field_value[i];
-            var customFieldMap = { 
+        if (req.body.custom_field_key instanceof Array) {
+            for (var i = 0; i < req.body.custom_field_key.length; i++) {
+                var custom_key = req.body.custom_field_key[i];
+                var custom_value = req.body.custom_field_value[i];
+                var customFieldMap = { 
+                    key: custom_key,
+                    value: custom_value
+                };
+                project.customFields.push(customFieldMap);
+            }
+        } else {
+            var custom_key = req.body.custom_field_key;
+            var custom_value = req.body.custom_field_value;
+            var customFieldMap = {
                 key: custom_key,
                 value: custom_value
             };
             project.customFields.push(customFieldMap);
         }
     }
-
     if(req.body.p_id == ''){
         projectService.storeImage(req,project,function(){
             project.save(function(err) {
@@ -125,9 +134,15 @@ exports.readImage = function(req, res) {
     });
 }
 
-exports.download = function(req, res) {
+exports.downloadByFilter = function(req, res) {
     var recordData = [];
-    projectService.getProjects(function(records) {
+    var filter;
+    if (req.query) {
+        filter = req.query;
+    } else {
+        filter = {};
+    }
+    projectService.getProjects(filter, function(records) {
         records.forEach(function(r) {
             projectService.convertProjectToCsvRow(r, function(csvRecord) {
                 recordData.push(csvRecord);
@@ -157,7 +172,6 @@ exports.storeCategories = function(req, callback) {
                     if(callbackCounter == (Object.keys(categoryHelper).length)) {
                         callback(categoryHelper);
                     }
-                    
                 })
             })(key);
         }

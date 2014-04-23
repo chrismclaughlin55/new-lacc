@@ -64,12 +64,18 @@ exports.readImage = function(req, res) {
     var Category = mongoose.model('Category');
     var category_id = req.params.category;
     Category.findById(req.params.category, function(err, category) {
+    	res.contentType('image/png');
         if (err || !category) {
             console.log("There was an error finding image for project: " + category_id);
-            res.send();
+            var img = fs.readFileSync('./public/pin.png');
+        	res.send(img);
         } else {
-        	res.contentType('image/png');
-        	res.send(category.image);
+        	if (category.image && category.image.length) {
+        		res.send(category.image);
+        	} else {
+        		var img = fs.readFileSync('./public/pin.png');
+        		res.send(img);
+        	}
         }
     });
 }

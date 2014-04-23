@@ -44,7 +44,6 @@ document.addEventListener('DOMContentLoaded', function()
     {
         $('#filter').toggle();
         $('#filters_panel').toggle();
-        //console.log($('#filters_button').text());
         if($('#filters_button').text() == "filters")
         {
             $('#filters_button').text('hide');
@@ -69,6 +68,11 @@ document.addEventListener('DOMContentLoaded', function()
         map.removeLayer(markers);
         markers = new L.layerGroup();
         socket.emit('projectsRequest', projectFilter);
+    });
+
+    $('#Csv_Download').click(function() {
+        var search = '/download/?' + $.param(projectFilter);
+        window.location.href = search;
     });
 
     updateMap(socket, function() 
@@ -100,12 +104,10 @@ function updateMap(socket, callback)
             }
             marker.project.narrativeTag += "<div>" + marker.project.address + "</div></div>";
             marker.project.imageTag = "";
-            
-            for (var i = 0; i < marker.project.images.length; i++) 
-            {
+            for (var i = 0; i < marker.project.images.length; i++) {
                 var url = '/project/' + marker.project._id + '/image/' + i;
                 url = '"' + url + '"';
-                marker.project.imageTag = '<div class="lightbox_thumbnail"><a ' + "onclick='lightbox_onclick("  + url + ")'"
+                marker.project.imageTag += '<div class="lightbox_thumbnail"><a ' + "onclick='lightbox_onclick("  + url + ")'"
                 + '><img src=' + url + ' width="100" height="100"></a></div>'; 
             } 
             marker.bindPopup(marker.project.narrativeTag + marker.project.imageTag);
