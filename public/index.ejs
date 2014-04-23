@@ -15,27 +15,25 @@
 		</head>
 		<body >
 				<div id="project_title"></div>
+				<div style="float:center" id="spinner"></div>
 				<div id="main">
 						<div id="title">
 							LA Conservation Corps Projects 
 							<span id="title_span" >
 								A visual history of LACC public works.
-								
-								<a href="#"><img src="download_icon.png" class="filters_class" id="filters_download"></a>
-								<input type="text" name="filtered_string" id="filter" class="filters_class" placeholder="Search Projects"/> 
-								
+								<a href="#"><img title="Download all visible points as a spreadsheet." src="download_icon.png" class="filters_class" id="Csv_Download"></a>
+								<input type="text" name="filtered_string" id="filter" class="filters_class" placeholder="Search Projects"/>	
 								<div class="filters_class">
-									<!-- INSIDE OUTSIDE LA MUST BE ADDED AS DEFAULT CATEGORIES -->
+									<select multiple id="location_radio" class="filters_class">
+										<option value="outside">Outside LA</option>
+										<option value="inside">Inside LA</option>
+									</select>
 									<select multiple id="filter-categories">
-										<option class="categories" value="inside_LA" selected="selected">Inside LA</option>
-										<option class="categories" value="outside_LA" selected="selected">Outside LA</option>
 										<% for (var i = 0; i < categories.length; i++) { %>
 											<option class="categories" value="<%=categories[i]['_id'] %>"><%=categories[i]['name'] %></option>
 										<% }%>
 									</select>
-
 								</div>
-
 							</span>
 						</div>
 						<div id="map"></div>
