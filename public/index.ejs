@@ -1,49 +1,57 @@
 <!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <title>LACC Asset Mapping Project</title>
-        <script src="jquery-1.11.0.min.js"></script>
-        <link rel="stylesheet" href="fancybox/source/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
-        <script type="text/javascript" src="fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-        <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.4.5/leaflet.css" />
-        <script src="http://cdn.leafletjs.com/leaflet-0.4.5/leaflet.js"></script>
-        <script src="/socket.io/socket.io.js"></script>
-        <script src="/index.js"></script> 
-        <link rel="stylesheet" href="/index.css">
-    </head>
-    <body >
-        <div id="project_title"></div>
-        <div id="main">
-            <div id="title">LA Conservation Corps Projects <span style="font-size: 14px;">A visual history of LACC public works.
-            <input type="text" name="filtered_string" id="filter" placeholder="Search projects"/> </span><br>
-            <select id="location_filter" name="location" >
-                <option value="" class="input">All Projects</option>
-                <option value='true' class="input">Project Inside LA</option>
-                <option value='false' class="input">Projects Outside LA </option>
-            </select>
-            <% for (var i = 0; i < categories.length; i++) { %>
-              <font size="2"><%=categories[i]['name'] %></font><input type="checkbox" class="categories" value="<%=categories[i]['_id'] %>">
-            <% }%>
-            </div>
-            <button type="submit" value="csvDownload" id="Csv_Download" >
-              Download Project Information
-            </button>
-            <div id="map"></div>
-            <div id="project_title"></div>
-            <div id="lightbox" class="lightbox" style="display:none"
-                  onclick="document.getElementById('lightbox').style.display='none';">
-               <table class="lightbox_table">
-               <tr>
-               <td class="lightbox_table_cell" align="center">
-                  <div id="lightbox_content">
-                     <img id="lightbox_image" src="pin.png" />
-                     <p>Possible image caption goes here</p>
-                  </div>
-               </td>
-               </tr>
-               </table>
-            </div>
-        </div>    
-    </body>
+		<head>
+				<meta charset="utf-8">
+				<title>LACC Asset Mapping Project</title>
+				<script src="jquery-1.11.0.min.js"></script>
+				<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.4.5/leaflet.css" />
+				<script src="http://cdn.leafletjs.com/leaflet-0.4.5/leaflet.js"></script>
+				<script src="/socket.io/socket.io.js"></script>
+				<script src="/spin.js"></script> 
+				<script src="/index.js"></script> 
+				<link rel="stylesheet" href="/index.css">
+				<link href="multiple-select2/multiple-select.css" rel="stylesheet"/>
+				<script src="multiple-select2/jquery.multiple.select.js"></script>
+		</head>
+		<body >
+				<div id="project_title"></div>
+				<div style="float:center" id="spinner"></div>
+				<div id="main">
+						<div id="title">
+							LA Conservation Corps Projects 
+							<span id="title_span" >
+								A visual history of LACC public works.
+								<a href="#"><img title="Download all visible points as a spreadsheet." src="download_icon.png" class="filters_class" id="Csv_Download"></a>
+								<input type="text" name="filtered_string" id="filter" class="filters_class" placeholder="Search Projects"/>	
+								<div class="filters_class">
+									<select multiple id="location_radio" class="filters_class">
+										<option value="">All Projects</option>
+										<option value="true">Inside LA</option>
+										<option value="false">Outside LA</option>
+									</select>
+									<select multiple id="filter-categories">
+										<% for (var i = 0; i < categories.length; i++) { %>
+											<option class="categories" value="<%=categories[i]['_id'] %>"><%=categories[i]['name'] %></option>
+										<% }%>
+									</select>
+								</div>
+							</span>
+						</div>
+						<div id="map"></div>
+						<div id="project_title"></div>
+						<div id="lightbox" class="lightbox" style="display:none"
+									onclick="document.getElementById('lightbox').style.display='none';">
+							 <table class="lightbox_table">
+							 <tr>
+							 <td class="lightbox_table_cell" align="center">
+									<div id="lightbox_content">
+										 <img id="lightbox_image" src="pin.png" />
+										 <p style="color:red">WE NEED SOMETHING TO GO HERE.</p>
+									</div>
+							 </td>
+							 </tr>
+							 </table>
+						</div>
+				</div>    
+		</body>
 </html>
