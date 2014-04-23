@@ -87,7 +87,7 @@ body, p {
 }
 
 #filter { 
-    margin-right:20px;
+    margin-right:5px;
     height:19px; 
 }
 
@@ -98,5 +98,10 @@ body, p {
 
 #title_span {
     font-size: 14px;
+}
+
+#filters_download {
+    margin-right: 20px;
+    height:25px;
 }
 

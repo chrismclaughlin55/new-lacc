@@ -19,15 +19,22 @@
 							LA Conservation Corps Projects 
 							<span id="title_span" >
 								A visual history of LACC public works.
+								
+								<a href="#"><img src="download_icon.png" class="filters_class" id="filters_download"></a>
 								<input type="text" name="filtered_string" id="filter" class="filters_class" placeholder="Search Projects"/> 
+								
 								<div class="filters_class">
 									<!-- INSIDE OUTSIDE LA MUST BE ADDED AS DEFAULT CATEGORIES -->
 									<select multiple id="filter-categories">
-									<% for (var i = 0; i < categories.length; i++) { %>
-										<option class="categories" value="<%=categories[i]['_id'] %>"><%=categories[i]['name'] %></option>
-									<% }%>
+										<option class="categories" value="inside_LA" selected="selected">Inside LA</option>
+										<option class="categories" value="outside_LA" selected="selected">Outside LA</option>
+										<% for (var i = 0; i < categories.length; i++) { %>
+											<option class="categories" value="<%=categories[i]['_id'] %>"><%=categories[i]['name'] %></option>
+										<% }%>
 									</select>
+
 								</div>
+
 							</span>
 						</div>
 
