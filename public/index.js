@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function()
     {
         $('#filter').attr("style",""); //default css on reset (by typing)
         var keyCode = e.keyCode || e.which;
-        if (keyCode == '13') 
+        if (keyCode == '13')  //TODO put red error message on failure
         {
             map.removeLayer(markers);
             markers = new L.layerGroup();
@@ -41,35 +41,6 @@ document.addEventListener('DOMContentLoaded', function()
         $('#filter').attr("style",""); //back to default css
     });
 
-    $('#filters_button').click(function()
-    {
-        $('#filter').toggle();
-        $('#filters_panel').toggle();
-        if($('#filters_button').text() == "filters")
-        {
-            $('#filters_button').text('hide');
-        }
-        else
-        {
-            $('#filters_button').text('filters');   
-        }
-    });
-
-    $('.categories').change(function() 
-    {
-        projectFilter.categories = [];
-        $('.categories').each(function() 
-        {
-            if ($(this).is(':checked')) 
-            {
-                projectFilter.categories.push($(this).val());
-            }
-        });
-        map.removeLayer(markers);
-        markers = new L.layerGroup();
-        socket.emit('projectsRequest', projectFilter);
-    });
-
     $('#Csv_Download').click(function() 
     {
         var search = '/download/?' + $.param(projectFilter);
@@ -82,8 +53,47 @@ document.addEventListener('DOMContentLoaded', function()
     });
     socket.emit('projectsRequest', projectFilter);
     L.Util.requestAnimFrame(map.invalidateSize,map,!1,map._container);
-    $("#filter-categories").multipleSelect({placeholder: "Categories", width: 150});
-    $("#location_radio").multipleSelect({placeholder: "Location", width: 120, single:true});
+    $("#filter-categories").multipleSelect(
+    {
+        placeholder: "Categories", 
+        width: 150, 
+        onClick:function(view)
+        {
+            //this is the unique category clicked off, but fuck that we can just look at all of them
+            //console.log(view.label + '(' + view.value + ') ' + (view.checked ? 'checked' : 'unchecked'));
+            projectFilter.categories = $("#filter-categories").multipleSelect("getSelects");
+            map.removeLayer(markers);
+            markers = new L.layerGroup();
+            socket.emit('projectsRequest', projectFilter);
+
+        },
+        onCheckAll:function(view)
+        {
+            //this is the array of category ids:
+            //console.log("Selected values: (unique id's)" + $("#filter-categories").multipleSelect("getSelects"));
+            //this is the array of category names:
+            //console.log("Selected texts: " + $("#filter-categories").multipleSelect("getSelects", "text"));
+            projectFilter.categories = $("#filter-categories").multipleSelect("getSelects");
+            map.removeLayer(markers);
+            markers = new L.layerGroup();
+            socket.emit('projectsRequest', projectFilter);
+        } 
+    });
+
+    $("#location_radio").multipleSelect(
+    {
+        placeholder: "Location",
+        width: 120, 
+        single:true,
+        onClick:function(view)
+        {
+            //do your backend magic here using the value. Since they can't mess with this, these "value"'s' will always be unique.
+            console.log("Title: "view.label + ', "value: "' + view.value + ',' + (view.checked ? 'checked' : 'unchecked'));
+        }
+    });
+
+    //$("#filter-categories").multipleSelect('onClick')function(){console.log("this one works");});
+
 }, false);
 
 function updateMap(socket, callback) 
