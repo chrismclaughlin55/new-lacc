@@ -100,9 +100,6 @@
 									Add Image
 									<input id="category_image" type="file" name="category_image">
 								</li>
-								<li> 
-									<span style="font-size:11px; align:center">(Choose an image/color radiobuttons) </span>
-								</li>
 								<li>
 									<button type="submit" id="update_cat" value="update_cat"  disabled>
 										Update Categories
@@ -113,7 +110,9 @@
 						Current Categories:
 							<form>
 								<% for (var i = 0; i < categories.length; i++) { %>
-									<input class="input" value="<%=categories[i]['name'] %>"> <br>
+									<div style="margin-bottom:7px"><input class="input" value="<%=categories[i]['name'] %>" style="float:left; width:230px;">
+									<input type="file" style="width:80px; float:left" name="">
+									<button style="height:25px">save</button></div>
 								<% }%>
 							</form>
 						<form id="category_entry">
