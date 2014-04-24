@@ -48,17 +48,10 @@ app.get('/download', projectService.downloadByFilter);
 
 // Admin
 app.get('/admin', userService.isLoggedIn, categoryService.getCategoriesForAdmin);
-<<<<<<< HEAD
 app.post('/admin/update-category', userService.isLoggedIn, categoryService.updateCategory);
 app.post('/admin/update-project', userService.isLoggedIn, projectService.updateProject);
-app.get('/admin/download', userService.isLoggedIn, projectService.download);
+app.get('/admin/download', userService.isLoggedIn, projectService.downloadByFilter);
 app.post('/admin/upload', userService.isLoggedIn, projectService.upload);
-=======
-app.post('/admin/update-category', categoryService.updateCategory);
-app.post('/admin/update-project', projectService.updateProject);
-app.get('/admin/download', projectService.downloadByFilter);
-app.post('/admin/upload', projectService.upload);
->>>>>>> b726a2ddc3471e3edf5858a8e488b5bbd130d005
 
 // User Authentication
 app.get('/login',userService.login);
