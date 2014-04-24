@@ -134,9 +134,15 @@ exports.readImage = function(req, res) {
     });
 }
 
-exports.download = function(req, res) {
+exports.downloadByFilter = function(req, res) {
     var recordData = [];
-    projectService.getProjects(function(records) {
+    var filter;
+    if (req.query) {
+        filter = req.query;
+    } else {
+        filter = {};
+    }
+    projectService.getProjects(filter, function(records) {
         records.forEach(function(r) {
             projectService.convertProjectToCsvRow(r, function(csvRecord) {
                 recordData.push(csvRecord);
@@ -166,7 +172,6 @@ exports.storeCategories = function(req, callback) {
                     if(callbackCounter == (Object.keys(categoryHelper).length)) {
                         callback(categoryHelper);
                     }
-                    
                 })
             })(key);
         }

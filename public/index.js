@@ -6,25 +6,50 @@ var markerArray = new Array();
 var markers = new L.layerGroup();
 var projectFilter = {};
 var iconMap = {};
+var opts = {
+  lines: 11, // The number of lines to draw
+  length: 23, // The length of each line
+  width: 10, // The line thickness
+  radius: 30, // The radius of the inner circle
+  corners: 1, // Corner roundness (0..1)
+  rotate: 40, // The rotation offset
+  direction: 1, // 1: clockwise, -1: counterclockwise
+  color: '#000', // #rgb or #rrggbb or array of colors
+  speed: 0.8, // Rounds per second
+  trail: 60, // Afterglow percentage
+  shadow: false, // Whether to render a shadow
+  hwaccel: false, // Whether to use hardware acceleration
+  className: 'spinner', // The CSS class to assign to the spinner
+  zIndex: 2e9, // The z-index (defaults to 2000000000)
+  top: '50%', // Top position relative to parent
+  left: '50%' // Left position relative to parent
+};
+var target;
+var spinner;
 
 document.addEventListener('DOMContentLoaded', function() 
 {
-    map = L.map('map', {center: mapCenter, zoom: 14,/*maxZoom: 15,//minZoom: 9*/});
+    map = L.map('map', {center: mapCenter, zoom: 14,minZoom:9/*maxZoom: 15,//minZoom: 9*/});
     L.tileLayer( Esri_WorldTopoMap, {}).addTo(map);
     resize_map();
+    target = document.getElementById('spinner');
+    spinner = new Spinner(opts);
     var socket = io.connect('http://localhost:3000');
 
-    $('#location_filter').change(function() {
+    $('#location_filter').change(function() 
+    {
         map.removeLayer(markers);
         markers = new L.layerGroup();
         projectFilter.insideLA = $('#location_filter').val(); 
         socket.emit('projectsRequest', projectFilter);
     });
 
-    $('#filter').keypress(function(e) {
+    $('#filter').keypress(function(e) 
+    {
         $('#filter').attr("style",""); //default css on reset (by typing)
         var keyCode = e.keyCode || e.which;
-        if (keyCode == '13') {
+        if (keyCode == '13') { //TODO put red error message on failure
+            spinner.spin(target);
             map.removeLayer(markers);
             markers = new L.layerGroup();
             projectFilter.name = "/" + $('#filter').val() + "/i";
@@ -32,34 +57,71 @@ document.addEventListener('DOMContentLoaded', function()
         }
     });
 
-    $('#filter').click(function() {
-        $('#filter').val("");
+    $('#filter').click(function() 
+    {
         $('#filter').attr("style",""); //back to default css
     });
 
-    $('.categories').change(function() {
-        projectFilter.categories = [];
-        $('.categories').each(function() {
-            if ($(this).is(':checked')) {
-                projectFilter.categories.push($(this).val());
-            }
-        });
-        map.removeLayer(markers);
-        markers = new L.layerGroup();
-        socket.emit('projectsRequest', projectFilter);
+    $('#Csv_Download').click(function() 
+    {
+        var search = '/download/?' + $.param(projectFilter);
+        window.location.href = search;
     });
 
-    updateMap(socket, function() {
+    updateMap(socket, function() 
+    {
         markers.addTo(map);
+        spinner.stop();
     });
     socket.emit('projectsRequest', projectFilter);
     L.Util.requestAnimFrame(map.invalidateSize,map,!1,map._container);
+    $("#filter-categories").multipleSelect(
+    {
+        placeholder: "Categories", 
+        width: 150, 
+        onClick:function(view)
+        {
+            projectFilter.categories = $("#filter-categories").multipleSelect("getSelects");
+            map.removeLayer(markers);
+            markers = new L.layerGroup();
+            socket.emit('projectsRequest', projectFilter);
+
+        },
+        onCheckAll:function(view)
+        {
+            projectFilter.categories = $("#filter-categories").multipleSelect("getSelects");
+            map.removeLayer(markers);
+            markers = new L.layerGroup();
+            socket.emit('projectsRequest', projectFilter);
+        } 
+    });
+
+    $("#location_radio").multipleSelect(
+    {
+        placeholder: "Location",
+        width: 120, 
+        single:true,
+        onClick:function(view)
+        {
+            projectFilter.insideLA = view.value;
+            map.removeLayer(markers);
+            markers = new L.layerGroup();
+            socket.emit('projectsRequest', projectFilter);
+            //PARTHA
+            //do your backend magic here using the value. Since they can't mess with this, these "value"'s' will always be unique.
+            // console.log("Title: " + view.label + ', "value: "' + view.value + ',' + (view.checked ? 'checked' : 'unchecked'));
+        }
+    });
 }, false);
 
-function updateMap(socket, callback) {
-    socket.on('projects', function(projects) {
-        projects.forEach(function(project) {
-            var icon = L.icon({
+function updateMap(socket, callback) 
+{
+    socket.on('projects', function(projects) 
+    {
+        projects.forEach(function(project) 
+        {
+            var icon = L.icon(
+            {
                 iconUrl: '/category/' + project.category + '/image',
                 iconSize:     [30, 30], // size of the icon
             });
@@ -84,15 +146,17 @@ function updateMap(socket, callback) {
     });
 }
 
-function resize_map() {
+function resize_map() 
+{
     var maxWidth = $(window).width();
     var maxHeight = $(window).height();
-    $("#map").width(maxWidth).height(maxHeight-90);
+    $("#map").width(maxWidth).height(maxHeight-95);
 }
 
-$(window).on('resize load', resize_map );
+$(window).on('resize load', resize_map);
 
-function lightbox_onclick(img_url) {
+function lightbox_onclick(img_url) 
+{
     document.getElementById('lightbox').style.display='inline';
     $("#lightbox_image").attr('src', img_url);
 }   

@@ -48,6 +48,8 @@
 										<option value="" disabled selected>Project Category</option>
 										 <% for (var i = 0; i < categories.length; i++) { %>
 											<option value='<%= categories[i]['_id'] %>' class="input"><%=categories[i]['name']%> </option>
+                      <button type = "button" id="change_image"> <%= categories[i]['image']%> </button>
+                      <button type= "button" id="change_category">Submit </button>
 										<% }%>
 									</select>
 								</li>
