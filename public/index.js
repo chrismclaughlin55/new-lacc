@@ -107,19 +107,19 @@ document.addEventListener('DOMContentLoaded', function()
             map.removeLayer(markers);
             markers = new L.layerGroup();
             socket.emit('projectsRequest', projectFilter);
-            //PARTHA
-            //do your backend magic here using the value. Since they can't mess with this, these "value"'s' will always be unique.
-            // console.log("Title: " + view.label + ', "value: "' + view.value + ',' + (view.checked ? 'checked' : 'unchecked'));
         }
     });
 }, false);
 
 function updateMap(socket, callback) 
 {
+
     socket.on('projects', function(projects) 
     {
+        var counter = 0;
         projects.forEach(function(project) 
         {
+            counter++;
             var icon = L.icon(
             {
                 iconUrl: '/category/' + project.category + '/image',
@@ -127,23 +127,27 @@ function updateMap(socket, callback)
             });
             var marker = L.marker([project.lat, project.lng], {icon: icon}).addTo(markers);
             marker.project = project;
-            marker.project.narrativeTag = "<div><div><strong>" + project.name + ": </strong></br>" + project.narrative + "</div>";
+            marker.project.narrativeTag = "<div class='narrative_class'><div><span class='title_class'>" + project.name + "</span><br />" + project.narrative + "</div>";
             for (var i = 0; i < marker.project.customFields.length; i++)
             {
-                project.narrativeTag += "<div>" + marker.project.customFields[i].key + ": " + marker.project.customFields[i].value + "</div>";  
+                project.narrativeTag += "<div><strong>" + marker.project.customFields[i].key + ":</strong> " + marker.project.customFields[i].value + "</div>";  
             }
-            marker.project.narrativeTag += "<div>" + marker.project.address + "</div></div>";
+            marker.project.narrativeTag += "<div><em>" + marker.project.address + "</em></div></div>";
             marker.project.imageTag = "";
+            
             for (var i = 0; i < marker.project.images.length; i++) {
                 var url = '/project/' + marker.project._id + '/image/' + i;
-                url = '"' + url + '"';
+                url = '"' + url + '"'; 
+
                 marker.project.imageTag += '<div class="lightbox_thumbnail"><a ' + "onclick='lightbox_onclick("  + url + ")'"
-                + '><img src=' + url + ' width="100" height="100"></a></div>'; 
-            } 
+                + '><img src=' + url + ' class="thumbnail_class"></a></div>'; 
+            }
             marker.bindPopup(marker.project.narrativeTag + marker.project.imageTag);
         });
         callback(markers);
+        console.log("found: " + (counter > 0)); //WOOOOT
     });
+
 }
 
 function resize_map() 
