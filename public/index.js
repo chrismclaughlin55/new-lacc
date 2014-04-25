@@ -145,7 +145,14 @@ function updateMap(socket, callback)
             marker.bindPopup(marker.project.narrativeTag + marker.project.imageTag);
         });
         callback(markers);
-        console.log("found: " + (counter > 0)); //WOOOOT
+        
+        
+        if (counter == 0)
+        {
+            $('#filter').attr("color","red");
+            console.log("found: " + counter); //WOOOOT
+        }
+
     });
 
 }
