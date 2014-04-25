@@ -57,10 +57,7 @@ document.addEventListener('DOMContentLoaded', function()
         }
     });
 
-    $('#filter').click(function() 
-    {
-        $('#filter').attr("style",""); //back to default css
-    });
+    
 
     $('#Csv_Download').click(function() 
     {
@@ -146,13 +143,21 @@ function updateMap(socket, callback)
         });
         callback(markers);
         
-        
         if (counter == 0)
         {
-            $('#filter').attr("color","red");
-            console.log("found: " + counter); //WOOOOT
+            $('#filter').val("No results found");
+            $('#filter').select();
+            $('#filter').css("color","red");
+            $('#filter').click(function() 
+            {
+                $('#filter').attr("style",""); //back to default css
+                $('#filter').val(""); 
+            });
         }
-
+        else 
+        {
+            $('#filter').css("color","black");
+        }
     });
 
 }
