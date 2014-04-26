@@ -59,7 +59,11 @@ app.get('/index', function(req, res) {
     });
 });
 
-app.get('/download', projectService.downloadByFilter);
+app.get('/download', function(req, res) {
+    projectService.downloadByFilter(req.query, function(csvData) {
+        res.csv(JSON.parse(csvData), "projects.csv");
+    });
+});
 
 // Admin
 app.get('/admin', userService.isLoggedIn, categoryService.getCategoriesForAdmin);
@@ -82,7 +86,6 @@ app.post('/admin/update-categories', function(req, res) {
 });
 
 app.post('/admin/update-project', projectService.updateProject);
-app.get('/admin/download', projectService.downloadByFilter);
 app.post('/admin/upload', projectService.upload);
 
 // User Authentication
