@@ -177,7 +177,7 @@ $(function(){
     });
 });
 
-var image_html = '<input type="file" name="imgFile">';
+var image_html = '<input type="file" name="imgFile"><input type="text" name="imgText" placeholder="Image caption">';
 $(function() {
     $('#add_image').click(function() {
         $("#image_injection_div").append(image_html);
