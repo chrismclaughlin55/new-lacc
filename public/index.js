@@ -78,8 +78,11 @@ document.addEventListener('DOMContentLoaded', function()
 
     updateMap(socket, function() 
     {
-        markers.addTo(map);
-        spinner.stop();
+        spinner.spin(target);
+        // setTimeout(function() {
+            markers.addTo(map);
+            spinner.stop();
+        // }, 1000);
     });
     socket.emit('projectsRequest', projectFilter);
     L.Util.requestAnimFrame(map.invalidateSize,map,!1,map._container);
