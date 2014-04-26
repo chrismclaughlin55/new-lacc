@@ -9,6 +9,7 @@ var passport    = require('passport'), LocalStrategy = require('passport-local')
 var bcrypt        = require('bcrypt-nodejs');
 var http = require('http');
 var path = require('path');
+var async = require('async');
 var json2csv = require('nice-json2csv');
 var app = express();
 var server = app.listen(3000);
@@ -70,8 +71,13 @@ app.post('/admin/create-category', function(req, res) {
 });
 
 app.post('/admin/update-categories', function(req, res) {
-    categoryService.updateCategories(req, res, function() {
-        
+    var categoryIds = Object.keys(req.body);
+    async.forEach(categoryIds, function(categoryId, callback) {
+        console.log(req.files[categoryId]);
+        categoryService.updateCategory(categoryId, req.body[categoryId], req.files[categoryId], callback);
+    }, function(err) {
+        console.log("Sending back request");
+        res.redirect('/admin');
     });
 });
 
@@ -84,9 +90,9 @@ app.get('/login',userService.login);
 app.get('/logout', userService.logout);
 app.post('/login-user',
     passport.authenticate('local-login', {
-    successRedirect: '/admin',
-    failureRedirect: '/login',
-    failureFlash: true
+        successRedirect: '/admin',
+        failureRedirect: '/login',
+        failureFlash: true
     })
 );
 app.post('/signup-user',
