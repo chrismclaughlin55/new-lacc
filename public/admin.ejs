@@ -109,7 +109,7 @@
 						</form>
 						<br>
 						Current Categories:
-							<form id='update_categories' enctype="multipart/form-data" action="/admin/update-category" method="post">
+							<form id='update_categories' enctype="multipart/form-data" action="/admin/update-categories" method="post">
 								<br>
 								<% for (var i = 0; i < categories.length; i++) { %>
 									<!-- <input class="input" value="<%=categories[i]['name'] %>"> <br> -->
@@ -121,6 +121,7 @@
 									<input type="text" name='<%=categories[i]['_id'] %>' placeholder="New Category Name"><br>
 									<input type="file" name='<%=categories[i]['_id'] %>'><br><br>
 								<% }%>
+								<input type="submit">
 							</form>
 						<form id="category_entry">
 							<input type="hidden" name="c_id" id="c_id" value=""/>
