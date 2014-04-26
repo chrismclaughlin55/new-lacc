@@ -52,12 +52,12 @@ document.addEventListener('DOMContentLoaded', function()
             spinner.spin(target);
             map.removeLayer(markers);
             markers = new L.layerGroup();
-            projectFilter.name = "/" + $('#filter').val() + "/i";
+            if ($('#filter').val()) {
+                projectFilter.name = "/" + $('#filter').val() + "/i";
+            }
             socket.emit('projectsRequest', projectFilter);
         }
     });
-
-    
 
     $('#Csv_Download').click(function() 
     {
@@ -80,11 +80,12 @@ document.addEventListener('DOMContentLoaded', function()
     updateMap(socket, function() 
     {
         spinner.spin(target);
-        // setTimeout(function() {
+        setTimeout(function() {
             markers.addTo(map);
             spinner.stop();
-        // }, 1000);
+        }, 1000);
     });
+
     socket.emit('projectsRequest', projectFilter);
     L.Util.requestAnimFrame(map.invalidateSize,map,!1,map._container);
     $("#filter-categories").multipleSelect(

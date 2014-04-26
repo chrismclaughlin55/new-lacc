@@ -88,7 +88,7 @@
 						</form>
 					</div>
 					<div id="edit_category_panel">
-						<form id="category_entry" enctype="multipart/form-data" action="/admin/update-category" method="post">
+						<form id="category_entry" enctype="multipart/form-data" action="/admin/create-category" method="post">
 							<ul id="entry_list">
 								<li>
 									New Category:
@@ -100,20 +100,26 @@
 									Add Image
 									<input id="category_image" type="file" name="category_image">
 								</li>
-								<li> 
-									<span style="font-size:11px; align:center">(Choose an image/color radiobuttons) </span>
-								</li>
 								<li>
 									<button type="submit" id="update_cat" value="update_cat"  disabled>
-										Update Categories
+										Add Category
 									</button>
 								</li>
 							</ul>
 						</form>
+						<br>
 						Current Categories:
-							<form>
+							<form id='update_categories' enctype="multipart/form-data" action="/admin/update-category" method="post">
+								<br>
 								<% for (var i = 0; i < categories.length; i++) { %>
-									<input class="input" value="<%=categories[i]['name'] %>"> <br>
+									<!-- <input class="input" value="<%=categories[i]['name'] %>"> <br> -->
+									<span>
+										<img style="float:left" src='/category/<%=categories[i]['_id'] %>/image' height="42" width="42"><br>
+										<label style="float:left"><%=categories[i]['name'] %><label>
+									</span>
+									<br><br>
+									<input type="text" name='<%=categories[i]['_id'] %>' placeholder="New Category Name"><br>
+									<input type="file" name='<%=categories[i]['_id'] %>'><br><br>
 								<% }%>
 							</form>
 						<form id="category_entry">
