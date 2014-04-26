@@ -19,7 +19,11 @@ var ProjectSchema = new mongoose.Schema({
 		],
 		images:
 		[
-			Buffer
+			{
+			 	picture: Buffer,
+			 	caption: String,
+			 	_id: false
+			}
 		]
 });
 
