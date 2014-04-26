@@ -177,7 +177,7 @@ $(function(){
     });
 });
 
-var image_html = '<input type="file" name="imgFile"><input type="text" name="imgText" placeholder="Image caption">';
+var image_html = '<input type="file" name="imgFile"><input type="text" name="imgText" class="imgText" placeholder="Image caption">';
 $(function() {
     $('#add_image').click(function() {
         $("#image_injection_div").append(image_html);
@@ -200,6 +200,18 @@ $(function(){
         $('#img_submit_button').show();
     });
 });
+
+$(function(){ //SARAL
+    $('#submit_button_id').click(function () {
+        var captions_array = [];
+        $(".imgText").each(function(i)
+        {
+            captions_array.push($(this).val());
+        });
+        console.log(captions_array);
+    });
+});
+
 
 $(function(){
     $("#database_category").change(function() {
