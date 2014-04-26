@@ -137,21 +137,16 @@ exports.readImage = function(req, res) {
     });
 }
 
-exports.downloadByFilter = function(req, res) {
+exports.downloadByFilter = function(filter, callback) {
     var recordData = [];
     var filter;
-    if (req.query) {
-        filter = req.query;
-    } else {
-        filter = {};
-    }
     projectService.getProjects(filter, function(records) {
         records.forEach(function(r) {
             projectService.convertProjectToCsvRow(r, function(csvRecord) {
                 recordData.push(csvRecord);
-                if(recordData.length == records.length) {
+                if (recordData.length == records.length) {
                     var csvData = JSON.stringify(recordData);
-                    res.csv(JSON.parse(csvData), "projects.csv");
+                    callback(csvData);
                 }
             });
         });
