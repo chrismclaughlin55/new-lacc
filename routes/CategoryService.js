@@ -28,15 +28,7 @@ exports.getCategoriesForAdmin = function(req, res) {
 	});
 }
 
-exports.getCategoriesForIndex = function(req, res) {
-	categoryService.getCategories(function(data) {
-		res.render('index.ejs', {
-			categories: data
-		});
-	});
-}
-
-exports.updateCategory = function(req, res) {
+exports.createCategory = function(req, res, callback) {
 	var Category = mongoose.model('Category');
 	var category = new Category();
 	category.name = req.body['new_category'];
@@ -47,7 +39,8 @@ exports.updateCategory = function(req, res) {
 				console.log(err);
 				return;
 			}
-			res.redirect('/admin');
+			// res.redirect('/admin');
+			callback();
 		});
 	});
 }

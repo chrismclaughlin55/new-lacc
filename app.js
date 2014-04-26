@@ -42,13 +42,32 @@ if ('development' == app.get('env')) {
 }
 
 // Index
-app.get('/', categoryService.getCategoriesForIndex);
-app.get('/index', categoryService.getCategoriesForIndex);
+app.get('/', function(req, res) {
+    categoryService.getCategories(function(data) {
+        res.render('index.ejs', {
+            categories: data
+        });
+    });
+});
+
+app.get('/index', function(req, res) {
+    categoryService.getCategories(function(data) {
+        res.render('index.ejs', {
+            categories: data
+        });
+    });
+});
+
 app.get('/download', projectService.downloadByFilter);
 
 // Admin
 app.get('/admin', userService.isLoggedIn, categoryService.getCategoriesForAdmin);
-app.post('/admin/update-category', categoryService.updateCategory);
+app.post('/admin/create-category', function(req, res) {
+    categoryService.createCategory(req, res, function() {
+        res.redirect('/admin');
+    });
+});
+// app.post('/admin/update-categories', categoryService.updateCategories);
 app.post('/admin/update-project', projectService.updateProject);
 app.get('/admin/download', projectService.downloadByFilter);
 app.post('/admin/upload', projectService.upload);

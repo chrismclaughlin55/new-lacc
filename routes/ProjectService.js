@@ -19,6 +19,7 @@ exports.getProjects = function(projectFilter, callback) {
     var Project = mongoose.model('Project');
     var filter = {};
     if (projectFilter) {
+        console.log(projectFilter);
         if (projectFilter.name) {
             filter.name = eval(projectFilter.name);
         }
