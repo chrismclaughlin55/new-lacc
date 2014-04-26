@@ -101,6 +101,13 @@ body, p {
 #filter { 
     margin-right:5px;
     height:19px; 
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    padding: 2.5px 7px;
+    border: 1px solid #aaa;
+    -webkit-appearance: none;
+
 }
 
 #filter-categories {
@@ -113,12 +120,12 @@ body, p {
 }
 
 #Csv_Download {
-    margin-right: 20px;
+    margin-right: 10px;
     height:23px;
 }
 
 #location_radio {
-    width:80px;
+    width:90px;
 }
 
 .title_class {

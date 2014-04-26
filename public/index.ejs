@@ -12,15 +12,25 @@
 				<link rel="stylesheet" href="/index.css">
 				<link href="multiple-select2/multiple-select.css" rel="stylesheet"/>
 				<script src="multiple-select2/jquery.multiple.select.js"></script>
+				<!-- Stuff for about modal -->
+				<link rel="stylesheet" href="jquery-ui-dialog.css">
+  				<script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 		</head>
 		<body >
+
+
+
 				<div id="project_title"></div> <!-- doesnt do anything... fix and add more padding to page...-->
 				<div style="float:center" id="spinner"></div>
 				<div id="main">
+
+
+
+					<span style="float:right; font-size:12px"><a href="#" class="showModal">about</a></span>
 						<div id="title">
 							LA Conservation Corps Projects 
 							<span id="title_span" >
-								A visual history of LACC public works.
+								A visual history of LACC public works. 
 								<a href="#"><img title="Download all visible points as a spreadsheet." src="download_icon.png" class="filters_class" id="Csv_Download"></a>
 								<input type="text" name="filtered_string" id="filter" class="filters_class" placeholder="Search Projects"/>	
 								<div class="filters_class">
@@ -52,6 +62,15 @@
 							 </tr>
 							 </table>
 						</div>
+		
 				</div>    
+
+		<div id="modalContents" style="display:none;">
+		  <div style="">LACC Public Works Map</div><br />
+		  <div style="font-size:14px">This map displays the (thousands?) of projects the LACC has worked on since its inception in 1986. Click on points to get details about specific projects.<br /><br />
+		  This project was created for USC's CSCI 477, a senior project type class to capstone the Computer Science major. It was developed over the course of a year by Michael Whitaker, Roy Iacob, Partha Mahajani, Saral Jalan, Chris McLaughlin, Jared Borner, and Adam Moguel.<br /><br />
+		  <a href="https://github.com/chrismclaughlin55/new-lacc">Check out the source code on Github</a></div>
+		</div>
+
 		</body>
 </html>

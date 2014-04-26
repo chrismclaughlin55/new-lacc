@@ -65,6 +65,18 @@ document.addEventListener('DOMContentLoaded', function()
         window.location.href = search;
     });
 
+    $(".showModal").click(function(e){
+        e.preventDefault();
+        $("#modalContents").dialog(
+        {
+            bgiframe: true,
+            height: 410,
+            modal: true,
+            resizable: false,
+            title:"About"
+        });
+    });
+
     updateMap(socket, function() 
     {
         markers.addTo(map);
@@ -161,6 +173,8 @@ function updateMap(socket, callback)
     });
 
 }
+
+
 
 function resize_map() 
 {
