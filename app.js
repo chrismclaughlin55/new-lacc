@@ -62,12 +62,19 @@ app.get('/download', projectService.downloadByFilter);
 
 // Admin
 app.get('/admin', userService.isLoggedIn, categoryService.getCategoriesForAdmin);
+
 app.post('/admin/create-category', function(req, res) {
     categoryService.createCategory(req, res, function() {
         res.redirect('/admin');
     });
 });
-// app.post('/admin/update-categories', categoryService.updateCategories);
+
+app.post('/admin/update-categories', function(req, res) {
+    categoryService.updateCategories(req, res, function() {
+        
+    });
+});
+
 app.post('/admin/update-project', projectService.updateProject);
 app.get('/admin/download', projectService.downloadByFilter);
 app.post('/admin/upload', projectService.upload);

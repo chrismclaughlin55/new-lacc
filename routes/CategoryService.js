@@ -39,10 +39,22 @@ exports.createCategory = function(req, res, callback) {
 				console.log(err);
 				return;
 			}
-			// res.redirect('/admin');
 			callback();
 		});
 	});
+}
+
+exports.updateCategories = function(req, res, callback) {
+	var Category = mongoose.model('Category');
+	console.log(req.body);
+	for (var category in req.body) {
+		var i = 3;
+		console.log(i + 1);
+		console.log(i);
+		console.log(category);
+		console.log(req.body[category]);
+	}
+	// console.log(req.body);
 }
 
 exports.storeImage = function(req, category, callback) {
