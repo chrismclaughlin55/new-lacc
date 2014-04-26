@@ -60,15 +60,7 @@ exports.getCategoryIdByName = function(projectCategory, callback) {
     });
 }
 
-exports.getCategoriesForAdmin = function(req, res) {
-	categoryService.getCategories(function(data) {
-		res.render('admin.ejs', {
-			categories: data
-		});
-	});
-}
-
-exports.createCategory = function(req, res, callback) {
+exports.createCategory = function(req, callback) {
 	var Category = mongoose.model('Category');
 	var category = new Category();
 	category.name = req.body['new_category'];

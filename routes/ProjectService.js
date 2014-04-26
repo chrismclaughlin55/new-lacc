@@ -153,7 +153,7 @@ exports.downloadByFilter = function(filter, callback) {
     });
 }
 
-exports.upload = function(req, res) {
+exports.upload = function(req, callback) {
 	categoryService.storeCategories(req, function(categoryHelper) {
         var projectReader = csv.createCsvFileReader(req.files.csvFile.path, {columnsFromHeader:true, nestedQuotes:true});
         projectReader.addListener('data', function(data) {
@@ -215,7 +215,7 @@ exports.upload = function(req, res) {
             });
         });
     });
-    res.redirect('/admin');
+    callback();
 }
 
 /* Helper function to convert each project into a CSV row. */

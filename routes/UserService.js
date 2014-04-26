@@ -53,7 +53,7 @@ passport.deserializeUser(function(id,done){
     });
 });
 
-exports.isLoggedIn = function(req,res, next){
+exports.isLoggedIn = function(req, res, next){
     // if(req.isAuthenticated()) {
     if (true) {
         next();
