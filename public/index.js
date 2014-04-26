@@ -57,8 +57,6 @@ document.addEventListener('DOMContentLoaded', function()
         }
     });
 
-    
-
     $('#Csv_Download').click(function() 
     {
         var search = '/download/?' + $.param(projectFilter);
@@ -73,7 +71,8 @@ document.addEventListener('DOMContentLoaded', function()
             height: 410,
             modal: true,
             resizable: false,
-            title:"About"
+            title:"About",
+            draggable:false
         });
     });
 
