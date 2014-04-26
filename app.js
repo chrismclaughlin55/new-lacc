@@ -66,10 +66,16 @@ app.get('/download', function(req, res) {
 });
 
 // Admin
-app.get('/admin', userService.isLoggedIn, categoryService.getCategoriesForAdmin);
+app.get('/admin', userService.isLoggedIn, function(req, res) {
+    categoryService.getCategories(function(data) {
+        res.render('admin.ejs', {
+            categories: data
+        });
+    });
+});
 
 app.post('/admin/create-category', function(req, res) {
-    categoryService.createCategory(req, res, function() {
+    categoryService.createCategory(req, function() {
         res.redirect('/admin');
     });
 });
@@ -77,16 +83,19 @@ app.post('/admin/create-category', function(req, res) {
 app.post('/admin/update-categories', function(req, res) {
     var categoryIds = Object.keys(req.body);
     async.forEach(categoryIds, function(categoryId, callback) {
-        console.log(req.files[categoryId]);
         categoryService.updateCategory(categoryId, req.body[categoryId], req.files[categoryId], callback);
     }, function(err) {
-        console.log("Sending back request");
         res.redirect('/admin');
     });
 });
 
 app.post('/admin/update-project', projectService.updateProject);
-app.post('/admin/upload', projectService.upload);
+
+app.post('/admin/upload', function(req, res) {
+    projectService.upload(req, function() {
+        res.redirect('/admin');
+    });
+});
 
 // User Authentication
 app.get('/login',userService.login);
