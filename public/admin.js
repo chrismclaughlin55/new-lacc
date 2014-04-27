@@ -15,6 +15,13 @@ var updateData = function (m) {
     $('#project_lat').val(m.getLatLng().lat);
 	$('#project_lng').val(m.getLatLng().lng);
     $('.p_id').val(m.data._id);
+
+    if ($('.p_id').val()) {
+        $('#delete_button').show();
+    } else {
+        $('#delete_button').hide();
+    }
+    
     var matches = document.querySelectorAll('#entry_list .user_label');
 
     for (var i = 0; i < matches.length; ++i) {
@@ -34,6 +41,7 @@ document.addEventListener('DOMContentLoaded', function() {
         attribution: 'Tiles &copy; Esri'
     }).addTo(map);
 
+    $('#delete_button').hide();
     document.getElementById("add_point").onclick = points;
     function points() {
         var pinIcon = L.icon(
@@ -63,17 +71,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             }
         };
-
         updateData(newMarker);
 
         newMarker.on('dragend', function(e) {
             updateData(newMarker);
         });
-
-        if($("#add_point").val() == "add_point")
-            console.log("add point value = add_point")
-        if($("#add_point").val() == "edit_point")
-            console.log("add point value = edit_point")
         newMarker.addTo(map);
     };
 
