@@ -47,7 +47,7 @@ exports.getProjects = function(projectFilter, callback) {
 exports.updateProject = function(req, res) {
 	var Project = mongoose.model('Project');
     var project = new Project();
-
+    console.log(req.body);
     project.name = req.body.project_name;
     project.address = req.body.project_address;
     project.narrative = req.body.project_narratives;
@@ -85,7 +85,6 @@ exports.updateProject = function(req, res) {
                     console.log(err);
                     return;
                 }
-
                 res.redirect('/admin');
             });
         });
@@ -98,10 +97,10 @@ exports.updateProject = function(req, res) {
                     console.log("error updating record "+ err); 
                     return;
                 }
-                // TODO: Do we need this?
-                projectService.storeImage(req, project, function(){
-                    console.log("project "+project.name+" has had an image added");
-                });
+                // // TODO: Do we need this?
+                // projectService.storeImage(req, project, function(){
+                //     console.log("project "+project.name+" has had an image added");
+                // });
                 console.log('The number of updated documents was %d', numberAffected);
                 res.redirect('/admin');
             });
@@ -112,12 +111,23 @@ exports.updateProject = function(req, res) {
 exports.storeImage = function(req, project, callback) {
     if (req.files['imgFile']) {
         if (req.files['imgFile'].length) {
+            var counter = 0;
             req.files['imgFile'].forEach(function(image) {
-                project.images.push(fs.readFileSync(image.path));
+                var imageObject = {
+                    picture: fs.readFileSync(image.path),
+                    caption: req.body['imgText'][counter]
+                };
+                project.images.push(imageObject);
+                counter++;
             });
         } else {
             var image = req.files['imgFile'];
-            project.images.push(fs.readFileSync(image.path));
+            console.log(req.body);
+            var imageObject = {
+                picture: fs.readFileSync(image.path),
+                caption: req.body['imgText']
+            };
+            project.images.push(imageObject);
         }
     }
     callback();
@@ -133,7 +143,7 @@ exports.readImage = function(req, res) {
             res.send();
         }
         res.contentType('image/png');
-        res.send(project.images[image_id]);
+        res.send(project.images[image_id].picture);
     });
 }
 
