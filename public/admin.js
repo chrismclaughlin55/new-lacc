@@ -14,6 +14,14 @@ var updateData = function (m) {
     $('#project_address').val(m.data.address);
     $('#project_lat').val(m.getLatLng().lat);
 	$('#project_lng').val(m.getLatLng().lng);
+    $('.p_id').val(m.data._id);
+
+    if ($('.p_id').val()) {
+        $('#delete_button').show();
+    } else {
+        $('#delete_button').hide();
+    }
+    
     var matches = document.querySelectorAll('#entry_list .user_label');
 
     for (var i = 0; i < matches.length; ++i) {
@@ -22,6 +30,11 @@ var updateData = function (m) {
     document.getElementById("custom_field_injection_div").innerHTML = '';
     for(i in m.data.customFields){
         document.getElementById("custom_field_injection_div").innerHTML +='<input name="custom_field_key" type="text" value="'+m.data.customFields[i]['key'] + '"class="field_key"><textarea name="custom_field_value" class="field_value" type="text" ">' + m.data.customFields[i]['value'] + '</textarea>';
+    }
+    document.getElementById("image_injection_div");
+    for (i in m.data.images) {
+        console.log(m.data.images);
+        document.getElementById("image_injection_div").innerHTML += '<img src="'+ m.data.images[i]['picture'] + '" alt="Smiley face" height="42" width="42"><input type="file" name="imgFile"><input type="text" name="imgText" class="imgText" value="'+ m.data.images[i]['caption'] + '" required>';
     }
 }
 
@@ -33,6 +46,7 @@ document.addEventListener('DOMContentLoaded', function() {
         attribution: 'Tiles &copy; Esri'
     }).addTo(map);
 
+    $('#delete_button').hide();
     document.getElementById("add_point").onclick = points;
     function points() {
         var pinIcon = L.icon(
@@ -62,17 +76,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             }
         };
-
         updateData(newMarker);
 
         newMarker.on('dragend', function(e) {
             updateData(newMarker);
         });
-
-        if($("#add_point").val() == "add_point")
-            console.log("add point value = add_point")
-        if($("#add_point").val() == "edit_point")
-            console.log("add point value = edit_point")
         newMarker.addTo(map);
     };
 
@@ -111,8 +119,9 @@ document.addEventListener('DOMContentLoaded', function() {
             point.on('click', function(){
                 var popup = L.popup();
                 content = '';
-                content += point.images[0];
-                console.log(content);
+                if (point.images) {
+                    content += point.images[0];
+                }
                 point.bindPopup(content).openPopup();
             });
         });
@@ -177,7 +186,7 @@ $(function(){
     });
 });
 
-var image_html = '<input type="file" name="imgFile"><input type="text" name="imgText" class="imgText" placeholder="Image caption">';
+var image_html = '<input type="file" name="imgFile"><input type="text" name="imgText" class="imgText" placeholder="Image caption" required>';
 $(function() {
     $('#add_image').click(function() {
         $("#image_injection_div").append(image_html);

@@ -73,7 +73,8 @@ document.addEventListener('DOMContentLoaded', function()
             height: 410,
             modal: true,
             resizable: false,
-            title:"About"
+            title:"About",
+            draggable:false
         });
     });
 
@@ -151,12 +152,9 @@ function updateMap(socket, callback)
             for (var i = 0; i < marker.project.images.length; i++) {
                 var url = '/project/' + marker.project._id + '/image/' + i;
                 url = '"' + url + '"'; 
-                var caption = '"' + project.images[i].caption + '"';
-
+                var caption = '"' + marker.project.images[i].caption + '"';
                 marker.project.imageTag += '<div class="lightbox_thumbnail"><a ' + "onclick='lightbox_onclick("  + url + ", " + caption + ")'"
                 + '><img src=' + url + ' class="thumbnail_class"></a></div>';
-
-
             }
             marker.bindPopup(marker.project.narrativeTag + marker.project.imageTag);
         });
@@ -181,8 +179,6 @@ function updateMap(socket, callback)
 
 }
 
-
-
 function resize_map() 
 {
     var maxWidth = $(window).width();
@@ -197,7 +193,7 @@ function lightbox_onclick(img_url,caption)
     document.getElementById('lightbox').style.display='inline';
     $("#lightbox_image").attr('src', img_url);
     $('#caption_id').text("");
-    if (caption != null)
+    if (caption != "undefined")
     {
         $('#caption_id').text(caption); //undefined?
     }
