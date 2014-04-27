@@ -152,8 +152,9 @@ function updateMap(socket, callback)
             for (var i = 0; i < marker.project.images.length; i++) {
                 var url = '/project/' + marker.project._id + '/image/' + i;
                 url = '"' + url + '"'; 
-
-                marker.project.imageTag += '<div class="lightbox_thumbnail"><a ' + "onclick='lightbox_onclick("  + url + ")'"
+                var caption = marker.project.images[i].caption;
+                caption = '"' + caption + '"'; 
+                marker.project.imageTag += '<div class="lightbox_thumbnail"><a ' + "onclick='lightbox_onclick("  + url + ", "  + caption + ")'"
                 + '><img src=' + url + ' class="thumbnail_class"></a></div>'; 
             }
             marker.bindPopup(marker.project.narrativeTag + marker.project.imageTag);
@@ -179,8 +180,6 @@ function updateMap(socket, callback)
 
 }
 
-
-
 function resize_map() 
 {
     var maxWidth = $(window).width();
@@ -190,8 +189,10 @@ function resize_map()
 
 $(window).on('resize load', resize_map);
 
-function lightbox_onclick(img_url) 
-{
+function lightbox_onclick(img_url, caption) 
+{   
+    console.log(caption);
     document.getElementById('lightbox').style.display='inline';
     $("#lightbox_image").attr('src', img_url);
+    $("#lightbox_caption").html(caption);
 }   
