@@ -14,7 +14,7 @@ var updateData = function (m) {
     $('#project_address').val(m.data.address);
     $('#project_lat').val(m.getLatLng().lat);
 	$('#project_lng').val(m.getLatLng().lng);
-    $('#p_id').val(m.data._id);
+    $('.p_id').val(m.data._id);
     var matches = document.querySelectorAll('#entry_list .user_label');
 
     for (var i = 0; i < matches.length; ++i) {

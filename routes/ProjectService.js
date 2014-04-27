@@ -44,10 +44,20 @@ exports.getProjects = function(projectFilter, callback) {
     });
 }
 
-exports.updateProject = function(req, res) {
+exports.deleteProject = function(projectId, callback) {
+    var Project = mongoose.model('Project');
+    Project.remove({"_id": mongoose.Types.ObjectId(projectId)}, function (err) {
+        if (err){ 
+            console.log("error updating record "+ err); 
+            return;
+        }
+        callback();
+    });
+}
+
+exports.updateProject = function(req, callback) {
 	var Project = mongoose.model('Project');
     var project = new Project();
-    console.log(req.body);
     project.name = req.body.project_name;
     project.address = req.body.project_address;
     project.narrative = req.body.project_narratives;
@@ -85,7 +95,7 @@ exports.updateProject = function(req, res) {
                     console.log(err);
                     return;
                 }
-                res.redirect('/admin');
+                callback();
             });
         });
     } else {
@@ -97,12 +107,8 @@ exports.updateProject = function(req, res) {
                     console.log("error updating record "+ err); 
                     return;
                 }
-                // // TODO: Do we need this?
-                // projectService.storeImage(req, project, function(){
-                //     console.log("project "+project.name+" has had an image added");
-                // });
                 console.log('The number of updated documents was %d', numberAffected);
-                res.redirect('/admin');
+                callback();
             });
         });
     }
