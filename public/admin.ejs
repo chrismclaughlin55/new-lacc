@@ -28,13 +28,13 @@
 						<button type="button" id="add_point" value="add_point">
 							Place New Point On Map
 						</button>
-						<form id="project_entry" enctype="multipart/form-data" action="/admin/update-project" method="post">
-							 <ul >
+						<ul>
+							<form id="project_entry" enctype="multipart/form-data" action="/admin/update-project" method="post">
 								<li>
 									<input id="project_lat" name="project_lat" type="text" placeholder="Project Latitude" required>
 								</li>
 									<li>
-									<input id="p_id" name ="p_id" type="text" hidden>
+									<input class="p_id" id="p_id" name ="p_id" type="text" hidden>
 									</li>
 								<li>
 									<input id="project_lng" name="project_lng" placeholder="Project Longitude"
@@ -84,8 +84,16 @@
 										Update Project
 									</button>
 								</li>
-							</ul>
-						</form>
+							</form>
+							<form id="project_delete" enctype="multipart/form-data" action="/admin/delete-project" method="post">
+								<input class="p_id" id="p_id" name ="p_id" type="text" hidden>
+								<li>
+									<button form="project_delete" type="submit" value="submit" id="delete_button" >
+										Delete Project
+									</button>
+								</li>
+							</form>
+						</ul>
 					</div>
 					<div id="edit_category_panel">
 						<form id="category_entry" enctype="multipart/form-data" action="/admin/create-category" method="post">

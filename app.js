@@ -89,7 +89,17 @@ app.post('/admin/update-categories', function(req, res) {
     });
 });
 
-app.post('/admin/update-project', projectService.updateProject);
+app.post('/admin/update-project', function(req, res) {
+    projectService.updateProject(req, function() {
+        res.redirect('/admin');
+    });
+});
+
+app.post('/admin/delete-project', function(req, res) {
+    projectService.deleteProject(req.body.p_id, function() {
+        res.redirect('/admin');
+    });
+});
 
 app.post('/admin/upload', function(req, res) {
     projectService.upload(req, function() {
