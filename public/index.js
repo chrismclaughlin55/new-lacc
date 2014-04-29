@@ -65,6 +65,10 @@ document.addEventListener('DOMContentLoaded', function()
         window.location.href = search;
     });
 
+    $('#reset_filters').click(function(){
+        console.log("PARTHA!");
+    });
+
     $(".showModal").click(function(e){
         e.preventDefault();
         $("#modalContents").dialog(
