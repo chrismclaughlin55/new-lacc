@@ -70,8 +70,8 @@
 								<li>
 									<button type="button" id="add_image">
 										Add Image
-									</button>
-									<div id="image_injection_div"></div>
+									</button><br />
+									<div id="image_injection_div" style="width:384px"></div>
 								</li>
 								<li>
 									<button type="button" id="add_entry">
@@ -120,8 +120,8 @@
 							<form id='update_categories' enctype="multipart/form-data" action="/admin/update-categories" method="post">
 								<br>
 								<% for (var i = 0; i < categories.length; i++) { %>
-									<div style="float:left;height:60px;">
-										<img style="float:left" src='/category/<%=categories[i]['_id'] %>/image' height="42" width="42"><br>
+									<div style="float:left; height:60px;">
+										<img src='/category/<%=categories[i]['_id'] %>/image' height="42" width="42"><br>
 									</div>
 									<div >
 										<input style="width:330px" type="text" name='<%=categories[i]['_id'] %>' placeholder="<%=categories[i]['name'] %>"><br />
