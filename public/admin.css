@@ -89,7 +89,8 @@ html, body {
 #database_category,
 #update_cat,
 #import_button,
-#export_button
+#export_button,
+#submit_categories
 {
     width: 380px;
     margin-left: 4px;
@@ -97,7 +98,6 @@ html, body {
 
 #add_point {
     width: 382px;
-
 }
 
 /*JARED STUFF*/

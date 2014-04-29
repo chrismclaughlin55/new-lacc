@@ -116,20 +116,19 @@
 							</ul>
 						</form>
 						<br>
-						Current Categories:
+						Edit Categories:
 							<form id='update_categories' enctype="multipart/form-data" action="/admin/update-categories" method="post">
 								<br>
 								<% for (var i = 0; i < categories.length; i++) { %>
-									<!-- <input class="input" value="<%=categories[i]['name'] %>"> <br> -->
-									<span>
+									<div style="float:left;height:60px;">
 										<img style="float:left" src='/category/<%=categories[i]['_id'] %>/image' height="42" width="42"><br>
-										<label style="float:left"><%=categories[i]['name'] %><label>
-									</span>
-									<br><br>
-									<input type="text" name='<%=categories[i]['_id'] %>' placeholder="New Category Name"><br>
-									<input type="file" name='<%=categories[i]['_id'] %>'><br><br>
+									</div>
+									<div >
+										<input style="width:330px" type="text" name='<%=categories[i]['_id'] %>' placeholder="<%=categories[i]['name'] %>"><br />
+										<input style="width:330px" type="file" name='<%=categories[i]['_id'] %>'>
+									</div><br />
 								<% }%>
-								<input type="submit">
+								<button id="submit_categories" type="submit">Save Changes </button>  
 							</form>
 						<form id="category_entry">
 							<input type="hidden" name="c_id" id="c_id" value=""/>
