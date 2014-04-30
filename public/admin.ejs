@@ -28,13 +28,13 @@
 						<button type="button" id="add_point" value="add_point">
 							Place New Point On Map
 						</button>
-						<form id="project_entry" enctype="multipart/form-data" action="/admin/update-project" method="post">
-							 <ul >
+						<ul>
+							<form id="project_entry" enctype="multipart/form-data" action="/admin/update-project" method="post">
 								<li>
 									<input id="project_lat" name="project_lat" type="text" placeholder="Project Latitude" required>
 								</li>
 									<li>
-									<input id="p_id" name ="p_id" type="text" hidden>
+									<input class="p_id" id="p_id" name ="p_id" type="text" hidden>
 									</li>
 								<li>
 									<input id="project_lng" name="project_lng" placeholder="Project Longitude"
@@ -52,7 +52,7 @@
 									</select>
 								</li>
 								<li>
-									<select id="location" name="location" >
+									<select id="location" name="location" style="width:108.5%" >
 										<option value="" disabled selected>Location</option>
 										<option value='true' class="input">Inside LA </option>
 										<option value='false' class="input">Outside LA </option>
@@ -71,7 +71,7 @@
 									<button type="button" id="add_image">
 										Add Image
 									</button>
-									<div id="image_injection_div"></div>
+									<div id="image_injection_div" style="width:384px"></div>
 								</li>
 								<li>
 									<button type="button" id="add_entry">
@@ -84,11 +84,19 @@
 										Update Project
 									</button>
 								</li>
-							</ul>
-						</form>
+							</form>
+							<form id="project_delete" enctype="multipart/form-data" action="/admin/delete-project" method="post">
+								<input class="p_id" id="p_id" name ="p_id" type="text" hidden>
+								<li>
+									<button form="project_delete" type="submit" value="submit" id="delete_button" >
+										Delete Project
+									</button>
+								</li>
+							</form>
+						</ul>
 					</div>
 					<div id="edit_category_panel">
-						<form id="category_entry" enctype="multipart/form-data" action="/admin/update-category" method="post">
+						<form id="category_entry" enctype="multipart/form-data" action="/admin/create-category" method="post">
 							<ul id="entry_list">
 								<li>
 									New Category:
@@ -100,29 +108,33 @@
 									Add Image
 									<input id="category_image" type="file" name="category_image">
 								</li>
-								<li> 
-									<span style="font-size:11px; align:center">(Choose an image/color radiobuttons) </span>
-								</li>
 								<li>
 									<button type="submit" id="update_cat" value="update_cat"  disabled>
-										Update Categories
+										Add Category
 									</button>
 								</li>
 							</ul>
 						</form>
-						Current Categories:
-							<form>
+						<br>
+						Edit Categories:
+							<form id='update_categories' enctype="multipart/form-data" action="/admin/update-categories" method="post">
+								<br>
 								<% for (var i = 0; i < categories.length; i++) { %>
-									<input class="input" value="<%=categories[i]['name'] %>"> <br>
+									<div style="float:left; height:60px;">
+										<img src='/category/<%=categories[i]['_id'] %>/image' height="42" width="42"><br>
+									</div>
+									<div >
+										<input style="width:330px" type="text" name='<%=categories[i]['_id'] %>' placeholder="<%=categories[i]['name'] %>"><br />
+										<input style="width:330px" type="file" name='<%=categories[i]['_id'] %>'>
+									</div><br />
 								<% }%>
+								<button id="submit_categories" type="submit">Save Changes </button>  
 							</form>
 						<form id="category_entry">
 							<input type="hidden" name="c_id" id="c_id" value=""/>
 							<input type="hidden" name="cat_cnt" id="cat_cnt" value="0"/>
 							<ul id="category_list"></ul>
 						</form>
-						<b style="color:red">TODO:Tooltips/Warnings for empty text field</b><br />
-
 					</div>
 					<div id="database_panel">
 						Database Operation:
@@ -136,7 +148,7 @@
 							<input type="file" name="csvFile"> 
 							<button type="submit" id="import_button">Import File</button>
 						</form>
-						<form action="/admin/download" method="GET" style="display:none" id="export_form">
+						<form action="/download" method="GET" style="display:none" id="export_form">
 							<button type="submit" id="export_button" class="btn">Export Database</button>
 						</form>
 						<form action="/signup-user" method="post" id="register_user_form" style="display:none">         

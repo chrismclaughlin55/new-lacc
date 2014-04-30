@@ -9,6 +9,7 @@ var passport    = require('passport'), LocalStrategy = require('passport-local')
 var bcrypt        = require('bcrypt-nodejs');
 var http = require('http');
 var path = require('path');
+var async = require('async');
 var json2csv = require('nice-json2csv');
 var app = express();
 var server = app.listen(3000);
@@ -42,25 +43,78 @@ if ('development' == app.get('env')) {
 }
 
 // Index
-app.get('/', categoryService.getCategoriesForIndex);
-app.get('/index', categoryService.getCategoriesForIndex);
-app.get('/download', projectService.downloadByFilter);
+app.get('/', function(req, res) {
+    categoryService.getCategories(function(data) {
+        res.render('index.ejs', {
+            categories: data
+        });
+    });
+});
+
+app.get('/index', function(req, res) {
+    categoryService.getCategories(function(data) {
+        res.render('index.ejs', {
+            categories: data
+        });
+    });
+});
+
+app.get('/download', function(req, res) {
+    projectService.downloadByFilter(req.query, function(csvData) {
+        res.csv(JSON.parse(csvData), "projects.csv");
+    });
+});
 
 // Admin
-app.get('/admin', userService.isLoggedIn, categoryService.getCategoriesForAdmin);
-app.post('/admin/update-category', categoryService.updateCategory);
-app.post('/admin/update-project', projectService.updateProject);
-app.get('/admin/download', projectService.downloadByFilter);
-app.post('/admin/upload', projectService.upload);
+app.get('/admin', userService.isLoggedIn, function(req, res) {
+    categoryService.getCategories(function(data) {
+        res.render('admin.ejs', {
+            categories: data
+        });
+    });
+});
+
+app.post('/admin/create-category', function(req, res) {
+    categoryService.createCategory(req, function() {
+        res.redirect('/admin');
+    });
+});
+
+app.post('/admin/update-categories', function(req, res) {
+    var categoryIds = Object.keys(req.body);
+    async.forEach(categoryIds, function(categoryId, callback) {
+        categoryService.updateCategory(categoryId, req.body[categoryId], req.files[categoryId], callback);
+    }, function(err) {
+        res.redirect('/admin');
+    });
+});
+
+app.post('/admin/update-project', function(req, res) {
+    projectService.updateProject(req, function() {
+        res.redirect('/admin');
+    });
+});
+
+app.post('/admin/delete-project', function(req, res) {
+    projectService.deleteProject(req.body.p_id, function() {
+        res.redirect('/admin');
+    });
+});
+
+app.post('/admin/upload', function(req, res) {
+    projectService.upload(req, function() {
+        res.redirect('/admin');
+    });
+});
 
 // User Authentication
 app.get('/login',userService.login);
 app.get('/logout', userService.logout);
 app.post('/login-user',
     passport.authenticate('local-login', {
-    successRedirect: '/admin',
-    failureRedirect: '/login',
-    failureFlash: true
+        successRedirect: '/admin',
+        failureRedirect: '/login',
+        failureFlash: true
     })
 );
 app.post('/signup-user',

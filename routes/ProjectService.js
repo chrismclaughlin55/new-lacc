@@ -2,6 +2,7 @@ var mongoose        = require('mongoose');
 var Project         = require('../models/Project');
 var Category        = require('../models/Category');
 var projectService  = require('../routes/ProjectService');
+var categoryService = require('../routes/CategoryService');
 var csvConvertor    = require('../custom_modules/CsvRecord.js');
 var json2csv        = require('nice-json2csv');
 var csv             = require('ya-csv');
@@ -19,6 +20,7 @@ exports.getProjects = function(projectFilter, callback) {
     var Project = mongoose.model('Project');
     var filter = {};
     if (projectFilter) {
+        console.log(projectFilter);
         if (projectFilter.name) {
             filter.name = eval(projectFilter.name);
         }
@@ -42,10 +44,20 @@ exports.getProjects = function(projectFilter, callback) {
     });
 }
 
-exports.updateProject = function(req, res) {
+exports.deleteProject = function(projectId, callback) {
+    var Project = mongoose.model('Project');
+    Project.remove({"_id": mongoose.Types.ObjectId(projectId)}, function (err) {
+        if (err){ 
+            console.log("error updating record "+ err); 
+            return;
+        }
+        callback();
+    });
+}
+
+exports.updateProject = function(req, callback) {
 	var Project = mongoose.model('Project');
     var project = new Project();
-
     project.name = req.body.project_name;
     project.address = req.body.project_address;
     project.narrative = req.body.project_narratives;
@@ -83,24 +95,20 @@ exports.updateProject = function(req, res) {
                     console.log(err);
                     return;
                 }
-
-                res.redirect('/admin');
+                callback();
             });
         });
     } else {
         var temp = project.toObject();
         delete temp._id;
-        projectService.storeImage(req,temp,function(){
+        projectService.storeImage(req, temp, function(){
             Project.update({"_id": mongoose.Types.ObjectId(req.body.p_id)}, temp, {upsert:true}, function (err, numberAffected, raw) {
                 if (err){ 
                     console.log("error updating record "+ err); 
                     return;
                 }
-                projectService.storeImage(req, project, function(){
-                    console.log("project "+project.name+" has had an image added");
-                });
                 console.log('The number of updated documents was %d', numberAffected);
-                res.redirect('/admin');
+                callback();
             });
         });
     }
@@ -109,12 +117,22 @@ exports.updateProject = function(req, res) {
 exports.storeImage = function(req, project, callback) {
     if (req.files['imgFile']) {
         if (req.files['imgFile'].length) {
+            var counter = 0;
             req.files['imgFile'].forEach(function(image) {
-                project.images.push(fs.readFileSync(image.path));
+                var imageObject = {
+                    picture: fs.readFileSync(image.path),
+                    caption: req.body['imgText'][counter]
+                };
+                project.images.push(imageObject);
+                counter++;
             });
         } else {
             var image = req.files['imgFile'];
-            project.images.push(fs.readFileSync(image.path));
+            var imageObject = {
+                picture: fs.readFileSync(image.path),
+                caption: req.body['imgText']
+            };
+            project.images.push(imageObject);
         }
     }
     callback();
@@ -130,56 +148,28 @@ exports.readImage = function(req, res) {
             res.send();
         }
         res.contentType('image/png');
-        res.send(project.images[image_id]);
+        res.send(project.images[image_id].picture);
     });
 }
 
-exports.downloadByFilter = function(req, res) {
+exports.downloadByFilter = function(filter, callback) {
     var recordData = [];
     var filter;
-    if (req.query) {
-        filter = req.query;
-    } else {
-        filter = {};
-    }
     projectService.getProjects(filter, function(records) {
         records.forEach(function(r) {
             projectService.convertProjectToCsvRow(r, function(csvRecord) {
                 recordData.push(csvRecord);
-                if(recordData.length == records.length) {
+                if (recordData.length == records.length) {
                     var csvData = JSON.stringify(recordData);
-                    res.csv(JSON.parse(csvData), "projects.csv");
+                    callback(csvData);
                 }
             });
         });
     });
 }
 
-exports.storeCategories = function(req, callback) {
-    var callbackCounter = 0;
-    var categoryHelper = {}; //key: {categoryName} value: {_id of categoryName}
-    var categoryReader = csv.createCsvFileReader(req.files.csvFile.path, {columnsFromHeader:true, nestedQuotes:true});
-    categoryReader.addListener('data', function(data) { 
-        if(data.category!='')
-            categoryHelper[data.category] = '';
-    });  
-    categoryReader.addListener('end', function() {
-        for(var key in categoryHelper) {
-            (function(key) {
-                projectService.getCategoryIdByName(key, function(categoryId) {
-                    categoryHelper[key] = categoryId;
-                    callbackCounter++;
-                    if(callbackCounter == (Object.keys(categoryHelper).length)) {
-                        callback(categoryHelper);
-                    }
-                })
-            })(key);
-        }
-    });     
-}
-
-exports.upload = function(req, res) {
-	projectService.storeCategories(req, function(categoryHelper) {
+exports.upload = function(req, callback) {
+	categoryService.storeCategories(req, function(categoryHelper) {
         var projectReader = csv.createCsvFileReader(req.files.csvFile.path, {columnsFromHeader:true, nestedQuotes:true});
         projectReader.addListener('data', function(data) {
             data.name = data.name.replace(/"/g, "'"); //Converting double quotes to single quotes
@@ -240,52 +230,15 @@ exports.upload = function(req, res) {
             });
         });
     });
-    res.redirect('/admin');
+    callback();
 }
 
 /* Helper function to convert each project into a CSV row. */
 exports.convertProjectToCsvRow = function(project, callback) {
-    projectService.getCategoryNameById(project.category, function(categoryName) {
-        csvConvertor(project, categoryName, function(instance) {
+    categoryService.getCategory(project.category, function(category) {
+        csvConvertor(project, category.name, function(instance) {
             callback(instance.getInformation());
         });
-    });
-}
-
-/* Input: CategoryId, Output: CategoryName */
-exports.getCategoryNameById = function(categoryId, callback) {
-    var Category = mongoose.model('Category');
-    Category.findById(categoryId, function(err, categoryReturned) {
-        if(categoryReturned!=null) {
-            callback(categoryReturned.name);
-        }else {
-            callback('');
-        }
-    });
-}
-
-/*
-Input: A CSV Row. Check to see if category exists for the project. 
-If category exits return category id. Else create a new category and return the category id. 
-*/
-exports.getCategoryIdByName = function(projectCategory, callback) {
-    var Category = mongoose.model('Category');
-    Category.findOne({ name: projectCategory }, function(err, categoryReturned) {
-        if (err) {
-            console.log("Could not return a category");
-            console.log(err);
-            return;
-        }
-        if (categoryReturned == null) { //If category does not exist create a new category. 
-            category = new Category({name : projectCategory});
-            category.save(function(err, categoryCreated) {
-                console.log('New Category Created');
-                console.log(category);
-                callback(categoryCreated._id);
-            });
-        } else {
-            callback(categoryReturned._id);
-        }
     });
 }
 

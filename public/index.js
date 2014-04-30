@@ -52,7 +52,9 @@ document.addEventListener('DOMContentLoaded', function()
             spinner.spin(target);
             map.removeLayer(markers);
             markers = new L.layerGroup();
-            projectFilter.name = "/" + $('#filter').val() + "/i";
+            if ($('#filter').val()) {
+                projectFilter.name = "/" + $('#filter').val() + "/i";
+            }
             socket.emit('projectsRequest', projectFilter);
         }
     });
@@ -61,6 +63,16 @@ document.addEventListener('DOMContentLoaded', function()
     {
         var search = '/download/?' + $.param(projectFilter);
         window.location.href = search;
+    });
+
+    $('#reset_filters').click(function(){
+        $('#filter').val("");
+        $('input:checkbox').removeAttr('checked');
+        $('input:radio').prop('checked', false);
+        map.removeLayer(markers);
+        markers = new L.layerGroup();
+        projectFilter = {};
+        socket.emit('projectsRequest', projectFilter);
     });
 
     $(".showModal").click(function(e){
@@ -78,9 +90,13 @@ document.addEventListener('DOMContentLoaded', function()
 
     updateMap(socket, function() 
     {
-        markers.addTo(map);
-        spinner.stop();
+        spinner.spin(target);
+        setTimeout(function() {
+            markers.addTo(map);
+            spinner.stop();
+        }, 1000);
     });
+
     socket.emit('projectsRequest', projectFilter);
     L.Util.requestAnimFrame(map.invalidateSize,map,!1,map._container);
     $("#filter-categories").multipleSelect(
@@ -121,7 +137,6 @@ document.addEventListener('DOMContentLoaded', function()
 
 function updateMap(socket, callback) 
 {
-
     socket.on('projects', function(projects) 
     {
         var counter = 0;
@@ -146,9 +161,10 @@ function updateMap(socket, callback)
             for (var i = 0; i < marker.project.images.length; i++) {
                 var url = '/project/' + marker.project._id + '/image/' + i;
                 url = '"' + url + '"'; 
-
-                marker.project.imageTag += '<div class="lightbox_thumbnail"><a ' + "onclick='lightbox_onclick("  + url + ")'"
-                + '><img src=' + url + ' class="thumbnail_class"></a></div>'; 
+                console.log(url);
+                var caption = '"' + marker.project.images[i].caption + '"';
+                marker.project.imageTag += '<div class="lightbox_thumbnail"><a ' + "onclick='lightbox_onclick("  + url + ", " + caption + ")'"
+                + '><img src=' + url + ' class="thumbnail_class"></a></div>';
             }
             marker.bindPopup(marker.project.narrativeTag + marker.project.imageTag);
         });
@@ -173,8 +189,6 @@ function updateMap(socket, callback)
 
 }
 
-
-
 function resize_map() 
 {
     var maxWidth = $(window).width();
@@ -184,8 +198,14 @@ function resize_map()
 
 $(window).on('resize load', resize_map);
 
-function lightbox_onclick(img_url) 
+function lightbox_onclick(img_url,caption) 
 {
     document.getElementById('lightbox').style.display='inline';
     $("#lightbox_image").attr('src', img_url);
+    $('#caption_id').text("");
+    if (caption != "undefined")
+    {
+        $('#caption_id').text(caption); //undefined?
+    }
+    console.log(caption); 
 }   

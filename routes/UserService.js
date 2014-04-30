@@ -53,8 +53,9 @@ passport.deserializeUser(function(id,done){
     });
 });
 
-exports.isLoggedIn = function(req,res, next){
+exports.isLoggedIn = function(req, res, next){
     if(req.isAuthenticated()) {
+    // if (true) {
         next();
     } else {
         req.flash('errors', 'You Must Log In Before Using the Admin Page');
