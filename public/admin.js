@@ -37,12 +37,11 @@ var updateData = function (m)
     {
         document.getElementById("custom_field_injection_div").innerHTML +='<input name="custom_field_key" type="text" value="'+m.data.customFields[i]['key'] + '"class="field_key"><textarea name="custom_field_value" class="field_value" type="text" ">' + m.data.customFields[i]['value'] + '</textarea>';
     }
-    document.getElementById("image_injection_div");
+    document.getElementById("image_injection_div").innerHTML = '';
     for (i in m.data.images) 
     {
-        console.log(m.data.images);
-        document.getElementById("image_injection_div").innerHTML += '<div style="float:left; height:60px"><img src="'+ m.data.images[i]['picture'] + '" alt="Smiley face" height="52" width="52"></div><div><input type="file" name="imgFile" style="width:317px"><input type="text" name="imgText" class="imgText" style="width:317px" value="'+ m.data.images[i]['caption'] + '" required></div><br />';
-        //</div>';
+        var url = '/project/' + m.data._id + '/image/' + i;
+        document.getElementById("image_injection_div").innerHTML += '<div style="float:left; height:60px"><img src="' + url + '" height="52" width="52"></div><div><input type="file" name="imgFile" style="width:317px"><input type="text" name="imgText" class="imgText" style="width:317px" value="'+ m.data.images[i]['caption'] + '" required></div><br />';
     }
 }
 
@@ -135,16 +134,6 @@ document.addEventListener('DOMContentLoaded', function()
             point.on('dragend', function()
             {
                 updateData(point);
-            });
-            point.on('click', function()
-            {
-                var popup = L.popup();
-                content = '';
-                if (point.images) 
-                {
-                    content += point.images[0];
-                }
-                point.bindPopup(content).openPopup();
             });
         });
 	});

@@ -66,7 +66,10 @@ document.addEventListener('DOMContentLoaded', function()
     });
 
     $('#reset_filters').click(function(){
-        console.log("PARTHA!");
+        map.removeLayer(markers);
+        markers = new L.layerGroup();
+        projectFilter = {};
+        socket.emit('projectsRequest', projectFilter);
     });
 
     $(".showModal").click(function(e){
@@ -156,6 +159,7 @@ function updateMap(socket, callback)
             for (var i = 0; i < marker.project.images.length; i++) {
                 var url = '/project/' + marker.project._id + '/image/' + i;
                 url = '"' + url + '"'; 
+                console.log(url);
                 var caption = '"' + marker.project.images[i].caption + '"';
                 marker.project.imageTag += '<div class="lightbox_thumbnail"><a ' + "onclick='lightbox_onclick("  + url + ", " + caption + ")'"
                 + '><img src=' + url + ' class="thumbnail_class"></a></div>';
