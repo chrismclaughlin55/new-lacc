@@ -66,6 +66,9 @@ document.addEventListener('DOMContentLoaded', function()
     });
 
     $('#reset_filters').click(function(){
+        $('#filter').val("");
+        $('input:checkbox').removeAttr('checked');
+        $('input:radio').prop('checked', false);
         map.removeLayer(markers);
         markers = new L.layerGroup();
         projectFilter = {};
@@ -134,7 +137,6 @@ document.addEventListener('DOMContentLoaded', function()
 
 function updateMap(socket, callback) 
 {
-
     socket.on('projects', function(projects) 
     {
         var counter = 0;
