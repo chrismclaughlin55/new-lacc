@@ -128,7 +128,6 @@ exports.storeImage = function(req, project, callback) {
             });
         } else {
             var image = req.files['imgFile'];
-            console.log(req.body);
             var imageObject = {
                 picture: fs.readFileSync(image.path),
                 caption: req.body['imgText']

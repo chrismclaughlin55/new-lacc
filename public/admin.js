@@ -41,7 +41,7 @@ var updateData = function (m)
     for (i in m.data.images) 
     {
         var url = '/project/' + m.data._id + '/image/' + i;
-        document.getElementById("image_injection_div").innerHTML += '<div style="float:left; height:60px"><img src="' + url + '" height="52" width="52"></div><div><input type="file" name="imgFile" style="width:317px"><input type="text" name="imgText" class="imgText" style="width:317px" value="'+ m.data.images[i]['caption'] + '" required></div><br />';
+        document.getElementById("image_injection_div").innerHTML += '<div style="float:left; height:60px"><img src="' + url + '" height="52" width="52" required></div><div><input type="file" name="imgFile" style="width:317px"><input type="text" name="imgText" class="imgText" style="width:317px" value="'+ m.data.images[i]['caption'] + '" required></div><br />';
     }
 }
 
