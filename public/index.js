@@ -66,7 +66,9 @@ document.addEventListener('DOMContentLoaded', function()
     });
 
     $('#reset_filters').click(function(){
-        console.log("PARTHA!");
+        $('#filter').val("");
+        $('input:checkbox').removeAttr('checked');
+        $('input:radio').prop('checked', false);
     });
 
     $(".showModal").click(function(e){
@@ -131,7 +133,6 @@ document.addEventListener('DOMContentLoaded', function()
 
 function updateMap(socket, callback) 
 {
-
     socket.on('projects', function(projects) 
     {
         var counter = 0;
