@@ -2,7 +2,7 @@
 <html lang="en">
 		<head>
 				<meta charset="utf-8">
-				<title>LACC Asset Mapping Project</title>
+				<title>LA Conservation Corps: Selected Projects”</title>
 				<script src="jquery-1.11.0.min.js"></script>
 				<link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.4.5/leaflet.css" />
 				<script src="http://cdn.leafletjs.com/leaflet-0.4.5/leaflet.js"></script>
@@ -21,13 +21,15 @@
 				<div style="float:center" id="spinner"></div>
 				<div id="main">
 					<span style="float:right; font-size:12px"><a href="#" id="reset_filters" style="margin-right:10px">Reset Filters</a> <a href="#" class="showModal">About</a></span>
+							
 						<div id="title">
-							LA Conservation Corps Projects 
-							<span id="title_span" >
-								A visual history of LACC public works. 
-								<a href="#"><img title="Download all visible points as a spreadsheet." src="download_icon.png" class="filters_class" id="Csv_Download"></a>
-								<input type="text" name="filtered_string" id="filter" class="filters_class" placeholder="Search Projects"/>	
-								<div class="filters_class">
+							<a href="http://lacorps.org"><img src="lacorpslogo.png" style="margin-top:-30px; margin-bottom:-30px; margin-left:-20px; margin-right:10px"></a>
+							<span>LA Conservation Corps: 
+							<span id="title_span">
+								selected projects 
+								<a href="#" ><img title="Download all visible points as a spreadsheet." src="download_icon.png" class="filters_class" id="Csv_Download" style="margin-top:26px"></a>
+								<input type="text" name="filtered_string" id="filter" class="filters_class" placeholder="Search Projects" style="margin-top:26px"/>	
+								<div class="filters_class" style="margin-top:20px">
 									<select multiple id="location_radio" class="filters_class">
 										<option value="">All Projects</option>
 										<option value="true">Inside LA</option>
@@ -39,7 +41,7 @@
 										<% }%>
 									</select>
 								</div>
-							</span>
+							</span></span>
 						</div>
 						<div id="map"></div>
 						<div id="project_title"></div>

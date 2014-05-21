@@ -14,15 +14,21 @@ body, p {
     width:98%;
 }
 
+a#title {
+    text-decoration: none;
+}
+
 #title {
     width: 100%;
+
     margin-left: 20px;
     padding: 15px 0;
     padding-top: 15px;
-    font: 36px 'Helvetica', Helvetica, 'sans-serif';
+    font: 30px 'Helvetica', Helvetica, 'sans-serif';
     /*color: #FFF;*/
     color:rgb(56,34,23);
     vertical-align: top;
+
 }
 
 #map {
@@ -116,7 +122,8 @@ body, p {
 }
 
 #title_span {
-    font-size: 14px;
+    font-size: 28px;
+    font-weight: lighter;
 }
 
 #Csv_Download {
