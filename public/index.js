@@ -146,7 +146,7 @@ function updateMap(socket, callback)
             var icon = L.icon(
             {
                 iconUrl: '/category/' + project.category + '/image',
-                iconSize:     [30, 30], // size of the icon
+                iconSize:     [24, 24], // size of the icon
             });
             var marker = L.marker([project.lat, project.lng], {icon: icon}).addTo(markers);
             marker.project = project;
