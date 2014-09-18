@@ -1,11 +1,11 @@
 new-lacc
 ========
 
-<li> install node.js
-<li> install mongodb
-<li> npm update
-<li> npm install mongoose
-<li> npm ejs
-<li> npm socket.io
-
+<br> install node.js
+<br> install mongodb
+<br> npm update
+<br> npm install mongoose
+<br> npm ejs
+<br> npm socket.io
+<br>
 node app.js
