@@ -18,9 +18,10 @@ mongodb.MongoClient.connect("mongodb://localhost:27017/lacc", function(err,db) {
             "Year Completed": e.year,
             "Sponsors": e.sponsors
         };
+        db.dropDatabase();
         db.collection('mapData').insert(entry, function(err, records) {
             console.log("Record added");
         });
     });
-
+    console.log("Done");
 });

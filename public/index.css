@@ -22,6 +22,7 @@ body, p {
     font: 30px 'Helvetica', Helvetica, 'sans-serif';
     color:rgb(56,34,23);
     vertical-align: top;
+    min-width: 1149px;
 }
 
 #map {

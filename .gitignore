@@ -9,6 +9,7 @@ lib-cov
 *.png
 *.jpg
 *.gif
+.idea
 lacc.pem
 pids
 logs

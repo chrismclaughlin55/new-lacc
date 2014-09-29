@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', function()
 
     $('#filter').keypress(function(e) 
     {
-        $('#filter').attr("style",""); //default css on reset (by typing)
+        $('#filter').css("color","black"); //default css on reset (by typing)
         var keyCode = e.keyCode || e.which;
         if (keyCode == '13') { //TODO put red error message on failure
             spinner.spin(target);
@@ -158,13 +158,16 @@ function updateMap(socket, callback)
             marker.project.narrativeTag += "<div><em>" + marker.project.address + "</em></div></div>";
             marker.project.imageTag = "";
             
-            for (var i = 0; i < marker.project.images.length; i++) {
+            for (var i = 0; i < marker.project.images.length; i++)
+            {
                 var url = '/project/' + marker.project._id + '/image/' + i;
                 url = '"' + url + '"'; 
                 console.log(url);
                 var caption = '"' + marker.project.images[i].caption + '"';
-                marker.project.imageTag += '<div class="lightbox_thumbnail"><a ' + "onclick='lightbox_onclick("  + url + ", " + caption + ")'"
-                + '><img src=' + url + ' class="thumbnail_class"></a></div>';
+                var image_tag = '<div class="lightbox_thumbnail"><a ' + "onclick='lightbox_onclick("  + url + ", " + caption + ")'"
+                    + '><img src=' + url + ' class="thumbnail_class"></a></div>';
+                console.log(image_tag);
+                marker.project.imageTag += image_tag;
             }
             marker.bindPopup(marker.project.narrativeTag + marker.project.imageTag);
         });
@@ -200,6 +203,7 @@ $(window).on('resize load', resize_map);
 
 function lightbox_onclick(img_url,caption) 
 {
+    console.log("img",img_url, "caption:",caption);
     document.getElementById('lightbox').style.display='inline';
     $("#lightbox_image").attr('src', img_url);
     $('#caption_id').text("");
