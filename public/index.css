@@ -92,8 +92,9 @@ body, p {
 
 .filters_class {
     float:right;
-    margin-top: 10px;
     margin-right: 0px;
+    font-size: 12px;
+    margin-top:26px;
 }
 
 #filter { 
@@ -121,6 +122,9 @@ body, p {
 #Csv_Download {
     margin-right: 10px;
     height:23px;
+    
+
+
 }
 
 #location_radio {
