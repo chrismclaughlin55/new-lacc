@@ -20,28 +20,28 @@
 				<div id="project_title"></div> <!-- doesnt do anything... fix and add more padding to page...-->
 				<div style="float:center" id="spinner"></div>
 				<div id="main">
-					<span style="float:right; font-size:12px"><a href="#" id="reset_filters" style="margin-right:10px">Reset Filters</a> <a href="#" class="showModal">About</a></span>
+					<span style="float:right; font-size:12px"><a href="#" id="reset_filters" style="margin-right:10px">Reset Filters</a> <a href="#" class="showModal" style="font-family:open-sans">About</a></span>
 							
 						<div id="title">
 							<a href="http://lacorps.org"><img src="lacorpslogo.png" style="margin-top:-30px; margin-bottom:-30px; margin-left:-20px; margin-right:10px"></a>
-							<span>LA Conservation Corps: 
+							<span id="lacc_span">LA Conservation Corps:
 							<span id="title_span">
 								selected projects 
-								<a href="#" ><img title="Download all visible points as a spreadsheet." src="download_icon.png" class="filters_class" id="Csv_Download" style="margin-top:26px"></a>
-								<input type="text" name="filtered_string" id="filter" class="filters_class" placeholder="Search Projects" style="margin-top:26px"/>	
-								<div class="filters_class" >
+								<a href="#"><img title="Download all visible points as a spreadsheet." src="download_icon.png" class="filters_class" id="Csv_Download" style="margin-top:26px"></a>
+								<input style="font-family:open-sans" type="text" name="filtered_string" id="filter" class="filters_class" placeholder="Search Projects" style="margin-top:26px"/>
+								<div class="filters_class" style="font-family:open-sans">
 									<select multiple id="location_radio" class="filters_class">
 										<option value="">All Projects</option>
 										<option value="true">Inside LA</option>
 										<option value="false">Outside LA</option>
 									</select>
-									<select multiple id="filter-categories">
+									<select multiple id="filter-categories" style="font-family:open-sans">
 										<% for (var i = 0; i < categories.length; i++) { %>
 											<option class="categories" value="<%=categories[i]['_id'] %>"><%=categories[i]['name'] %></option>
 										<% }%>
 									</select>
 								</div>
-							</span></span>
+
 						</div>
 						<div id="map"></div>
 						<div id="project_title"></div>

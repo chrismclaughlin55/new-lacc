@@ -1,25 +1,24 @@
 var mongodb = require('mongodb');
 
 mongodb.MongoClient.connect("mongodb://localhost:27017/lacc", function(err,db) {
-    var entries = require('./load.json');
+    console.log("wow");
+    //var entries = require('./load.json');
+    var entries = require('./load_copy.json');
+
+    db.dropDatabase();
     entries.forEach(function(e) {
         var entry = {};
         entry.name = e.name;
         entry.narrative = '';
         entry.address = '';
         entry.category = e.category;
-        entry.coords = {
-            point: {
-                lat: e.lat,
-                lng: e.lng
-            }
-        };
+        entry.lat = e.lat;
+        entry.lng = e.lng;
         entry.user_values = {
             "Year Completed": e.year,
             "Sponsors": e.sponsors
         };
-        db.dropDatabase();
-        db.collection('mapData').insert(entry, function(err, records) {
+        db.collection('projects').insert(entry, function(err, records) {
             console.log("Record added");
         });
     });

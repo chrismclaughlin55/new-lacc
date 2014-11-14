@@ -242,7 +242,8 @@ $(function()
         $(".imgText").each(function(i)
         {
             //TODO: HTML needs to be escaped using text() method. DOESN'T WORK. (input: apostrophe or '>'R
-            captions_array.push(text_to_html($(this).val()));
+            //captions_array.push(text_to_html($(this).val()));
+            captions_array.push($(this).val());
         });
     });
 });

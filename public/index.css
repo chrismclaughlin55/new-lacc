@@ -3,15 +3,37 @@
     -moz-border-radius: 1px;
     -webkit-border-radius: 1px;
     -khtml-border-radius: 1px;
-}  
+}
+
+@font-face {
+    font-family: roboto-regular;
+    src: url(style/RobotoSlab-Bold.ttf);
+
+}
+
+@font-face {
+    font-family: roboto-light
+    src: url(style/RobotoSlab-Light.ttf);
+}
+
+@font-face {
+    font-family: open-sans
+    src: url(style/OpenSans-Regular.ttf);
+}
+
 
 body, p {
+
     padding: 0;
     margin: 0;
     /*background-color: #444;*/
-    background-color: rgb(183,216,163);
+    background-color: #99cc66;
     height: 100%;
     width:98%;
+}
+
+#lacc_span  {
+    font: 30px 'roboto-regular';
 }
 
 #title {
@@ -19,7 +41,8 @@ body, p {
     margin-left: 20px;
     padding: 15px 0;
     padding-top: 15px;
-    font: 30px 'Helvetica', Helvetica, 'sans-serif';
+    /*font: 30px 'Helvetica', Helvetica, 'sans-serif';*/
+    font: 30px 'open-sans';
     color:rgb(56,34,23);
     vertical-align: top;
     min-width: 1149px;
@@ -39,7 +62,7 @@ body, p {
 #project_title {
     position: relative;
     width: 100%;
-    font: 24px Georgia, "Times New Roman", Times, serif;
+    font: 14px open-sans;
     margin: 15px 0;
 }
 
@@ -62,7 +85,7 @@ body, p {
 }
 
 #lightbox_content {
-    font: 14px Georgia, "Times New Roman", Times, serif;
+    font: 14px open-sans;
     width:400px; 
     border:5px solid black;
     color:rgb(56,34,23);
@@ -115,14 +138,16 @@ body, p {
 }
 
 #title_span {
-    font-size: 28px;
-    font-weight: lighter;
+
+    font: 28px 'roboto-light';
+
+
 }
 
 #Csv_Download {
     margin-right: 10px;
     height:23px;
-    
+
 
 
 }

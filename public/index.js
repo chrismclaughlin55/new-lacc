@@ -163,7 +163,8 @@ function updateMap(socket, callback)
                 var url = '/project/' + marker.project._id + '/image/' + i;
                 url = '"' + url + '"'; 
                 console.log(url);
-                var caption = '"' + marker.project.images[i].caption + '"';
+                var caption = '"' + marker.project.images[i].caption.replace(/'/g, "\\'").replace(/"/g, "\\'") + '"';
+                console.log("caption is NOW: ",caption);
                 var image_tag = '<div class="lightbox_thumbnail"><a ' + "onclick='lightbox_onclick("  + url + ", " + caption + ")'"
                     + '><img src=' + url + ' class="thumbnail_class"></a></div>';
                 console.log(image_tag);
