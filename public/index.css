@@ -162,8 +162,7 @@ body, p {
 }
 
 .thumbnail_class {
-    width:90px;
-    height:auto; 
+    height:auto;
     margin-left:auto;
     margin-right:auto;
     display: block;

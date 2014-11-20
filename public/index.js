@@ -27,6 +27,8 @@ var opts = {
 var target;
 var spinner;
 
+
+
 document.addEventListener('DOMContentLoaded', function() 
 {
     map = L.map('map', {center: mapCenter, zoom: 14,minZoom:9/*maxZoom: 15,//minZoom: 9*/});
@@ -75,6 +77,8 @@ document.addEventListener('DOMContentLoaded', function()
         socket.emit('projectsRequest', projectFilter);
     });
 
+
+
     $(".showModal").click(function(e){
         e.preventDefault();
         $("#modalContents").dialog(
@@ -95,6 +99,7 @@ document.addEventListener('DOMContentLoaded', function()
             markers.addTo(map);
             spinner.stop();
         }, 1000);
+
     });
 
     socket.emit('projectsRequest', projectFilter);
@@ -166,14 +171,22 @@ function updateMap(socket, callback)
                 var caption = '"' + marker.project.images[i].caption.replace(/'/g, "\\'").replace(/"/g, "\\'") + '"';
                 console.log("caption is NOW: ",caption);
                 var image_tag = '<div class="lightbox_thumbnail"><a ' + "onclick='lightbox_onclick("  + url + ", " + caption + ")'"
-                    + '><img src=' + url + ' class="thumbnail_class"></a></div><br>';
+                    + '><img width="90px" data-original=' + url + ' class="lazy thumbnail_class"></a></div><br>';
                 console.log(image_tag);
                 marker.project.imageTag += image_tag;
+                marker.on("click", function(e){ //only lazy load markers with images
+                    setTimeout(
+                        function(){
+                            $("img.lazy").lazyload();
+                        }, 10
+                    );
+                });
             }
             marker.bindPopup(marker.project.narrativeTag + marker.project.imageTag);
         });
         callback(markers);
-        
+
+
         if (counter == 0)
         {
             $('#filter').val("No results found");
@@ -190,6 +203,7 @@ function updateMap(socket, callback)
             $('#filter').css("color","black");
         }
     });
+
 
 }
 
@@ -213,4 +227,6 @@ function lightbox_onclick(img_url,caption)
         $('#caption_id').text(caption); //undefined?
     }
     console.log(caption); 
-}   
+}
+
+
