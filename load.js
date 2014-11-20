@@ -3,7 +3,7 @@ var mongodb = require('mongodb');
 mongodb.MongoClient.connect("mongodb://localhost:27017/lacc", function(err,db) {
     console.log("wow");
     //var entries = require('./load.json');
-    var entries = require('./load_copy.json');
+    var entries = require('./load.json');
 
     db.dropDatabase();
     entries.forEach(function(e) {
@@ -23,4 +23,5 @@ mongodb.MongoClient.connect("mongodb://localhost:27017/lacc", function(err,db) {
         });
     });
     console.log("Done");
+    return;
 });
