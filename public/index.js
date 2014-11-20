@@ -166,7 +166,7 @@ function updateMap(socket, callback)
                 var caption = '"' + marker.project.images[i].caption.replace(/'/g, "\\'").replace(/"/g, "\\'") + '"';
                 console.log("caption is NOW: ",caption);
                 var image_tag = '<div class="lightbox_thumbnail"><a ' + "onclick='lightbox_onclick("  + url + ", " + caption + ")'"
-                    + '><img src=' + url + ' class="thumbnail_class"></a></div>';
+                    + '><img src=' + url + ' class="thumbnail_class"></a></div><br>';
                 console.log(image_tag);
                 marker.project.imageTag += image_tag;
             }

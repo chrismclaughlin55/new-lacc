@@ -92,7 +92,8 @@ html, body {
 #update_cat,
 #import_button,
 #export_button,
-#submit_categories
+#submit_categories,
+#add_user
 {
     width: 380px;
     margin-left: 4px;
@@ -102,7 +103,6 @@ html, body {
     width: 382px;
 }
 
-/*JARED STUFF*/
 button {
     background: #dddddd;
     border: none;
